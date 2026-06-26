@@ -11,6 +11,11 @@
       "count": 1,
       "tokens": 0,
       "first_read": "2026-06-26T17:27:47.311Z"
+    },
+    "C:/Users/USER/Desktop/meeting-recorder/src/app/admin/page.tsx": {
+      "count": 2,
+      "tokens": 4024,
+      "first_read": "2026-06-26T18:23:36.071Z"
     }
   },
   "files_written": [
@@ -145,15 +150,28 @@
       "action": "edit",
       "tokens": 27,
       "at": "2026-06-26T18:01:33.428Z"
+    },
+    {
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/admin/page.tsx",
+      "action": "edit",
+      "tokens": 241,
+      "at": "2026-06-26T18:23:53.020Z"
+    },
+    {
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/admin/page.tsx",
+      "action": "edit",
+      "tokens": 67,
+      "at": "2026-06-26T18:25:20.112Z"
     }
   ],
   "edit_counts": {
     "src/components/recording/RecordButton.tsx": 12,
-    "src/app/teams/[teamId]/record/page.tsx": 10
+    "src/app/teams/[teamId]/record/page.tsx": 10,
+    "src/app/admin/page.tsx": 2
   },
-  "anatomy_hits": 1,
+  "anatomy_hits": 2,
   "anatomy_misses": 1,
-  "repeated_reads_warned": 0,
+  "repeated_reads_warned": 1,
   "cerebrum_warnings": 0,
-  "stop_count": 4
+  "stop_count": 6
 }

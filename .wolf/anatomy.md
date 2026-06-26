@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T18:01:33.398Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T18:25:20.068Z
 > Files: 16 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
@@ -39,7 +39,7 @@
 
 ## src/app/admin/
 
-- `page.tsx` — AdminPage — renders form (~4024 tok)
+- `page.tsx` — AdminPage — renders form (~4227 tok)
 
 ## src/app/api/admin/teams/
 

@@ -169,7 +169,19 @@ export default function AdminPage() {
         <form onSubmit={createUser} className="flex flex-wrap items-end gap-3 mb-6 p-4 border rounded-xl">
           <Input label="Name" value={nu.name} onChange={e => setNu({ ...nu, name: e.target.value })} required />
           <Input label="Email" type="email" value={nu.email} onChange={e => setNu({ ...nu, email: e.target.value })} required />
-          <Input label="Password" type="password" value={nu.password} onChange={e => setNu({ ...nu, password: e.target.value })} required />
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">Password</label>
+            <div className="flex gap-1">
+              <input type="text" value={nu.password} onChange={e => setNu({ ...nu, password: e.target.value })}
+                required className="border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono w-32" />
+              <button type="button" title="Random password"
+                className="px-2 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-100"
+                onClick={() => setNu({ ...nu, password: Array.from(crypto.getRandomValues(new Uint8Array(6)))
+                  .map(b => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'[b % 52]).join('') })}>
+                ↺
+              </button>
+            </div>
+          </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Role</label>
             <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm"

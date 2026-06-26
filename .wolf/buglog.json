@@ -1197,6 +1197,22 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T18:01:24.714Z"
+    },
+    {
+      "id": "bug-075",
+      "timestamp": "2026-06-26T18:23:53.027Z",
+      "error_message": "CSS fix: password",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "password: e.target.value → Array.from(crypto.getRandomValues(new Uint8Array(6)))",
+      "fix": "Changed password: e.target.value → Array.from(crypto.getRandomValues(new Uint8Array(6)))",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T18:23:53.027Z"
     }
   ]
 }
