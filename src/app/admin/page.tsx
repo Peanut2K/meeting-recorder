@@ -166,14 +166,14 @@ export default function AdminPage() {
       {/* ---- Users ---- */}
       <section className="mb-12">
         <h2 className="text-xl font-semibold mb-4">Users</h2>
-        <form onSubmit={createUser} className="flex flex-wrap items-end gap-3 mb-6 p-4 border rounded-xl">
+        <form onSubmit={createUser} className="grid grid-cols-1 sm:flex sm:flex-wrap items-end gap-3 mb-6 p-4 border rounded-xl">
           <Input label="Name" value={nu.name} onChange={e => setNu({ ...nu, name: e.target.value })} required />
           <Input label="Email" type="email" value={nu.email} onChange={e => setNu({ ...nu, email: e.target.value })} required />
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Password</label>
             <div className="flex gap-1">
-              <input type="text" value={nu.password} onChange={e => setNu({ ...nu, password: e.target.value })}
-                required className="border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono w-32" />
+                      <input type="text" value={nu.password} onChange={e => setNu({ ...nu, password: e.target.value })}
+                required className="border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono w-full sm:w-32" />
               <button type="button" title="Random password"
                 className="px-2 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-100"
                 onClick={() => setNu({ ...nu, password: Array.from(crypto.getRandomValues(new Uint8Array(6)))
@@ -245,12 +245,12 @@ function UserAdminRow({ u, onChangeRole, onDelete, onSetPassword }: {
 
   return (
     <div className="px-4 py-3">
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-2">
         <div>
           <p className="font-medium">{u.name}</p>
           <p className="text-sm text-gray-500">{u.email}</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap justify-end items-center gap-2">
           <select className="border border-gray-300 rounded-lg px-2 py-1 text-sm"
             value={u.role} onChange={e => onChangeRole(u.id, e.target.value as GlobalRole)}>
             <option value="user">user</option>
@@ -261,10 +261,10 @@ function UserAdminRow({ u, onChangeRole, onDelete, onSetPassword }: {
         </div>
       </div>
       {open && (
-        <div className="mt-3 flex items-end gap-2">
+        <div className="mt-3 flex flex-wrap items-end gap-2">
           {/* type=text on purpose: admin sets a new password and needs to read it back to hand over */}
           <Input label="New password" type="text" value={pwd} placeholder="min 6 characters"
-            onChange={e => setPwd(e.target.value)} className="min-w-64" />
+            onChange={e => setPwd(e.target.value)} className="w-full sm:min-w-64 sm:w-auto" />
           <Button className="text-sm py-2" disabled={pwd.length < 6 || saving} loading={saving} onClick={save}>Save</Button>
           <Button variant="secondary" className="text-sm py-2" onClick={() => { setOpen(false); setPwd('') }}>Cancel</Button>
           {done && <span className="text-sm text-green-600 pb-2">Updated ✓</span>}
@@ -295,7 +295,7 @@ function TeamAdminCard({ team, users, onAddMember, onChangeRole, onRemoveMember,
       </div>
       <div className="divide-y mb-3">
         {team.team_members.map(m => (
-          <div key={m.user_id} className="flex items-center justify-between py-2">
+          <div key={m.user_id} className="flex flex-wrap items-center justify-between gap-2 py-2">
             <p className="text-sm">{m.users?.name} <span className="text-gray-500">· {m.users?.email}</span></p>
             <div className="flex items-center gap-2">
               <select className="border border-gray-300 rounded-lg px-2 py-1 text-sm"
@@ -308,10 +308,10 @@ function TeamAdminCard({ team, users, onAddMember, onChangeRole, onRemoveMember,
           </div>
         ))}
       </div>
-      <div className="flex items-end gap-2">
-        <div className="flex flex-col gap-1">
+      <div className="flex flex-wrap items-end gap-2">
+        <div className="flex flex-col gap-1 flex-1 min-w-40">
           <label className="text-sm font-medium text-gray-700">Add member</label>
-          <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm min-w-56"
+          <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-full"
             value={email} onChange={e => setEmail(e.target.value)}>
             <option value="">Select user…</option>
             {available.map(u => (

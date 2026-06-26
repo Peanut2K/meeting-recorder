@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T18:25:20.068Z
-> Files: 16 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T20:02:49.676Z
+> Files: 20 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
 
@@ -33,13 +33,14 @@
 
 ## src/
 
+- `middleware.ts` — Exports middleware, config (~339 tok)
 
 ## src/app/
 
 
 ## src/app/admin/
 
-- `page.tsx` — AdminPage — renders form (~4227 tok)
+- `page.tsx` — AdminPage — renders form (~4267 tok)
 
 ## src/app/api/admin/teams/
 
@@ -101,6 +102,7 @@
 
 ## src/app/login/
 
+- `page.tsx` — LoginPage — renders form (~666 tok)
 
 ## src/app/meetings/[meetingId]/
 
@@ -159,6 +161,8 @@
 
 ## src/lib/supabase/
 
+- `client.ts` — Exports createClient (~73 tok)
+- `server.ts` — Exports createClient (~201 tok)
 
 ## src/lib/utils/
 

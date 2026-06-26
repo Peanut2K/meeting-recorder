@@ -1213,6 +1213,40 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T18:23:53.027Z"
+    },
+    {
+      "id": "bug-076",
+      "timestamp": "2026-06-26T19:45:03.486Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "Had \"flex flex-wrap items-end gap-3 mb-6 p-4 border ro",
+      "fix": "Changed to \"grid grid-cols-1 sm:flex sm:flex-wrap items-end g",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T19:45:07.908Z"
+    },
+    {
+      "id": "bug-077",
+      "timestamp": "2026-06-26T19:59:57.372Z",
+      "error_message": "Login on mobile (local IP) shows logs but does not redirect to dashboard",
+      "file": "src/app/login/page.tsx",
+      "root_cause": "Login used server-side Route Handler with next/headers cookieStore.set() which silently swallows errors via try/catch. Session cookie never saved in browser. Middleware finds no session and redirects back to /login.",
+      "fix": "Replaced fetch(\"/api/auth/login\") with direct browser-side supabase.auth.signInWithPassword() using createBrowserClient which handles session cookies natively.",
+      "tags": [
+        "auth",
+        "cookie",
+        "mobile",
+        "supabase",
+        "middleware"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T19:59:57.373Z"
     }
   ]
 }

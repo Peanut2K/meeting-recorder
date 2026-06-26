@@ -12,7 +12,7 @@ export async function createClient() {
         setAll(cookiesToSet) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookieStore.set(name, value, { maxAge: 86400, ...options })
             )
           } catch {
             // In Server Components, cookies are read-only. Ignore the error.
