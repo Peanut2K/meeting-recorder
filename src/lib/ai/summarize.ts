@@ -1,37 +1,20 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { SummaryContent } from '@/types'
+import { DEFAULT_SUMMARY_PROMPT, buildSummaryPrompt } from '@/lib/ai/prompt'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 export async function summarizeMeeting(
   transcript: string,
-  customFields: string[]
+  customFields: string[],
+  instruction?: string | null
 ): Promise<SummaryContent> {
-  const customFieldsText = customFields.length > 0
-    ? `\n\nAlso extract these additional sections: ${customFields.join(', ')}`
-    : ''
-
-  const customShape = customFields.length > 0
-    ? customFields.map(f => `"${f}": "summary text"`).join(', ')
-    : ''
-
   const message = await anthropic.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 2048,
     messages: [{
       role: 'user',
-      content: `You are a meeting summarizer. Extract structured information from this meeting transcript.${customFieldsText}
-
-Return ONLY valid JSON with this exact structure:
-{
-  "topics": ["topic 1", "topic 2"],
-  "decisions": ["decision 1", "decision 2"],
-  "action_items": [{"who": "name", "what": "task", "due": "date or null"}],
-  "custom": {${customShape}}
-}
-
-Transcript:
-${transcript}`,
+      content: buildSummaryPrompt(instruction?.trim() || DEFAULT_SUMMARY_PROMPT, customFields, transcript),
     }],
   })
 

@@ -24,13 +24,18 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   if (!(await canManageTeam(supabase, admin, id, user.id)))
     return NextResponse.json({ error: 'Only the team head can edit the prompt' }, { status: 403 })
 
-  let body: { fields?: string[] }
+  let body: { fields?: string[]; prompt?: string }
   try { body = await request.json() } catch { return NextResponse.json({ error: 'Invalid request body' }, { status: 400 }) }
   const { fields } = body
   if (!Array.isArray(fields)) return NextResponse.json({ error: 'fields must be an array' }, { status: 400 })
 
+  const row: { team_id: string; fields: string[]; updated_at: string; prompt?: string | null } = {
+    team_id: id, fields, updated_at: new Date().toISOString(),
+  }
+  if (typeof body.prompt === 'string') row.prompt = body.prompt.trim() || null
+
   const { data, error } = await supabase.from('team_templates')
-    .upsert({ team_id: id, fields, updated_at: new Date().toISOString() })
+    .upsert(row)
     .select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json(data)

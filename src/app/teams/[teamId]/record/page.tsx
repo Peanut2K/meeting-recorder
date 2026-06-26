@@ -6,17 +6,9 @@ import { RecordButton } from '@/components/recording/RecordButton'
 import { ProcessingProgress } from '@/components/recording/ProcessingProgress'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
+import { primeWebmDuration } from '@/lib/utils/audio'
 
 type Stage = 'record' | 'preview' | 'processing'
-
-// MediaRecorder WebM blobs ship without a duration header, so audio.duration is Infinity
-// and the seek bar runs backwards. Force the browser to compute it: seek far, then reset.
-function primeWebmDuration(audio: HTMLAudioElement) {
-  if (audio.duration !== Infinity) return
-  audio.currentTime = 1e101
-  const reset = () => { audio.removeEventListener('timeupdate', reset); audio.currentTime = 0 }
-  audio.addEventListener('timeupdate', reset)
-}
 
 export default function RecordPage() {
   const { teamId } = useParams<{ teamId: string }>()
@@ -25,19 +17,25 @@ export default function RecordPage() {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null)
   const [audioUrl, setAudioUrl] = useState('')
   const [title, setTitle] = useState('')
+  const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10))
   const [processStep, setProcessStep] = useState(0)
   const [error, setError] = useState('')
 
   useEffect(() => {
-    return () => {
-      if (audioUrl) URL.revokeObjectURL(audioUrl)
-    }
+    return () => { if (audioUrl) URL.revokeObjectURL(audioUrl) }
   }, [audioUrl])
 
-  function handleRecordingComplete(blob: Blob) {
+  function startPreview(blob: Blob) {
     setAudioBlob(blob)
     setAudioUrl(URL.createObjectURL(blob))
     setStage('preview')
+  }
+
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (!title) setTitle(file.name.replace(/\.[^.]+$/, ''))
+    startPreview(file)
   }
 
   async function handleUpload() {
@@ -50,18 +48,13 @@ export default function RecordPage() {
     formData.append('audio', audioBlob, 'recording.webm')
     formData.append('teamId', teamId)
     formData.append('title', title)
+    formData.append('date', date)
 
     setProcessStep(1)
     try {
       const res = await fetch('/api/meetings/upload', { method: 'POST', body: formData })
       const data = await res.json()
-
-      if (!res.ok) {
-        setError(data.error ?? 'Upload failed')
-        setStage('preview')
-        return
-      }
-
+      if (!res.ok) { setError(data.error ?? 'Upload failed'); setStage('preview'); return }
       setProcessStep(3)
       setTimeout(() => router.push(`/meetings/${data.meetingId}`), 300)
     } catch {
@@ -75,27 +68,35 @@ export default function RecordPage() {
       <h1 className="text-2xl font-bold mb-8">Record Meeting</h1>
 
       {stage === 'record' && (
-        <div className="flex flex-col items-center gap-8 py-12">
-          <p className="text-gray-500">Press start to begin recording your meeting</p>
-          <RecordButton onRecordingComplete={handleRecordingComplete} />
+        <div className="flex flex-col items-center gap-6 py-12">
+          <p className="text-muted">Record live, or upload an existing audio / video file</p>
+          <RecordButton onRecordingComplete={startPreview} />
+          <div className="flex items-center gap-3 text-sm text-muted">
+            <span className="h-px w-12 bg-line" /> or <span className="h-px w-12 bg-line" />
+          </div>
+          <label className="cursor-pointer rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium transition-colors hover:border-brand/40 hover:text-brand">
+            Upload audio / video file
+            <input type="file" accept="audio/*,video/*" className="hidden" onChange={handleFile} />
+          </label>
         </div>
       )}
 
       {stage === 'preview' && (
         <div className="flex flex-col gap-6 max-w-md">
-          <div className="border rounded-xl p-4 bg-gray-50">
-            <p className="text-sm text-gray-500 mb-2">Preview</p>
+          <div className="rounded-xl border border-line p-4 bg-bg">
+            <p className="text-sm text-muted mb-2">Preview</p>
             <audio src={audioUrl} controls className="w-full" onLoadedMetadata={e => primeWebmDuration(e.currentTarget)} />
           </div>
           <Input label="Meeting Title" value={title} onChange={e => setTitle(e.target.value)} placeholder="e.g. Sprint Planning Week 26" required />
+          <Input label="Meeting Date" type="date" value={date} onChange={e => setDate(e.target.value)}
+            onClick={e => e.currentTarget.showPicker?.()} className="cursor-pointer" />
           {error && <p className="text-sm text-red-500">{error}</p>}
           <div className="flex gap-3">
             <Button variant="secondary" onClick={() => {
-              setStage('record')
-              setAudioBlob(null)
+              setStage('record'); setAudioBlob(null)
               if (audioUrl) URL.revokeObjectURL(audioUrl)
               setAudioUrl('')
-            }}>Re-record</Button>
+            }}>Back</Button>
             <Button onClick={handleUpload} disabled={!title.trim()}>Upload & Process</Button>
           </div>
         </div>

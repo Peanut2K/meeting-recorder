@@ -3,19 +3,21 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { format } from 'date-fns'
 import { BackLink } from '@/components/ui/BackLink'
+import { primeWebmDuration } from '@/lib/utils/audio'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { SummaryEditor } from '@/components/summary/SummaryEditor'
 import { TranscriptCollapsible } from '@/components/summary/TranscriptCollapsible'
 import { ExportButtons } from '@/components/summary/ExportButtons'
 import { Meeting, Summary, Team, SummaryContent } from '@/types'
 
-type MeetingWithSummary = Meeting & { summaries: Summary[] }
+type MeetingWithSummary = Meeting & { summaries: Summary[]; audio_signed_url?: string | null }
 
 export default function MeetingPage() {
   const { meetingId } = useParams<{ meetingId: string }>()
   const [meeting, setMeeting] = useState<MeetingWithSummary | null>(null)
   const [team, setTeam] = useState<Team | null>(null)
   const [template, setTemplate] = useState<string[]>([])
+  const [canEdit, setCanEdit] = useState(false)
   const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -25,12 +27,16 @@ export default function MeetingPage() {
       .then(async (data: MeetingWithSummary | null) => {
         if (!data) { setLoading(false); return }
         setMeeting(data)
-        const [teamData, tmpl] = await Promise.all([
+        const [teamData, tmpl, me, teams] = await Promise.all([
           fetch(`/api/teams/${data.team_id}`).then(r => r.ok ? r.json() : null),
           fetch(`/api/teams/${data.team_id}/template`).then(r => r.ok ? r.json() : { fields: [] }),
+          fetch('/api/auth/me').then(r => r.ok ? r.json() : null),
+          fetch('/api/teams').then(r => r.ok ? r.json() : []),
         ])
         setTeam(teamData)
         setTemplate(tmpl.fields || [])
+        const role = Array.isArray(teams) ? teams.find((t: any) => t.teams?.id === data.team_id)?.role : null
+        setCanEdit(role === 'head' || me?.role === 'admin')
         setLoading(false)
       })
       .catch(() => setLoading(false))
@@ -64,6 +70,7 @@ export default function MeetingPage() {
         </div>
         {summary && meeting.status === 'done' && (
           <ExportButtons
+            meetingId={meetingId}
             title={meeting.title}
             date={dateStr}
             teamName={team?.name || ''}
@@ -73,6 +80,13 @@ export default function MeetingPage() {
       </div>
 
       {saved && <p className="text-sm text-green-600 mb-4">Saved!</p>}
+
+      {meeting.audio_signed_url && (
+        <div className="mb-6 rounded-xl border border-line bg-surface p-4">
+          <p className="mb-2 text-sm text-muted">Recording</p>
+          <audio src={meeting.audio_signed_url} controls className="w-full" onLoadedMetadata={e => primeWebmDuration(e.currentTarget)} />
+        </div>
+      )}
 
       {meeting.status === 'processing' && (
         <div className="text-center py-12 text-gray-500">
@@ -90,7 +104,7 @@ export default function MeetingPage() {
 
       {meeting.status === 'done' && summary && (
         <div className="space-y-8">
-          <SummaryEditor content={summary.content} customFields={template} onSave={handleSave} />
+          <SummaryEditor content={summary.content} customFields={template} onSave={handleSave} readOnly={!canEdit} />
           <TranscriptCollapsible transcript={meeting.transcript} />
         </div>
       )}

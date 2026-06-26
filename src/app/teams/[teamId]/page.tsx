@@ -14,20 +14,27 @@ export default function TeamPage() {
   const [team, setTeam] = useState<any>(null)
   const [meetings, setMeetings] = useState<Meeting[]>([])
   const [search, setSearch] = useState('')
-  const [date, setDate] = useState('')
+  const [from, setFrom] = useState('')
+  const [to, setTo] = useState('')
   const [isHead, setIsHead] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const loadMeetings = useCallback(async () => {
     const params = new URLSearchParams()
     if (search) params.set('search', search)
-    if (date) params.set('date', date)
+    if (from) params.set('from', from)
+    if (to) params.set('to', to)
     const res = await fetch(`/api/teams/${teamId}/meetings?${params}`)
     if (res.ok) {
       const data = await res.json()
       setMeetings(Array.isArray(data) ? data : [])
     }
-  }, [teamId, search, date])
+  }, [teamId, search, from, to])
+
+  function presetDays(days: number) {
+    const d = new Date(); d.setDate(d.getDate() - days)
+    setFrom(d.toISOString().slice(0, 10)); setTo('')
+  }
 
   useEffect(() => {
     Promise.all([
@@ -65,11 +72,21 @@ export default function TeamPage() {
           {isHead && <Link href={`/teams/${teamId}/record`}><Button>+ Record Meeting</Button></Link>}
         </div>
       </div>
-      <div className="flex gap-3 mb-6">
-        <Input placeholder="Search meetings..." value={search} onChange={e => setSearch(e.target.value)} className="flex-1" />
-        <input type="date" value={date} onChange={e => setDate(e.target.value)}
-          className="border rounded-lg px-3 py-2 text-sm" />
-        {date && <Button variant="secondary" onClick={() => setDate('')}>Clear</Button>}
+      <div className="mb-3">
+        <Input placeholder="Search meetings..." value={search} onChange={e => setSearch(e.target.value)} className="w-full" />
+      </div>
+      <div className="flex flex-wrap items-center gap-2 mb-6">
+        <Button variant="secondary" className="text-sm py-1" onClick={() => presetDays(1)}>1 day</Button>
+        <Button variant="secondary" className="text-sm py-1" onClick={() => presetDays(7)}>7 days</Button>
+        <Button variant="secondary" className="text-sm py-1" onClick={() => presetDays(30)}>1 month</Button>
+        <input type="date" value={from} onChange={e => setFrom(e.target.value)} aria-label="From date"
+          onClick={e => e.currentTarget.showPicker?.()}
+          className="cursor-pointer rounded-lg bg-brand px-3 py-2 text-sm text-white hover:bg-brand-strong [&::-webkit-calendar-picker-indicator]:invert" />
+        <span className="text-muted">–</span>
+        <input type="date" value={to} onChange={e => setTo(e.target.value)} aria-label="To date"
+          onClick={e => e.currentTarget.showPicker?.()}
+          className="cursor-pointer rounded-lg bg-brand px-3 py-2 text-sm text-white hover:bg-brand-strong [&::-webkit-calendar-picker-indicator]:invert" />
+        {(from || to) && <Button variant="secondary" className="text-sm py-1" onClick={() => { setFrom(''); setTo('') }}>Clear</Button>}
       </div>
       <div className="space-y-3">
         {meetings.length === 0

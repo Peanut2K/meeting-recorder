@@ -1,14 +1,14 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T08:28:02.319Z
-> Files: 74 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T12:16:49.235Z
+> Files: 80 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
 - `.gitignore` — Git ignore rules (~128 tok)
 - `AGENTS.md` — This is NOT the Next.js you know (~82 tok)
 - `CLAUDE.md` — OpenWolf (~60 tok)
-- `next.config.ts` — Declares nextConfig (~95 tok)
+- `next.config.ts` — Declares nextConfig (~102 tok)
 - `package-lock.json` — npm lock file (~25457 tok)
 - `package.json` — Node.js package manifest (~204 tok)
 - `postcss.config.mjs` — Declares config (~26 tok)
@@ -24,6 +24,10 @@
 
 - `openwolf.md` (~313 tok)
 
+## .github/workflows/
+
+- `supabase-keepalive.yml` — CI: Supabase keep-alive (~236 tok)
+
 ## .remember/
 
 - `.gitignore` — Git ignore rules (~1 tok)
@@ -36,6 +40,10 @@
 ## docs/superpowers/specs/
 
 - `2026-06-26-role-based-access-design.md` — Role-Based Access Control — Design (~818 tok)
+
+## scripts/
+
+- `render-pdf.mjs` — Standalone PDF renderer — run as its own node process so @react-pdf/renderer (~877 tok)
 
 ## src/
 
@@ -81,15 +89,19 @@
 
 ## src/app/api/meetings/[id]/
 
-- `route.ts` — Next.js API route: GET, DELETE (~590 tok)
+- `route.ts` — Next.js API route: GET, DELETE (~665 tok)
+
+## src/app/api/meetings/[id]/pdf/
+
+- `route.ts` — Render the PDF in a separate node process (scripts/render-pdf.mjs). Rendering (~759 tok)
 
 ## src/app/api/meetings/[id]/summary/
 
-- `route.ts` — Next.js API route: PUT (~420 tok)
+- `route.ts` — Next.js API route: PUT (~450 tok)
 
 ## src/app/api/meetings/upload/
 
-- `route.ts` — Next.js API route: POST (~1167 tok)
+- `route.ts` — Next.js API route: POST (~1263 tok)
 
 ## src/app/api/teams/
 
@@ -101,7 +113,7 @@
 
 ## src/app/api/teams/[id]/meetings/
 
-- `route.ts` — Next.js API route: GET (~356 tok)
+- `route.ts` — Next.js API route: GET (~376 tok)
 
 ## src/app/api/teams/[id]/members/
 
@@ -113,7 +125,7 @@
 
 ## src/app/api/teams/[id]/template/
 
-- `route.ts` — Next.js API route: GET, PUT (~516 tok)
+- `route.ts` — Next.js API route: GET, PUT (~575 tok)
 
 ## src/app/dashboard/
 
@@ -125,7 +137,7 @@
 
 ## src/app/meetings/[meetingId]/
 
-- `page.tsx` — MeetingPage (~1149 tok)
+- `page.tsx` — MeetingPage (~1389 tok)
 
 ## src/app/profile/
 
@@ -137,15 +149,15 @@
 
 ## src/app/teams/[teamId]/
 
-- `page.tsx` — TeamPage (~969 tok)
+- `page.tsx` — TeamPage (~1309 tok)
 
 ## src/app/teams/[teamId]/record/
 
-- `page.tsx` — primeWebmDuration (~1102 tok)
+- `page.tsx` — RecordPage (~1263 tok)
 
 ## src/app/teams/[teamId]/settings/
 
-- `page.tsx` — TeamSettingsPage (~846 tok)
+- `page.tsx` — TeamSettingsPage (~1205 tok)
 
 ## src/app/teams/new/
 
@@ -163,8 +175,8 @@
 
 ## src/components/summary/
 
-- `ExportButtons.tsx` — ExportButtons — uses useState (~456 tok)
-- `SummaryEditor.tsx` — SummaryEditor — uses useState (~1155 tok)
+- `ExportButtons.tsx` — ExportButtons (~455 tok)
+- `SummaryEditor.tsx` — SummaryEditor (~1220 tok)
 - `TranscriptCollapsible.tsx` — TranscriptCollapsible — uses useState (~211 tok)
 
 ## src/components/teams/
@@ -175,12 +187,13 @@
 ## src/components/ui/
 
 - `BackLink.tsx` — BackLink (~141 tok)
-- `Button.tsx` — Button (~280 tok)
+- `Button.tsx` — Button (~294 tok)
 - `Input.tsx` — Input (~240 tok)
 
 ## src/lib/ai/
 
-- `summarize.ts` — Exports summarizeMeeting (~444 tok)
+- `prompt.ts` — Shared between the server-side summarizer and the settings UI (no SDK import here, (~388 tok)
+- `summarize.ts` — Exports summarizeMeeting (~318 tok)
 - `transcribe.ts` — Typhoon ASR is OpenAI-compatible — Thai-optimized speech-to-text from SCB 10X. (~514 tok)
 
 ## src/lib/auth/
@@ -190,7 +203,7 @@
 
 ## src/lib/pdf/
 
-- `MeetingPdf.tsx` — styles (~698 tok)
+- `MeetingPdf.tsx` — react-pdf's built-in Helvetica has no Thai glyphs, so Thai summaries render as blank (~854 tok)
 
 ## src/lib/supabase/
 
@@ -200,6 +213,7 @@
 
 ## src/lib/utils/
 
+- `audio.ts` — MediaRecorder WebM blobs ship without a duration header, so audio.duration is Infinity (~131 tok)
 - `cn.ts` — Exports cn (~48 tok)
 - `markdown.ts` — Exports summaryToMarkdown (~193 tok)
 
@@ -214,3 +228,4 @@
 - `002_fix_rls_recursion.sql` — ============================================================ (~886 tok)
 - `003_roles.sql` — ============================================================ (~1235 tok)
 - `004_seed_first_admin.sql` — ============================================================ (~289 tok)
+- `005_flexible_template.sql` — Per-team editable base prompt for the summarizer (null = use the app default). (~42 tok)

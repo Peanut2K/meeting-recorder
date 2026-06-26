@@ -16,7 +16,12 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
 
   // Read the summary with admin: the nested-RLS join can return empty even for members.
   const { data: summaries } = await admin.from('summaries').select('*').eq('meeting_id', id)
-  return NextResponse.json({ ...meeting, summaries: summaries ?? [] })
+
+  // Signed URL for the recording (bucket is private). Null if the object isn't there.
+  const { data: signed } = await admin.storage.from('meeting-audio')
+    .createSignedUrl(`${meeting.team_id}/${id}.webm`, 3600)
+
+  return NextResponse.json({ ...meeting, summaries: summaries ?? [], audio_signed_url: signed?.signedUrl ?? null })
 }
 
 export async function DELETE(_: Request, { params }: { params: Promise<{ id: string }> }) {

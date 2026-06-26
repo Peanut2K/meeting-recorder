@@ -19,9 +19,13 @@ export async function POST(request: Request) {
   const file = formData.get('audio') as File | null
   const teamId = formData.get('teamId') as string | null
   const title = formData.get('title') as string | null
+  const dateStr = formData.get('date') as string | null
 
   if (!file || !teamId || !title?.trim())
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+
+  // Optional custom meeting date — overrides created_at (used as the meeting date everywhere).
+  const createdAt = dateStr && /^\d{4}-\d{2}-\d{2}$/.test(dateStr) ? new Date(dateStr).toISOString() : undefined
 
   // Only the team head (or a global admin) may record/create meetings.
   if (!(await canManageTeam(supabase, admin, teamId, user.id)))
@@ -30,7 +34,7 @@ export async function POST(request: Request) {
   // Create meeting record with processing status
   const { data: meeting, error: meetingError } = await admin
     .from('meetings')
-    .insert({ team_id: teamId, title: title.trim(), recorded_by: user.id, status: 'processing' })
+    .insert({ team_id: teamId, title: title.trim(), recorded_by: user.id, status: 'processing', ...(createdAt && { created_at: createdAt }) })
     .select().single()
   if (meetingError) {
     console.error('Meeting insert failed:', meetingError.message)
@@ -57,10 +61,10 @@ export async function POST(request: Request) {
       .catch((e: unknown) => { throw new Error(`Transcription (Typhoon) failed: ${e instanceof Error ? e.message : e}`) })
     await admin.from('meetings').update({ transcript }).eq('id', meeting.id)
 
-    const { data: template } = await admin.from('team_templates').select('fields').eq('team_id', teamId).single()
+    const { data: template } = await admin.from('team_templates').select('fields, prompt').eq('team_id', teamId).single()
     const customFields: string[] = Array.isArray(template?.fields) ? template.fields : []
 
-    const summary = await summarizeMeeting(transcript, customFields)
+    const summary = await summarizeMeeting(transcript, customFields, template?.prompt)
       .catch((e: unknown) => { throw new Error(`Summarization (Anthropic) failed: ${e instanceof Error ? e.message : e}`) })
     const { error: summaryError } = await admin.from('summaries').insert({ meeting_id: meeting.id, content: summary, edited_by: user.id })
     if (summaryError) throw new Error(`Saving summary failed: ${summaryError.message}`)

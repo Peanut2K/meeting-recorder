@@ -493,6 +493,230 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T08:28:02.336Z"
+    },
+    {
+      "id": "bug-031",
+      "timestamp": "2026-06-26T11:41:30.072Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/api/teams/[id]/template/route.ts",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 8→13 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:41:30.072Z"
+    },
+    {
+      "id": "bug-032",
+      "timestamp": "2026-06-26T11:41:54.147Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/api/meetings/[id]/route.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:41:54.147Z"
+    },
+    {
+      "id": "bug-033",
+      "timestamp": "2026-06-26T11:42:02.857Z",
+      "error_message": "Type error",
+      "file": "src/lib/pdf/MeetingPdf.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:42:02.857Z"
+    },
+    {
+      "id": "bug-034",
+      "timestamp": "2026-06-26T11:42:08.592Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "src/components/summary/ExportButtons.tsx",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:42:08.592Z"
+    },
+    {
+      "id": "bug-035",
+      "timestamp": "2026-06-26T11:43:29.792Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/meetings/[meetingId]/page.tsx",
+      "root_cause": "Had '@/components/layout/PageWrapper'",
+      "fix": "Changed to '@/lib/utils/audio'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:43:29.792Z"
+    },
+    {
+      "id": "bug-036",
+      "timestamp": "2026-06-26T11:43:42.237Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/meetings/[meetingId]/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:43:42.237Z"
+    },
+    {
+      "id": "bug-037",
+      "timestamp": "2026-06-26T11:44:11.638Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/teams/[teamId]/page.tsx",
+      "root_cause": "3 lines replaced/restructured",
+      "fix": "Rewrote 15→22 lines (3 removed) | Also: <div className=\"flex gap-3 mb-6\">; <Input placeholder=\"Search meetings...\" value={sea",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T11:44:34.156Z"
+    },
+    {
+      "id": "bug-038",
+      "timestamp": "2026-06-26T11:49:36.649Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/Button.tsx",
+      "root_cause": "Had 'bg-gray-100 text-ink hover:bg-gray-200'",
+      "fix": "Changed to 'bg-surface text-ink border border-line shadow-sm ",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:49:36.649Z"
+    },
+    {
+      "id": "bug-039",
+      "timestamp": "2026-06-26T11:54:06.442Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/teams/[teamId]/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check) | Also: <Input label=\"Meeting Date\" type=\"date\" value={date} onChang; onClick={e => e.currentTarget.showPicker?.()} className=\"cur",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T11:54:13.851Z"
+    },
+    {
+      "id": "bug-040",
+      "timestamp": "2026-06-26T11:57:29.792Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/teams/[teamId]/page.tsx",
+      "root_cause": "Had \"secondary\"",
+      "fix": "Changed to \"text-sm py-1\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T11:57:29.792Z"
+    },
+    {
+      "id": "bug-041",
+      "timestamp": "2026-06-26T12:00:54.302Z",
+      "error_message": "CSS fix: hover",
+      "file": "src/app/teams/[teamId]/page.tsx",
+      "root_cause": "hover: border-brand/40\" /> → bg-brand-strong [&::-webkit-calendar-picker-indicator]:invert\" />",
+      "fix": "Changed hover: border-brand/40\" /> → bg-brand-strong [&::-webkit-calendar-picker-indicator]:invert\" />",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T12:00:54.302Z"
+    },
+    {
+      "id": "bug-042",
+      "timestamp": "2026-06-26T12:09:00.337Z",
+      "error_message": "CSS fix: src",
+      "file": "src/lib/pdf/MeetingPdf.tsx",
+      "root_cause": "src: 'https://cdn.jsdelivr.net/gh/google/fonts/ofl/sarabun/Sarabun-Bold.ttf', fontWeight: 'bold' → join(fontsDir, 'Sarabun-Bold.ttf'), fontWeight: 'bold'",
+      "fix": "Changed src: 'https://cdn.jsdelivr.net/gh/google/fonts/ofl/sarabun/Sarabun-Bold.ttf', fontWeight: 'bold' → join(fontsDir, 'Sarabun-Bold.ttf'), fontWeight: 'bold'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T12:09:00.337Z"
+    },
+    {
+      "id": "bug-043",
+      "timestamp": "2026-06-26T12:11:38.914Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "src/app/api/meetings/[id]/pdf/route.ts",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T12:11:38.914Z"
+    },
+    {
+      "id": "bug-044",
+      "timestamp": "2026-06-26T12:11:46.873Z",
+      "error_message": "Missing error handling in ExportButtons",
+      "file": "src/components/summary/ExportButtons.tsx",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T12:11:46.873Z"
     }
   ]
 }

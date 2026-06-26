@@ -132,3 +132,59 @@
 | 15:28 | Edited src/app/admin/page.tsx | added 1 condition(s) | ~653 |
 | 15:28 | Session end: 37 writes across 12 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 26 reads | ~23772 tok |
 | 15:31 | Session end: 37 writes across 12 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 26 reads | ~23772 tok |
+| 18:40 | Created supabase/migrations/005_flexible_template.sql | — | ~42 |
+| 18:40 | Created src/lib/ai/prompt.ts | — | ~388 |
+| 18:40 | Created src/lib/utils/audio.ts | — | ~131 |
+| 18:40 | Created .github/workflows/supabase-keepalive.yml | — | ~236 |
+| 18:41 | Created src/lib/ai/summarize.ts | — | ~318 |
+| 18:41 | Edited src/app/api/meetings/upload/route.ts | modified toISOString() | ~157 |
+| 18:41 | Edited src/app/api/meetings/upload/route.ts | 2→2 lines | ~48 |
+| 18:41 | Edited src/app/api/meetings/upload/route.ts | 4→4 lines | ~86 |
+| 18:41 | Edited src/app/api/teams/[id]/template/route.ts | added 1 condition(s) | ~190 |
+| 18:41 | Created src/app/api/meetings/[id]/summary/route.ts | — | ~450 |
+| 18:41 | Edited src/app/api/teams/[id]/meetings/route.ts | added 1 condition(s) | ~140 |
+| 18:41 | Edited src/app/api/meetings/[id]/route.ts | added optional chaining | ~148 |
+| 18:42 | Edited src/lib/pdf/MeetingPdf.tsx | expanded (+10 lines) | ~186 |
+| 18:42 | Edited src/components/summary/ExportButtons.tsx | CSS: failed, message | ~53 |
+| 18:42 | Created src/components/summary/SummaryEditor.tsx | — | ~1220 |
+| 18:42 | Created src/app/teams/[teamId]/record/page.tsx | — | ~1238 |
+| 18:43 | Created src/app/teams/[teamId]/settings/page.tsx | — | ~1205 |
+| 18:43 | Edited src/app/meetings/[meetingId]/page.tsx | added 1 import(s) | ~48 |
+| 18:43 | Edited src/app/meetings/[meetingId]/page.tsx | added optional chaining | ~418 |
+| 18:43 | Edited src/app/meetings/[meetingId]/page.tsx | expanded (+7 lines) | ~130 |
+| 18:43 | Edited src/app/meetings/[meetingId]/page.tsx | inline fix | ~34 |
+| 18:44 | Edited src/app/teams/[teamId]/page.tsx | CSS: days | ~224 |
+| 18:44 | Edited src/app/teams/[teamId]/page.tsx | expanded (+8 lines) | ~313 |
+| 16:40 | 8 features: file-upload+custom-date, editable team prompt(005 mig), audio player(signed url), head-only summary edit, date-range filter, PDF Thai font, keepalive workflow, settings backlink | many | done, tsc clean | ~9k |
+| 18:45 | Session end: 60 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~36791 tok |
+| 18:49 | Edited src/components/ui/Button.tsx | 3→3 lines | ~62 |
+| 18:49 | Session end: 61 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~36853 tok |
+| 18:54 | Edited src/app/teams/[teamId]/page.tsx | added optional chaining | ~165 |
+| 18:54 | Edited src/app/teams/[teamId]/record/page.tsx | added optional chaining | ~55 |
+| 18:54 | Session end: 63 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~37073 tok |
+| 18:57 | Edited src/app/teams/[teamId]/page.tsx | 3→3 lines | ~75 |
+| 18:57 | Edited src/app/teams/[teamId]/page.tsx | inline fix | ~28 |
+| 18:57 | Session end: 65 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~37176 tok |
+| 18:58 | Edited src/app/teams/[teamId]/page.tsx | 3→4 lines | ~55 |
+| 18:58 | Edited src/app/teams/[teamId]/page.tsx | modified presetDays() | ~50 |
+| 18:59 | Edited src/app/teams/[teamId]/page.tsx | 11→11 lines | ~349 |
+| 18:59 | Edited src/app/teams/[teamId]/page.tsx | inline fix | ~33 |
+| 18:59 | Session end: 69 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~37663 tok |
+| 19:00 | Edited src/app/teams/[teamId]/page.tsx | 4→3 lines | ~34 |
+| 19:00 | Edited src/app/teams/[teamId]/page.tsx | inline fix | ~15 |
+| 19:00 | Edited src/app/teams/[teamId]/page.tsx | 11→11 lines | ~323 |
+| 19:01 | Session end: 72 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~38035 tok |
+| 19:03 | Created src/app/api/meetings/[id]/pdf/route.ts | — | ~528 |
+| 19:03 | Created src/components/summary/ExportButtons.tsx | — | ~334 |
+| 19:03 | Edited src/app/meetings/[meetingId]/page.tsx | 2→3 lines | ~27 |
+| 19:03 | Edited next.config.ts | inline fix | ~23 |
+| 19:04 | Session end: 76 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~39050 tok |
+| 19:09 | Edited src/lib/pdf/MeetingPdf.tsx | CSS: node | ~184 |
+| 19:09 | Session end: 77 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~39234 tok |
+| 19:11 | Edited src/app/api/meetings/[id]/pdf/route.ts | added error handling | ~155 |
+| 19:11 | Edited src/components/summary/ExportButtons.tsx | added error handling | ~216 |
+| 19:11 | Edited src/components/summary/ExportButtons.tsx | inline fix | ~27 |
+| 19:12 | Session end: 80 writes across 20 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~39632 tok |
+| 19:16 | Created scripts/render-pdf.mjs | — | ~877 |
+| 19:16 | Created src/app/api/meetings/[id]/pdf/route.ts | — | ~759 |
+| 19:17 | Session end: 82 writes across 21 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~41330 tok |

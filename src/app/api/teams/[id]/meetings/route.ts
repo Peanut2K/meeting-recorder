@@ -14,14 +14,16 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 
   const url = new URL(request.url)
   const search = url.searchParams.get('search') || ''
-  const date = url.searchParams.get('date') || ''
+  const from = url.searchParams.get('from') || ''
+  const to = url.searchParams.get('to') || ''
 
   let query = supabase.from('meetings').select('*')
     .eq('team_id', id)
     .order('created_at', { ascending: false })
 
   if (search) query = query.ilike('title', `%${search}%`)
-  if (date) query = query.gte('created_at', `${date}T00:00:00`).lte('created_at', `${date}T23:59:59`)
+  if (from) query = query.gte('created_at', `${from}T00:00:00`)
+  if (to) query = query.lte('created_at', `${to}T23:59:59`)
 
   const { data, error } = await query
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })

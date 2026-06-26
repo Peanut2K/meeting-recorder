@@ -5,29 +5,30 @@ import { SummaryContent } from '@/types'
 import { summaryToMarkdown } from '@/lib/utils/markdown'
 
 interface ExportButtonsProps {
+  meetingId: string
   title: string
   date: string
   teamName: string
   content: SummaryContent
 }
 
-export function ExportButtons({ title, date, teamName, content }: ExportButtonsProps) {
+export function ExportButtons({ meetingId, title, date, teamName, content }: ExportButtonsProps) {
   const [copying, setCopying] = useState(false)
   const [exporting, setExporting] = useState(false)
 
   async function exportPdf() {
     setExporting(true)
     try {
-      const { pdf } = await import('@react-pdf/renderer')
-      const { MeetingPdf } = await import('@/lib/pdf/MeetingPdf')
-      const { createElement } = await import('react')
-      const blob = await pdf(createElement(MeetingPdf, { title, date, teamName, content })).toBlob()
-      const url = URL.createObjectURL(blob)
+      const res = await fetch(`/api/meetings/${meetingId}/pdf`)
+      if (!res.ok) { alert(`PDF export failed: ${await res.text()}`); return }
+      const url = URL.createObjectURL(await res.blob())
       const a = document.createElement('a')
       a.href = url
       a.download = `meeting-${date}.pdf`
       a.click()
       URL.revokeObjectURL(url)
+    } catch (e) {
+      alert(`PDF export failed: ${e instanceof Error ? e.message : e}`)
     } finally {
       setExporting(false)
     }
