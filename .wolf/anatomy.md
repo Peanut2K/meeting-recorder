@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T20:13:16.275Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T20:15:28.750Z
 > Files: 20 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
@@ -117,7 +117,7 @@
 
 ## src/app/teams/[teamId]/
 
-- `page.tsx` — TeamPage (~1514 tok)
+- `page.tsx` — TeamPage (~1626 tok)
 
 ## src/app/teams/[teamId]/record/
 

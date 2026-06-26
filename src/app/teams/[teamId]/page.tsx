@@ -84,12 +84,22 @@ export default function TeamPage() {
       <div className="mb-4">
         <BackLink href="/dashboard">Back to teams</BackLink>
       </div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">{team?.name || 'Team'}</h1>
-        <div className="flex gap-2">
-          {isHead && <Link href={`/teams/${teamId}/settings`}><Button variant="secondary">Settings</Button></Link>}
-          {isHead && <Link href={`/teams/${teamId}/record`}><Button>+ Record Meeting</Button></Link>}
+      <div className="mb-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold">{team?.name || 'Team'}</h1>
+          {isHead && (
+            <div className="hidden sm:flex gap-2">
+              <Link href={`/teams/${teamId}/settings`}><Button variant="secondary">Settings</Button></Link>
+              <Link href={`/teams/${teamId}/record`}><Button>+ Record Meeting</Button></Link>
+            </div>
+          )}
         </div>
+        {isHead && (
+          <div className="flex sm:hidden gap-2 mt-3">
+            <Link href={`/teams/${teamId}/settings`}><Button variant="secondary">Settings</Button></Link>
+            <Link href={`/teams/${teamId}/record`}><Button>+ Record Meeting</Button></Link>
+          </div>
+        )}
       </div>
       <div className="mb-3">
         <Input placeholder="Search meetings..." value={search} onChange={e => setSearch(e.target.value)} className="w-full" />
