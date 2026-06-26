@@ -1,715 +1,79 @@
 {
-  "session_id": "session-2026-06-26-1411",
-  "started": "2026-06-26T07:11:30.126Z",
+  "session_id": "session-2026-06-26-2001",
+  "started": "2026-06-26T13:01:47.494Z",
   "files_read": {
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/page.tsx": {
+    "C:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts": {
       "count": 1,
-      "tokens": 31,
-      "first_read": "2026-06-26T07:12:38.234Z"
+      "tokens": 0,
+      "first_read": "2026-06-26T13:04:54.136Z"
     },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/globals.css": {
+    "C:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/upload/route.ts": {
       "count": 1,
-      "tokens": 140,
-      "first_read": "2026-06-26T07:12:38.808Z"
+      "tokens": 0,
+      "first_read": "2026-06-26T13:04:54.385Z"
     },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/layout.tsx": {
+    "C:/Users/USER/Desktop/meeting-recorder/src/app/meetings/[meetingId]/page.tsx": {
       "count": 1,
-      "tokens": 151,
-      "first_read": "2026-06-26T07:12:39.178Z"
+      "tokens": 0,
+      "first_read": "2026-06-26T13:27:45.367Z"
     },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/login/page.tsx": {
+    "C:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/[id]/route.ts": {
       "count": 1,
-      "tokens": 536,
-      "first_read": "2026-06-26T07:12:39.522Z"
+      "tokens": 0,
+      "first_read": "2026-06-26T13:27:51.889Z"
     },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/ui/Button.tsx": {
+    "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx": {
       "count": 1,
-      "tokens": 250,
-      "first_read": "2026-06-26T07:13:06.687Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/ui/Input.tsx": {
-      "count": 1,
-      "tokens": 240,
-      "first_read": "2026-06-26T07:13:07.683Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/layout/Navbar.tsx": {
-      "count": 1,
-      "tokens": 386,
-      "first_read": "2026-06-26T07:13:08.067Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/package.json": {
-      "count": 1,
-      "tokens": 204,
-      "first_read": "2026-06-26T07:13:08.462Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/middleware.ts": {
-      "count": 1,
-      "tokens": 322,
-      "first_read": "2026-06-26T07:13:25.361Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/dashboard/page.tsx": {
-      "count": 1,
-      "tokens": 602,
-      "first_read": "2026-06-26T07:20:55.033Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/teams/TeamCard.tsx": {
-      "count": 1,
-      "tokens": 155,
-      "first_read": "2026-06-26T07:20:55.521Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/teams/MeetingRow.tsx": {
-      "count": 1,
-      "tokens": 246,
-      "first_read": "2026-06-26T07:20:55.940Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/layout/PageWrapper.tsx": {
-      "count": 1,
-      "tokens": 43,
-      "first_read": "2026-06-26T07:21:12.340Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/recording/RecordButton.tsx": {
-      "count": 1,
-      "tokens": 700,
-      "first_read": "2026-06-26T07:27:04.166Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts": {
-      "count": 2,
-      "tokens": 1074,
-      "first_read": "2026-06-26T07:37:00.945Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/ai/transcribe.ts": {
-      "count": 1,
-      "tokens": 172,
-      "first_read": "2026-06-26T07:37:25.279Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/supabase/migrations/001_initial_schema.sql": {
-      "count": 3,
-      "tokens": 1584,
-      "first_read": "2026-06-26T07:37:44.099Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/record/page.tsx": {
-      "count": 1,
-      "tokens": 957,
-      "first_read": "2026-06-26T07:48:15.106Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/ai/summarize.ts": {
-      "count": 1,
-      "tokens": 444,
-      "first_read": "2026-06-26T07:52:44.941Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/next.config.ts": {
-      "count": 1,
-      "tokens": 38,
-      "first_read": "2026-06-26T08:01:24.201Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx": {
-      "count": 4,
-      "tokens": 1379,
-      "first_read": "2026-06-26T08:15:09.326Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/route.ts": {
-      "count": 1,
-      "tokens": 180,
-      "first_read": "2026-06-26T08:15:31.695Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx": {
-      "count": 2,
-      "tokens": 1033,
-      "first_read": "2026-06-26T08:15:31.847Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/admin/users/[userId]/route.ts": {
-      "count": 1,
-      "tokens": 724,
-      "first_read": "2026-06-26T08:26:39.092Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/supabase/admin.ts": {
-      "count": 1,
-      "tokens": 100,
-      "first_read": "2026-06-26T08:26:39.214Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx": {
-      "count": 1,
-      "tokens": 2877,
-      "first_read": "2026-06-26T08:26:52.749Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/settings/page.tsx": {
-      "count": 1,
-      "tokens": 846,
-      "first_read": "2026-06-26T11:37:31.869Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/teams/[id]/template/route.ts": {
-      "count": 1,
-      "tokens": 516,
-      "first_read": "2026-06-26T11:37:32.780Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/summary/route.ts": {
-      "count": 1,
-      "tokens": 420,
-      "first_read": "2026-06-26T11:37:33.248Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/auth/roles.ts": {
-      "count": 1,
-      "tokens": 435,
-      "first_read": "2026-06-26T11:37:33.608Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx": {
-      "count": 1,
-      "tokens": 1155,
-      "first_read": "2026-06-26T11:37:39.626Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/ExportButtons.tsx": {
-      "count": 1,
-      "tokens": 456,
-      "first_read": "2026-06-26T11:37:40.100Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/pdf/MeetingPdf.tsx": {
-      "count": 1,
-      "tokens": 698,
-      "first_read": "2026-06-26T11:37:40.577Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/teams/[id]/meetings/route.ts": {
-      "count": 1,
-      "tokens": 356,
-      "first_read": "2026-06-26T11:37:41.085Z"
-    },
-    "/home/sapon/Desktop/Projects/meeting-recorder/src/types/index.ts": {
-      "count": 1,
-      "tokens": 336,
-      "first_read": "2026-06-26T11:38:19.902Z"
+      "tokens": 0,
+      "first_read": "2026-06-26T13:27:52.022Z"
     }
   },
   "files_written": [
     {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/globals.css",
-      "action": "create",
-      "tokens": 136,
-      "at": "2026-06-26T07:15:04.259Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/ui/Button.tsx",
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts",
       "action": "edit",
-      "tokens": 118,
-      "at": "2026-06-26T07:15:12.802Z"
+      "tokens": 614,
+      "at": "2026-06-26T13:06:06.806Z"
     },
     {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/login/page.tsx",
-      "action": "create",
-      "tokens": 1305,
-      "at": "2026-06-26T07:15:31.546Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/login/page.tsx",
-      "action": "create",
-      "tokens": 667,
-      "at": "2026-06-26T07:19:39.315Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/globals.css",
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/upload/route.ts",
       "action": "edit",
-      "tokens": 90,
-      "at": "2026-06-26T07:21:42.555Z"
+      "tokens": 20,
+      "at": "2026-06-26T13:06:13.729Z"
     },
     {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/teams/TeamCard.tsx",
-      "action": "create",
-      "tokens": 296,
-      "at": "2026-06-26T07:21:48.897Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/teams/MeetingRow.tsx",
-      "action": "create",
-      "tokens": 362,
-      "at": "2026-06-26T07:21:55.738Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/layout/Navbar.tsx",
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/upload/route.ts",
       "action": "edit",
-      "tokens": 250,
-      "at": "2026-06-26T07:22:13.978Z"
+      "tokens": 113,
+      "at": "2026-06-26T13:07:05.645Z"
     },
     {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/dashboard/page.tsx",
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/[id]/route.ts",
       "action": "edit",
-      "tokens": 410,
-      "at": "2026-06-26T07:22:25.599Z"
+      "tokens": 103,
+      "at": "2026-06-26T13:29:00.041Z"
     },
     {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/recording/RecordButton.tsx",
-      "action": "create",
-      "tokens": 1258,
-      "at": "2026-06-26T07:28:03.811Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/[id]/route.ts",
       "action": "edit",
-      "tokens": 91,
-      "at": "2026-06-26T07:38:14.780Z"
+      "tokens": 38,
+      "at": "2026-06-26T13:29:22.550Z"
     },
     {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
+      "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/upload/route.ts",
       "action": "edit",
-      "tokens": 93,
-      "at": "2026-06-26T07:38:20.247Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/ai/transcribe.ts",
-      "action": "edit",
-      "tokens": 212,
-      "at": "2026-06-26T07:40:54.333Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 182,
-      "at": "2026-06-26T07:46:36.981Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
-      "action": "edit",
-      "tokens": 143,
-      "at": "2026-06-26T07:48:42.843Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
-      "action": "edit",
-      "tokens": 36,
-      "at": "2026-06-26T07:48:48.113Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 197,
-      "at": "2026-06-26T07:52:55.038Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/ai/transcribe.ts",
-      "action": "create",
-      "tokens": 514,
-      "at": "2026-06-26T07:56:54.204Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/types/ffmpeg-installer.d.ts",
-      "action": "create",
-      "tokens": 35,
-      "at": "2026-06-26T07:56:59.337Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/next.config.ts",
-      "action": "edit",
-      "tokens": 75,
-      "at": "2026-06-26T08:01:31.880Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 152,
-      "at": "2026-06-26T08:06:21.369Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/route.ts",
-      "action": "create",
-      "tokens": 590,
-      "at": "2026-06-26T08:18:17.086Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 88,
-      "at": "2026-06-26T08:18:27.523Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 43,
-      "at": "2026-06-26T08:18:32.588Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 84,
-      "at": "2026-06-26T08:18:41.081Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/teams/MeetingRow.tsx",
-      "action": "edit",
-      "tokens": 400,
-      "at": "2026-06-26T08:18:55.911Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 114,
-      "at": "2026-06-26T08:19:01.676Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 33,
-      "at": "2026-06-26T08:19:06.155Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/ui/BackLink.tsx",
-      "action": "create",
-      "tokens": 141,
-      "at": "2026-06-26T08:22:09.865Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 25,
-      "at": "2026-06-26T08:22:14.265Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 56,
-      "at": "2026-06-26T08:22:21.899Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 46,
-      "at": "2026-06-26T08:22:27.251Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 76,
-      "at": "2026-06-26T08:22:32.076Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/admin/users/[userId]/route.ts",
-      "action": "edit",
-      "tokens": 445,
-      "at": "2026-06-26T08:27:35.300Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx",
-      "action": "edit",
-      "tokens": 206,
-      "at": "2026-06-26T08:27:43.411Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx",
-      "action": "edit",
-      "tokens": 81,
-      "at": "2026-06-26T08:27:49.774Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx",
-      "action": "edit",
-      "tokens": 653,
-      "at": "2026-06-26T08:28:02.333Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/supabase/migrations/005_flexible_template.sql",
-      "action": "create",
-      "tokens": 44,
-      "at": "2026-06-26T11:40:40.393Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/ai/prompt.ts",
-      "action": "create",
-      "tokens": 388,
-      "at": "2026-06-26T11:40:46.562Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/utils/audio.ts",
-      "action": "create",
-      "tokens": 131,
-      "at": "2026-06-26T11:40:48.487Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/.github/workflows/supabase-keepalive.yml",
-      "action": "create",
-      "tokens": 236,
-      "at": "2026-06-26T11:40:52.969Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/ai/summarize.ts",
-      "action": "create",
-      "tokens": 318,
-      "at": "2026-06-26T11:41:03.891Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 157,
-      "at": "2026-06-26T11:41:11.056Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 48,
-      "at": "2026-06-26T11:41:16.048Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 86,
-      "at": "2026-06-26T11:41:22.316Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/teams/[id]/template/route.ts",
-      "action": "edit",
-      "tokens": 190,
-      "at": "2026-06-26T11:41:30.070Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/summary/route.ts",
-      "action": "create",
-      "tokens": 450,
-      "at": "2026-06-26T11:41:39.862Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/teams/[id]/meetings/route.ts",
-      "action": "edit",
-      "tokens": 140,
-      "at": "2026-06-26T11:41:47.198Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/route.ts",
-      "action": "edit",
-      "tokens": 148,
-      "at": "2026-06-26T11:41:54.145Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/pdf/MeetingPdf.tsx",
-      "action": "edit",
-      "tokens": 186,
-      "at": "2026-06-26T11:42:02.854Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/ExportButtons.tsx",
-      "action": "edit",
-      "tokens": 53,
-      "at": "2026-06-26T11:42:08.590Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
-      "action": "create",
-      "tokens": 1220,
-      "at": "2026-06-26T11:42:26.481Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
-      "action": "create",
-      "tokens": 1238,
-      "at": "2026-06-26T11:42:45.133Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/settings/page.tsx",
-      "action": "create",
-      "tokens": 1205,
-      "at": "2026-06-26T11:43:04.313Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 48,
-      "at": "2026-06-26T11:43:29.789Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 418,
-      "at": "2026-06-26T11:43:42.235Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 130,
-      "at": "2026-06-26T11:43:53.785Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 34,
-      "at": "2026-06-26T11:43:59.028Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 224,
-      "at": "2026-06-26T11:44:11.634Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 313,
-      "at": "2026-06-26T11:44:34.152Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/ui/Button.tsx",
-      "action": "edit",
-      "tokens": 62,
-      "at": "2026-06-26T11:49:36.647Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 165,
-      "at": "2026-06-26T11:54:06.440Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
-      "action": "edit",
-      "tokens": 55,
-      "at": "2026-06-26T11:54:13.848Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 75,
-      "at": "2026-06-26T11:57:29.790Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 28,
-      "at": "2026-06-26T11:57:35.017Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 55,
-      "at": "2026-06-26T11:58:46.878Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 50,
-      "at": "2026-06-26T11:58:54.753Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 349,
-      "at": "2026-06-26T11:59:06.303Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 33,
-      "at": "2026-06-26T11:59:12.554Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 34,
-      "at": "2026-06-26T12:00:36.152Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 15,
-      "at": "2026-06-26T12:00:42.734Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/teams/[teamId]/page.tsx",
-      "action": "edit",
-      "tokens": 323,
-      "at": "2026-06-26T12:00:54.298Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/pdf/route.ts",
-      "action": "create",
-      "tokens": 528,
-      "at": "2026-06-26T12:03:22.743Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/ExportButtons.tsx",
-      "action": "create",
-      "tokens": 334,
-      "at": "2026-06-26T12:03:31.372Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
-      "action": "edit",
-      "tokens": 27,
-      "at": "2026-06-26T12:03:36.701Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/next.config.ts",
-      "action": "edit",
-      "tokens": 23,
-      "at": "2026-06-26T12:03:42.453Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/pdf/MeetingPdf.tsx",
-      "action": "edit",
-      "tokens": 184,
-      "at": "2026-06-26T12:09:00.334Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/pdf/route.ts",
-      "action": "edit",
-      "tokens": 155,
-      "at": "2026-06-26T12:11:38.912Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/ExportButtons.tsx",
-      "action": "edit",
-      "tokens": 216,
-      "at": "2026-06-26T12:11:46.871Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/ExportButtons.tsx",
-      "action": "edit",
-      "tokens": 27,
-      "at": "2026-06-26T12:11:55.165Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/scripts/render-pdf.mjs",
-      "action": "create",
-      "tokens": 939,
-      "at": "2026-06-26T12:16:21.197Z"
-    },
-    {
-      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/pdf/route.ts",
-      "action": "create",
-      "tokens": 759,
-      "at": "2026-06-26T12:16:49.251Z"
+      "tokens": 116,
+      "at": "2026-06-26T13:31:33.590Z"
     }
   ],
   "edit_counts": {
-    "src/app/globals.css": 2,
-    "src/components/ui/Button.tsx": 2,
-    "src/app/login/page.tsx": 2,
-    "src/components/teams/TeamCard.tsx": 1,
-    "src/components/teams/MeetingRow.tsx": 2,
-    "src/components/layout/Navbar.tsx": 1,
-    "src/app/dashboard/page.tsx": 1,
-    "src/components/recording/RecordButton.tsx": 1,
-    "src/app/api/meetings/upload/route.ts": 9,
-    "src/lib/ai/transcribe.ts": 2,
-    "src/app/teams/[teamId]/record/page.tsx": 4,
-    "src/types/ffmpeg-installer.d.ts": 1,
-    "next.config.ts": 2,
-    "src/app/api/meetings/[id]/route.ts": 2,
-    "src/app/meetings/[meetingId]/page.tsx": 9,
-    "src/app/teams/[teamId]/page.tsx": 16,
-    "src/components/ui/BackLink.tsx": 1,
-    "src/app/api/admin/users/[userId]/route.ts": 1,
-    "src/app/admin/page.tsx": 3,
-    "supabase/migrations/005_flexible_template.sql": 1,
-    "src/lib/ai/prompt.ts": 1,
-    "src/lib/utils/audio.ts": 1,
-    ".github/workflows/supabase-keepalive.yml": 1,
-    "src/lib/ai/summarize.ts": 1,
-    "src/app/api/teams/[id]/template/route.ts": 1,
-    "src/app/api/meetings/[id]/summary/route.ts": 1,
-    "src/app/api/teams/[id]/meetings/route.ts": 1,
-    "src/lib/pdf/MeetingPdf.tsx": 2,
-    "src/components/summary/ExportButtons.tsx": 4,
-    "src/components/summary/SummaryEditor.tsx": 1,
-    "src/app/teams/[teamId]/settings/page.tsx": 1,
-    "src/app/api/meetings/[id]/pdf/route.ts": 3,
-    "scripts/render-pdf.mjs": 1
+    "src/lib/ai/transcribe.ts": 1,
+    "src/app/api/meetings/upload/route.ts": 3,
+    "src/app/api/meetings/[id]/route.ts": 2
   },
-  "anatomy_hits": 35,
-  "anatomy_misses": 0,
-  "repeated_reads_warned": 7,
+  "anatomy_hits": 0,
+  "anatomy_misses": 5,
+  "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 28
+  "stop_count": 3
 }

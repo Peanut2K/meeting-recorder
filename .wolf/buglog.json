@@ -717,6 +717,54 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T12:11:46.873Z"
+    },
+    {
+      "id": "bug-045",
+      "timestamp": "2026-06-26T13:07:05.648Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "src/app/api/meetings/upload/route.ts",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T13:07:05.648Z"
+    },
+    {
+      "id": "bug-046",
+      "timestamp": "2026-06-26T13:29:00.086Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/api/meetings/[id]/route.ts",
+      "root_cause": "3 lines replaced/restructured",
+      "fix": "Rewrote 3→5 lines (3 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T13:29:00.086Z"
+    },
+    {
+      "id": "bug-047",
+      "timestamp": "2026-06-26T13:29:22.554Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/api/meetings/[id]/route.ts",
+      "root_cause": "Had `${meeting.team_id}/${id}.webm`",
+      "fix": "Changed to `${meeting.team_id}/${id}.mp3`",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T13:29:22.554Z"
     }
   ]
 }

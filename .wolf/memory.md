@@ -188,3 +188,18 @@
 | 19:16 | Created scripts/render-pdf.mjs | — | ~877 |
 | 19:16 | Created src/app/api/meetings/[id]/pdf/route.ts | — | ~759 |
 | 19:17 | Session end: 82 writes across 21 files (globals.css, Button.tsx, page.tsx, TeamCard.tsx, MeetingRow.tsx) | 35 reads | ~41330 tok |
+
+## Session: 2026-06-26 20:01
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 20:06 | Edited src/lib/ai/transcribe.ts | modified runFfmpeg() | ~614 |
+| 20:06 | Edited src/app/api/meetings/upload/route.ts | inline fix | ~20 |
+| 20:07 | Edited src/app/api/meetings/upload/route.ts | added nullish coalescing | ~113 |
+| 20:08 | เปลี่ยน ASR Typhoon→OpenAI Whisper, เพิ่ม compressToMp3 ก่อนอัพ S3 | transcribe.ts, upload/route.ts | done | ~500 |
+| 20:08 | Session end: 3 writes across 2 files (transcribe.ts, route.ts) | 2 reads | ~747 tok |
+| 20:29 | Edited src/app/api/meetings/[id]/route.ts | added 1 condition(s) | ~103 |
+| 20:29 | Edited src/app/api/meetings/[id]/route.ts | inline fix | ~38 |
+| 20:29 | Session end: 5 writes across 2 files (transcribe.ts, route.ts) | 5 reads | ~888 tok |
+| 20:31 | Edited src/app/api/meetings/upload/route.ts | added 1 condition(s) | ~116 |
+| 20:31 | Session end: 6 writes across 2 files (transcribe.ts, route.ts) | 5 reads | ~1004 tok |

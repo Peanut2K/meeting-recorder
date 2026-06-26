@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { transcribeAudio } from '@/lib/ai/transcribe'
+import { transcribeAudio, compressToMp3 } from '@/lib/ai/transcribe'
 import { summarizeMeeting } from '@/lib/ai/summarize'
 import { canManageTeam } from '@/lib/auth/roles'
 import { NextResponse } from 'next/server'
@@ -24,8 +24,13 @@ export async function POST(request: Request) {
   if (!file || !teamId || !title?.trim())
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
 
-  // Optional custom meeting date — overrides created_at (used as the meeting date everywhere).
-  const createdAt = dateStr && /^\d{4}-\d{2}-\d{2}$/.test(dateStr) ? new Date(dateStr).toISOString() : undefined
+  // Optional custom meeting date — overrides the date portion of created_at but preserves current time.
+  let createdAt: string | undefined
+  if (dateStr && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+    const [y, m, d] = dateStr.split('-').map(Number)
+    const now = new Date()
+    createdAt = new Date(Date.UTC(y, m - 1, d, now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds())).toISOString()
+  }
 
   // Only the team head (or a global admin) may record/create meetings.
   if (!(await canManageTeam(supabase, admin, teamId, user.id)))
@@ -42,10 +47,13 @@ export async function POST(request: Request) {
   }
 
   const audioBuffer = Buffer.from(await file.arrayBuffer())
-  const audioPath = `${teamId}/${meeting.id}.webm`
+  const audioPath = `${teamId}/${meeting.id}.mp3`
 
+  const compressedAudio = await compressToMp3(audioBuffer).catch(() => null)
   const { error: storageError } = await admin.storage
-    .from('meeting-audio').upload(audioPath, audioBuffer, { contentType: 'audio/webm' })
+    .from('meeting-audio').upload(audioPath, compressedAudio ?? audioBuffer, {
+      contentType: compressedAudio ? 'audio/mpeg' : 'audio/webm',
+    })
 
   // Non-fatal: transcription uses the in-memory buffer, not the stored file. A storage
   // hiccup (e.g. 504) only costs audio replay — it shouldn't lose the whole meeting.

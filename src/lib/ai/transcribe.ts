@@ -6,28 +6,40 @@ import { join } from 'node:path'
 import { randomUUID } from 'node:crypto'
 import ffmpeg from '@ffmpeg-installer/ffmpeg'
 
-// Typhoon ASR is OpenAI-compatible — Thai-optimized speech-to-text from SCB 10X.
-// https://docs.opentyphoon.ai/en/asr/
-const typhoon = new OpenAI({
-  apiKey: process.env.TYPHOON_API_KEY,
-  baseURL: 'https://api.opentyphoon.ai/v1',
-})
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
-// Browsers can only record WebM/Opus, which Typhoon's decoder rejects. Re-encode to
-// 16 kHz mono WAV (ideal ASR input, first in Typhoon's supported list) with bundled ffmpeg.
+async function runFfmpeg(inPath: string, outPath: string, args: string[]): Promise<void> {
+  await new Promise<void>((resolve, reject) => {
+    const ff = spawn(ffmpeg.path, ['-y', '-i', inPath, ...args, outPath])
+    let stderr = ''
+    ff.stderr.on('data', d => { stderr += d })
+    ff.on('error', reject)
+    ff.on('close', code => code === 0 ? resolve() : reject(new Error(`ffmpeg exited ${code}: ${stderr.slice(-400)}`)))
+  })
+}
+
+// Convert WebM to 16 kHz mono WAV for Whisper ASR.
 async function toWav(input: Buffer): Promise<Buffer> {
   const base = join(tmpdir(), randomUUID())
   const inPath = `${base}.webm`
   const outPath = `${base}.wav`
   try {
     await writeFile(inPath, input)
-    await new Promise<void>((resolve, reject) => {
-      const ff = spawn(ffmpeg.path, ['-y', '-i', inPath, '-ar', '16000', '-ac', '1', outPath])
-      let stderr = ''
-      ff.stderr.on('data', d => { stderr += d })
-      ff.on('error', reject)
-      ff.on('close', code => code === 0 ? resolve() : reject(new Error(`ffmpeg exited ${code}: ${stderr.slice(-400)}`)))
-    })
+    await runFfmpeg(inPath, outPath, ['-ar', '16000', '-ac', '1'])
+    return await readFile(outPath)
+  } finally {
+    await Promise.allSettled([unlink(inPath), unlink(outPath)])
+  }
+}
+
+// Compress WebM to mono MP3 @ 32 kbps for storage — 1 hr ≈ 14 MB, well under the 25 MB Whisper limit.
+export async function compressToMp3(input: Buffer): Promise<Buffer> {
+  const base = join(tmpdir(), randomUUID())
+  const inPath = `${base}.webm`
+  const outPath = `${base}.mp3`
+  try {
+    await writeFile(inPath, input)
+    await runFfmpeg(inPath, outPath, ['-ac', '1', '-b:a', '32k'])
     return await readFile(outPath)
   } finally {
     await Promise.allSettled([unlink(inPath), unlink(outPath)])
@@ -37,9 +49,10 @@ async function toWav(input: Buffer): Promise<Buffer> {
 export async function transcribeAudio(audioBuffer: Buffer, filename: string): Promise<string> {
   const wav = await toWav(audioBuffer)
   const file = new File([new Uint8Array(wav)], filename.replace(/\.\w+$/, '') + '.wav', { type: 'audio/wav' })
-  const transcription = await typhoon.audio.transcriptions.create({
+  const transcription = await openai.audio.transcriptions.create({
     file,
-    model: 'typhoon-asr-realtime',
+    model: 'whisper-1',
+    language: 'th',
   })
   return transcription.text
 }
