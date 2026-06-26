@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T17:15:07.266Z
-> Files: 15 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T18:01:33.398Z
+> Files: 16 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
 
@@ -119,7 +119,7 @@
 
 ## src/app/teams/[teamId]/record/
 
-- `page.tsx` — RecordPage (~1315 tok)
+- `page.tsx` — RecordPage (~1450 tok)
 
 ## src/app/teams/[teamId]/settings/
 
@@ -133,6 +133,7 @@
 
 ## src/components/recording/
 
+- `RecordButton.tsx` — RecordButton (~1522 tok)
 
 ## src/components/summary/
 

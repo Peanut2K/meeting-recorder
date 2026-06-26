@@ -8,6 +8,7 @@ interface RecordButtonProps {
 
 export function RecordButton({ onRecordingComplete }: RecordButtonProps) {
   const [recording, setRecording] = useState(false)
+  const [paused, setPaused] = useState(false)
   const [includeSystem, setIncludeSystem] = useState(false)
   const [seconds, setSeconds] = useState(0)
   const [error, setError] = useState('')
@@ -82,23 +83,45 @@ export function RecordButton({ onRecordingComplete }: RecordButtonProps) {
     mediaRecorderRef.current?.stop()
     if (timerRef.current) clearInterval(timerRef.current)
     setRecording(false)
+    setPaused(false)
   }
 
-  const fmt = (s: number) => `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`
+  function togglePause() {
+    const mr = mediaRecorderRef.current
+    if (!mr) return
+    if (paused) {
+      mr.resume()
+      timerRef.current = setInterval(() => setSeconds(s => s + 1), 1000)
+      setPaused(false)
+    } else {
+      mr.pause()
+      if (timerRef.current) clearInterval(timerRef.current)
+      setPaused(true)
+    }
+  }
+
+const fmt = (s: number) => `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`
 
   return (
     <div className="flex flex-col items-center gap-4">
       {error && <p className="text-sm text-red-500 text-center max-w-sm">{error}</p>}
       {recording && (
-        <div className="flex items-center gap-2 text-red-500 font-mono text-2xl">
-          <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+        <div className="flex items-center gap-2 font-mono text-2xl" style={{ color: paused ? '#f59e0b' : '#ef4444' }}>
+          <span className={`w-3 h-3 rounded-full ${paused ? 'bg-amber-400' : 'bg-red-500 animate-pulse'}`} />
           {fmt(seconds)}
+          {paused && <span className="text-sm font-sans ml-1 opacity-70">paused</span>}
         </div>
       )}
-      {recording
-        ? <Button variant="danger" onClick={stopRecording} className="px-8 py-3 text-base">Stop Recording</Button>
-        : <Button onClick={startRecording} className="px-8 py-3 text-base">Start Recording</Button>
-      }
+      {recording ? (
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button variant="secondary" onClick={togglePause} className="px-6 py-3 text-base">
+            {paused ? '▶ Resume' : '⏸ Pause'}
+          </Button>
+          <Button onClick={stopRecording} className="px-6 py-3 text-base">Submit</Button>
+        </div>
+      ) : (
+        <Button onClick={startRecording} className="px-8 py-3 text-base">Start Recording</Button>
+      )}
       {!recording && (
         <label className="flex items-center gap-2 text-sm text-muted cursor-pointer select-none">
           <input type="checkbox" checked={includeSystem} onChange={e => setIncludeSystem(e.target.checked)} className="accent-brand" />

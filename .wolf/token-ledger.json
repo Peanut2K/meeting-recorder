@@ -2,14 +2,14 @@
   "version": 1,
   "created_at": "2026-06-26T02:35:24.646Z",
   "lifetime": {
-    "total_tokens_estimated": 875979,
-    "total_reads": 1094,
-    "total_writes": 1892,
-    "total_sessions": 6,
-    "anatomy_hits": 777,
-    "anatomy_misses": 317,
+    "total_tokens_estimated": 884545,
+    "total_reads": 1100,
+    "total_writes": 1938,
+    "total_sessions": 7,
+    "anatomy_hits": 780,
+    "anatomy_misses": 320,
     "repeated_reads_blocked": 133,
-    "estimated_savings_vs_bare_cli": 307286
+    "estimated_savings_vs_bare_cli": 307886
   },
   "sessions": [
     {
@@ -17155,6 +17155,323 @@
         "writes_count": 7,
         "repeated_reads_blocked": 0,
         "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-06-26-0020",
+      "started": "2026-06-26T17:20:03.003Z",
+      "ended": "2026-06-26T17:30:03.826Z",
+      "reads": [
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 1315,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 67,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 185,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 92,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 172,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 184,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 111,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 369,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 102,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 48,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 51,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 33,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 22,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1315,
+        "output_tokens_estimated": 1436,
+        "reads_count": 2,
+        "writes_count": 12,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-06-26-0020",
+      "started": "2026-06-26T17:20:03.003Z",
+      "ended": "2026-06-26T17:56:31.571Z",
+      "reads": [
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 1315,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 67,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 185,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 92,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 172,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 184,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 111,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 369,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 102,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 48,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 51,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 33,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 22,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1315,
+        "output_tokens_estimated": 1436,
+        "reads_count": 2,
+        "writes_count": 12,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-06-26-0020",
+      "started": "2026-06-26T17:20:03.003Z",
+      "ended": "2026-06-26T18:01:43.023Z",
+      "reads": [
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 1315,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 67,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 185,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 92,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 172,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 184,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 111,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 369,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 102,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 48,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 51,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 33,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 0,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 49,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 0,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/components/recording/RecordButton.tsx",
+          "tokens_estimated": 93,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 18,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 34,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 48,
+          "action": "edit"
+        },
+        {
+          "file": "C:/Users/USER/Desktop/meeting-recorder/src/app/teams/[teamId]/record/page.tsx",
+          "tokens_estimated": 27,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1315,
+        "output_tokens_estimated": 1749,
+        "reads_count": 2,
+        "writes_count": 22,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
       }
     }
   ],

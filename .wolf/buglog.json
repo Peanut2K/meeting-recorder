@@ -1069,6 +1069,134 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T17:14:38.216Z"
+    },
+    {
+      "id": "bug-067",
+      "timestamp": "2026-06-26T17:28:52.276Z",
+      "error_message": "Missing guard clause",
+      "file": "src/components/recording/RecordButton.tsx",
+      "root_cause": "No early return/throw for edge case: timerRef.current",
+      "fix": "Added guard clause: if (timerRef.current)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T17:28:52.276Z"
+    },
+    {
+      "id": "bug-068",
+      "timestamp": "2026-06-26T17:28:59.542Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/recording/RecordButton.tsx",
+      "root_cause": "4 lines replaced/restructured",
+      "fix": "Rewrote 5→14 lines (4 removed) | Also: <div className=\"flex items-center gap-2 text-red-5; <span className=\"w-3 h-3 bg-red-500 rounded-full a",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T17:29:05.871Z"
+    },
+    {
+      "id": "bug-069",
+      "timestamp": "2026-06-26T17:29:18.218Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/teams/[teamId]/record/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check) | Also: async function handleUpload(blobOverride?: Blob) {; const blob = blobOverride ?? audioBlob",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T17:29:27.871Z"
+    },
+    {
+      "id": "bug-070",
+      "timestamp": "2026-06-26T17:29:39.701Z",
+      "error_message": "Missing guard clause",
+      "file": "src/app/teams/[teamId]/record/page.tsx",
+      "root_cause": "No early return/throw for edge case: !blob",
+      "fix": "Added guard clause: if (!blob)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T17:29:39.701Z"
+    },
+    {
+      "id": "bug-071",
+      "timestamp": "2026-06-26T17:29:43.950Z",
+      "error_message": "Wrong reference: title should be resolvedTitle",
+      "file": "src/app/teams/[teamId]/record/page.tsx",
+      "root_cause": "Used \"title\" instead of \"resolvedTitle\"",
+      "fix": "Changed title → resolvedTitle",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T17:29:43.950Z"
+    },
+    {
+      "id": "bug-072",
+      "timestamp": "2026-06-26T18:00:54.199Z",
+      "error_message": "Wrong reference: onSubmitRecording should be RecordButtonProps",
+      "file": "src/components/recording/RecordButton.tsx",
+      "root_cause": "Used \"onSubmitRecording\" instead of \"RecordButtonProps\"",
+      "fix": "Changed onSubmitRecording → RecordButtonProps",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T18:00:54.199Z"
+    },
+    {
+      "id": "bug-073",
+      "timestamp": "2026-06-26T18:01:03.135Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/recording/RecordButton.tsx",
+      "root_cause": "4 lines replaced/restructured",
+      "fix": "Rewrote 10→5 lines (4 removed) | Also: <Button variant=\"danger\" onClick={stopRecording} c; {onSubmitRecording && (",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T18:01:14.053Z"
+    },
+    {
+      "id": "bug-074",
+      "timestamp": "2026-06-26T18:01:24.714Z",
+      "error_message": "Wrong condition in logic",
+      "file": "src/app/teams/[teamId]/record/page.tsx",
+      "root_cause": "Condition was: if (!blob)",
+      "fix": "Changed to: if (!audioBlob || !title.trim()",
+      "tags": [
+        "auto-detected",
+        "logic-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T18:01:24.714Z"
     }
   ]
 }

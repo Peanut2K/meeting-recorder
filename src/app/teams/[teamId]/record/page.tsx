@@ -40,6 +40,7 @@ export default function RecordPage() {
 
   async function handleUpload() {
     if (!audioBlob || !title.trim()) return
+    const resolvedTitle = title.trim()
     setError('')
     setStage('processing')
     setProcessStep(0)
@@ -48,7 +49,7 @@ export default function RecordPage() {
     const filename = audioBlob instanceof File ? audioBlob.name : 'recording.webm'
     formData.append('audio', audioBlob, filename)
     formData.append('teamId', teamId)
-    formData.append('title', title)
+    formData.append('title', resolvedTitle)
     formData.append('date', date)
 
     setProcessStep(1)
@@ -69,8 +70,13 @@ export default function RecordPage() {
       <h1 className="text-2xl font-bold mb-8">Record Meeting</h1>
 
       {stage === 'record' && (
-        <div className="flex flex-col items-center gap-6 py-12">
+        <div className="flex flex-col items-center gap-6 py-8">
           <p className="text-muted">Record live, or upload an existing audio / video file</p>
+          <div className="flex flex-col gap-3 w-full max-w-sm">
+            <Input label="Meeting Title" value={title} onChange={e => setTitle(e.target.value)} placeholder="e.g. Sprint Planning Week 26" />
+            <Input label="Meeting Date" type="date" value={date} onChange={e => setDate(e.target.value)}
+              onClick={e => e.currentTarget.showPicker?.()} className="cursor-pointer" />
+          </div>
           <RecordButton onRecordingComplete={startPreview} />
           <div className="flex items-center gap-3 text-sm text-muted">
             <span className="h-px w-12 bg-line" /> or <span className="h-px w-12 bg-line" />
