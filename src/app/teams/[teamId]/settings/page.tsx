@@ -1,26 +1,23 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { BackLink } from '@/components/ui/BackLink'
+import { useToast } from '@/components/ui/Toast'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import { DEFAULT_SUMMARY_PROMPT } from '@/lib/ai/prompt'
 
 export default function TeamSettingsPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const router = useRouter()
   const [team, setTeam] = useState<any>(null)
   const [customFields, setCustomFields] = useState<string[]>([])
   const [prompt, setPrompt] = useState('')
   const [newField, setNewField] = useState('')
-  const [msg, setMsg] = useState('')
-  const [msgType, setMsgType] = useState<'success' | 'error'>('success')
-
-  function notify(message: string, type: 'success' | 'error' = 'success') {
-    setMsg(message)
-    setMsgType(type)
-    setTimeout(() => setMsg(''), 3000)
-  }
+  const [confirmDeleteTeam, setConfirmDeleteTeam] = useState(false)
+  const { toast, ToastContainer } = useToast()
 
   async function loadTeam() {
     const res = await fetch(`/api/teams/${teamId}`)
@@ -41,19 +38,31 @@ export default function TeamSettingsPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fields: customFields, prompt }),
     })
-    if (res.ok) notify('Saved!')
-    else notify('Failed to save', 'error')
+    if (res.ok) toast('Settings saved!')
+    else toast('Failed to save', 'error')
+  }
+
+  async function handleDeleteTeam() {
+    setConfirmDeleteTeam(false)
+    const res = await fetch(`/api/teams/${teamId}`, { method: 'DELETE' })
+    if (res.ok) {
+      toast('Team deleted')
+      setTimeout(() => router.push('/dashboard'), 1000)
+    } else {
+      const err = (await res.json().catch(() => ({}))).error ?? 'Could not delete team'
+      toast(err, 'error')
+    }
   }
 
   if (!team) return <PageWrapper><p className="text-gray-500">Loading...</p></PageWrapper>
 
   return (
     <PageWrapper>
+      <ToastContainer />
       <div className="mb-4">
         <BackLink href={`/teams/${teamId}`}>Back to team</BackLink>
       </div>
       <h1 className="text-2xl font-bold mb-8">Team Settings — {team.name}</h1>
-      {msg && <p className={`mb-4 text-sm ${msgType === 'error' ? 'text-red-500' : 'text-green-600'}`}>{msg}</p>}
       <p className="text-sm text-muted mb-8">Members are managed by an administrator in the Admin panel.</p>
 
       <section className="mb-10">
@@ -94,6 +103,26 @@ export default function TeamSettingsPage() {
       </section>
 
       <Button onClick={saveTemplate}>Save Settings</Button>
+
+      <section className="mt-16 border border-red-200 rounded-xl p-6">
+        <h2 className="text-lg font-semibold text-red-600 mb-1">Danger Zone</h2>
+        <p className="text-sm text-muted mb-4">Deleting the team will permanently remove all meetings, summaries, and audio files.</p>
+        <button
+          onClick={() => setConfirmDeleteTeam(true)}
+          className="rounded-lg border border-red-300 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors">
+          Delete this team
+        </button>
+      </section>
+
+      {confirmDeleteTeam && (
+        <ConfirmDialog
+          message={`Delete "${team.name}"?`}
+          description="All meetings, summaries, and audio files will be permanently deleted. This cannot be undone."
+          confirmLabel="Delete Team"
+          onConfirm={handleDeleteTeam}
+          onCancel={() => setConfirmDeleteTeam(false)}
+        />
+      )}
     </PageWrapper>
   )
 }

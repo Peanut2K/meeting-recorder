@@ -40,7 +40,9 @@ export async function DELETE(_: Request, { params }: { params: Promise<{ id: str
   if (!(await canManageTeam(supabase, admin, meeting.team_id, user.id)))
     return NextResponse.json({ error: 'Only the team head can delete meetings' }, { status: 403 })
 
-  await admin.storage.from('meeting-audio').remove([`${meeting.team_id}/${id}.mp3`, `${meeting.team_id}/${id}.webm`]).catch(() => {})
-  await admin.from('meetings').delete().eq('id', id) // summaries cascade on delete
+  await Promise.all([
+    admin.storage.from('meeting-audio').remove([`${meeting.team_id}/${id}.mp3`, `${meeting.team_id}/${id}.webm`]).catch(() => {}),
+    admin.from('meetings').delete().eq('id', id),
+  ])
   return NextResponse.json({ ok: true })
 }

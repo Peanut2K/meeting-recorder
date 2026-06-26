@@ -1,7 +1,11 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T13:31:33.585Z
-> Files: 3 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T17:15:07.266Z
+> Files: 15 tracked | Anatomy hits: 0 | Misses: 0
+
+## ../../.claude/plans/
+
+- `woolly-soaring-treehouse.md` — Fix: Whisper ByteString Error (~629 tok)
 
 ## ./
 
@@ -35,6 +39,7 @@
 
 ## src/app/admin/
 
+- `page.tsx` — AdminPage — renders form (~4024 tok)
 
 ## src/app/api/admin/teams/
 
@@ -59,7 +64,7 @@
 
 ## src/app/api/meetings/[id]/
 
-- `route.ts` — Next.js API route: GET, DELETE (~729 tok)
+- `route.ts` — Next.js API route: GET, DELETE (~726 tok)
 
 ## src/app/api/meetings/[id]/pdf/
 
@@ -69,13 +74,14 @@
 
 ## src/app/api/meetings/upload/
 
-- `route.ts` — Next.js API route: POST (~1389 tok)
+- `route.ts` — Next.js API route: POST (~1386 tok)
 
 ## src/app/api/teams/
 
 
 ## src/app/api/teams/[id]/
 
+- `route.ts` — Next.js API route: GET, DELETE, PUT (~849 tok)
 
 ## src/app/api/teams/[id]/meetings/
 
@@ -88,6 +94,7 @@
 
 ## src/app/api/teams/[id]/template/
 
+- `route.ts` — Next.js API route: GET, PUT (~594 tok)
 
 ## src/app/dashboard/
 
@@ -97,21 +104,26 @@
 
 ## src/app/meetings/[meetingId]/
 
+- `page.tsx` — MeetingPage (~1422 tok)
 
 ## src/app/profile/
 
+- `page.tsx` — ProfilePage — renders form (~907 tok)
 
 ## src/app/register/
 
 
 ## src/app/teams/[teamId]/
 
+- `page.tsx` — TeamPage (~1514 tok)
 
 ## src/app/teams/[teamId]/record/
 
+- `page.tsx` — RecordPage (~1315 tok)
 
 ## src/app/teams/[teamId]/settings/
 
+- `page.tsx` — TeamSettingsPage (~1589 tok)
 
 ## src/app/teams/new/
 
@@ -130,10 +142,13 @@
 
 ## src/components/ui/
 
+- `ConfirmDialog.tsx` — ConfirmDialog (~337 tok)
+- `Toast.tsx` — useToast (~328 tok)
 
 ## src/lib/ai/
 
-- `transcribe.ts` — Exports compressToMp3, transcribeAudio (~630 tok)
+- `summarize.ts` — Exports summarizeMeeting (~371 tok)
+- `transcribe.ts` — Exports compressToMp3, transcribeAudio (~589 tok)
 
 ## src/lib/auth/
 

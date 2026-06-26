@@ -65,8 +65,8 @@ export async function POST(request: Request) {
   }
 
   try {
-    const transcript = await transcribeAudio(audioBuffer, `${meeting.id}.webm`)
-      .catch((e: unknown) => { throw new Error(`Transcription (Typhoon) failed: ${e instanceof Error ? e.message : e}`) })
+    const transcript = await transcribeAudio(audioBuffer, file.name)
+      .catch((e: unknown) => { throw new Error(`Transcription (Whisper) failed: ${e instanceof Error ? e.message : e}`) })
     await admin.from('meetings').update({ transcript }).eq('id', meeting.id)
 
     const { data: template } = await admin.from('team_templates').select('fields, prompt').eq('team_id', teamId).single()

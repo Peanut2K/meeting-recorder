@@ -12,14 +12,15 @@ export async function summarizeMeeting(
   const message = await anthropic.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 2048,
-    messages: [{
-      role: 'user',
-      content: buildSummaryPrompt(instruction?.trim() || DEFAULT_SUMMARY_PROMPT, customFields, transcript),
-    }],
+    messages: [
+      { role: 'user', content: buildSummaryPrompt(instruction?.trim() || DEFAULT_SUMMARY_PROMPT, customFields, transcript) },
+    ],
   })
 
   const text = message.content[0].type === 'text' ? message.content[0].text : ''
-  const jsonMatch = text.match(/\{[\s\S]*\}/)
+  // Strip markdown code fences if present, then extract the JSON object
+  const stripped = text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '')
+  const jsonMatch = stripped.match(/\{[\s\S]*\}/)
   if (!jsonMatch) throw new Error('Claude did not return valid JSON')
 
   const parsed = JSON.parse(jsonMatch[0])

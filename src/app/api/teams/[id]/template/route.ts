@@ -34,8 +34,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   }
   if (typeof body.prompt === 'string') row.prompt = body.prompt.trim() || null
 
-  const { data, error } = await supabase.from('team_templates')
-    .upsert(row)
+  const { data, error } = await admin.from('team_templates')
+    .upsert(row, { onConflict: 'team_id' })
     .select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json(data)

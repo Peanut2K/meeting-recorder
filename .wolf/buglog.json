@@ -765,6 +765,310 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T13:29:22.554Z"
+    },
+    {
+      "id": "bug-048",
+      "timestamp": "2026-06-26T13:44:21.642Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/lib/ai/summarize.ts",
+      "root_cause": "Had 'claude-sonnet-4-6'",
+      "fix": "Changed to 'claude-haiku-4-5-20251001'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T13:44:21.642Z"
+    },
+    {
+      "id": "bug-049",
+      "timestamp": "2026-06-26T13:48:44.587Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/api/meetings/upload/route.ts",
+      "root_cause": "Had `${meeting.id}.webm`",
+      "fix": "Changed to `Transcription (Whisper) failed: ${e instanceof Er",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T13:48:44.587Z"
+    },
+    {
+      "id": "bug-050",
+      "timestamp": "2026-06-26T13:50:40.197Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/lib/ai/transcribe.ts",
+      "root_cause": "3 lines replaced/restructured",
+      "fix": "Rewrote 10→17 lines (3 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T13:50:40.197Z"
+    },
+    {
+      "id": "bug-051",
+      "timestamp": "2026-06-26T13:57:51.250Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/lib/ai/transcribe.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T13:57:51.250Z"
+    },
+    {
+      "id": "bug-052",
+      "timestamp": "2026-06-26T14:05:58.586Z",
+      "error_message": "Wrong reference: supabase should be admin",
+      "file": "src/app/api/teams/[id]/template/route.ts",
+      "root_cause": "Used \"supabase\" instead of \"admin\"",
+      "fix": "Changed supabase → admin",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T14:05:58.586Z"
+    },
+    {
+      "id": "bug-053",
+      "timestamp": "2026-06-26T14:08:06.662Z",
+      "error_message": "Type error",
+      "file": "src/app/api/teams/[id]/template/route.ts",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T14:08:06.662Z"
+    },
+    {
+      "id": "bug-054",
+      "timestamp": "2026-06-26T15:24:57.420Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/lib/ai/summarize.ts",
+      "root_cause": "Had 'claude-haiku-4-5-20251001'",
+      "fix": "Changed to 'claude-sonnet-4-6'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T15:24:57.420Z"
+    },
+    {
+      "id": "bug-055",
+      "timestamp": "2026-06-26T15:33:18.589Z",
+      "error_message": "Missing guard clause",
+      "file": "src/lib/ai/transcribe.ts",
+      "root_cause": "No early return/throw for edge case: wavBuffer.length < 10_000",
+      "fix": "Added guard clause: if (wavBuffer.length < 10_000)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T15:33:18.589Z"
+    },
+    {
+      "id": "bug-056",
+      "timestamp": "2026-06-26T15:45:01.735Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/teams/[teamId]/record/page.tsx",
+      "root_cause": "Had 'audio'",
+      "fix": "Changed to 'recording.webm'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T15:45:01.735Z"
+    },
+    {
+      "id": "bug-057",
+      "timestamp": "2026-06-26T15:45:10.759Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/lib/ai/transcribe.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T15:45:10.759Z"
+    },
+    {
+      "id": "bug-058",
+      "timestamp": "2026-06-26T16:14:32.157Z",
+      "error_message": "Missing guard clause",
+      "file": "src/lib/ai/transcribe.ts",
+      "root_cause": "No early return/throw for edge case: i + len > tokens.length",
+      "fix": "Added guard clause: if (i + len > tokens.length)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T16:14:32.157Z"
+    },
+    {
+      "id": "bug-059",
+      "timestamp": "2026-06-26T16:41:34.426Z",
+      "error_message": "Wrong reference: handleDelete should be setConfirmDelete",
+      "file": "src/app/teams/[teamId]/page.tsx",
+      "root_cause": "Used \"handleDelete\" instead of \"setConfirmDelete\"",
+      "fix": "Changed handleDelete → setConfirmDelete",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T16:41:34.426Z"
+    },
+    {
+      "id": "bug-060",
+      "timestamp": "2026-06-26T16:41:46.018Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/teams/[teamId]/settings/page.tsx",
+      "root_cause": "7 lines replaced/restructured",
+      "fix": "Rewrote 10→3 lines (7 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T16:41:46.018Z"
+    },
+    {
+      "id": "bug-061",
+      "timestamp": "2026-06-26T16:41:51.232Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/teams/[teamId]/settings/page.tsx",
+      "root_cause": "Had 'Saved!'",
+      "fix": "Changed to 'Settings saved!'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T16:42:36.013Z"
+    },
+    {
+      "id": "bug-062",
+      "timestamp": "2026-06-26T16:48:49.321Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/meetings/[meetingId]/page.tsx",
+      "root_cause": "Had '@/lib/utils/audio'",
+      "fix": "Changed to '@/components/ui/Toast'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T16:48:49.321Z"
+    },
+    {
+      "id": "bug-063",
+      "timestamp": "2026-06-26T16:49:12.425Z",
+      "error_message": "Wrong reference: saved should be ToastContainer",
+      "file": "src/app/meetings/[meetingId]/page.tsx",
+      "root_cause": "Used \"saved\" instead of \"ToastContainer\"",
+      "fix": "Changed saved → ToastContainer",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T16:49:12.425Z"
+    },
+    {
+      "id": "bug-064",
+      "timestamp": "2026-06-26T17:05:36.007Z",
+      "error_message": "Missing error handling in function",
+      "file": "src/app/api/teams/[id]/route.ts",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T17:05:36.007Z"
+    },
+    {
+      "id": "bug-065",
+      "timestamp": "2026-06-26T17:06:04.196Z",
+      "error_message": "Missing error handling in function",
+      "file": "src/app/teams/[teamId]/settings/page.tsx",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T17:06:04.197Z"
+    },
+    {
+      "id": "bug-066",
+      "timestamp": "2026-06-26T17:14:38.216Z",
+      "error_message": "CSS fix: onDelete",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "onDelete: (userId: string) => void → (userId: string, label: string) => void",
+      "fix": "Changed onDelete: (userId: string) => void → (userId: string, label: string) => void",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T17:14:38.216Z"
     }
   ]
 }

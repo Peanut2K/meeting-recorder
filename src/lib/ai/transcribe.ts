@@ -18,7 +18,6 @@ async function runFfmpeg(inPath: string, outPath: string, args: string[]): Promi
   })
 }
 
-// Convert WebM to 16 kHz mono WAV for Whisper ASR.
 async function toWav(input: Buffer): Promise<Buffer> {
   const base = join(tmpdir(), randomUUID())
   const inPath = `${base}.webm`
@@ -32,7 +31,7 @@ async function toWav(input: Buffer): Promise<Buffer> {
   }
 }
 
-// Compress WebM to mono MP3 @ 32 kbps for storage — 1 hr ≈ 14 MB, well under the 25 MB Whisper limit.
+// Compress WebM to mono MP3 @ 32 kbps for storage — 1 hr ≈ 14 MB.
 export async function compressToMp3(input: Buffer): Promise<Buffer> {
   const base = join(tmpdir(), randomUUID())
   const inPath = `${base}.webm`

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { format } from 'date-fns'
 import { BackLink } from '@/components/ui/BackLink'
+import { useToast } from '@/components/ui/Toast'
 import { primeWebmDuration } from '@/lib/utils/audio'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { SummaryEditor } from '@/components/summary/SummaryEditor'
@@ -18,7 +19,7 @@ export default function MeetingPage() {
   const [team, setTeam] = useState<Team | null>(null)
   const [template, setTemplate] = useState<string[]>([])
   const [canEdit, setCanEdit] = useState(false)
-  const [saved, setSaved] = useState(false)
+  const { toast, ToastContainer } = useToast()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -48,7 +49,8 @@ export default function MeetingPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content }),
     })
-    if (res.ok) { setSaved(true); setTimeout(() => setSaved(false), 2000) }
+    if (res.ok) toast('Saved!')
+    else toast('Failed to save', 'error')
   }
 
   if (loading) return <PageWrapper><p className="text-gray-500">Loading...</p></PageWrapper>
@@ -79,8 +81,7 @@ export default function MeetingPage() {
         )}
       </div>
 
-      {saved && <p className="text-sm text-green-600 mb-4">Saved!</p>}
-
+      <ToastContainer />
       {meeting.audio_signed_url && (
         <div className="mb-6 rounded-xl border border-line bg-surface p-4">
           <p className="mb-2 text-sm text-muted">Recording</p>

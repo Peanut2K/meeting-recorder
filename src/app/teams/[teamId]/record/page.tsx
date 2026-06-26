@@ -45,7 +45,8 @@ export default function RecordPage() {
     setProcessStep(0)
 
     const formData = new FormData()
-    formData.append('audio', audioBlob, 'recording.webm')
+    const filename = audioBlob instanceof File ? audioBlob.name : 'recording.webm'
+    formData.append('audio', audioBlob, filename)
     formData.append('teamId', teamId)
     formData.append('title', title)
     formData.append('date', date)

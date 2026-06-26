@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { isGlobalAdmin } from '@/lib/auth/roles'
+import { isGlobalAdmin, canManageTeam } from '@/lib/auth/roles'
 import { NextResponse } from 'next/server'
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -18,6 +18,27 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
     return NextResponse.json({ error: error.message }, { status })
   }
   return NextResponse.json(data)
+}
+
+export async function DELETE(_: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const supabase = await createClient()
+  const admin = createAdminClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!(await canManageTeam(supabase, admin, id, user.id)))
+    return NextResponse.json({ error: 'Only the team head can delete the team' }, { status: 403 })
+
+  // Remove all meeting audio files from storage before deleting the team
+  const { data: meetings } = await admin.from('meetings').select('id').eq('team_id', id)
+  if (meetings?.length) {
+    const paths = meetings.flatMap(m => [`${id}/${m.id}.mp3`, `${id}/${m.id}.webm`])
+    await admin.storage.from('meeting-audio').remove(paths).catch(() => {})
+  }
+
+  const { error } = await admin.from('teams').delete().eq('id', id)
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  return NextResponse.json({ ok: true })
 }
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {

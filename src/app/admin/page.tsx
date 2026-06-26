@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { useToast } from '@/components/ui/Toast'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import type { UserProfile, GlobalRole, TeamRole } from '@/types'
 
 interface AdminTeamMember {
@@ -23,7 +25,8 @@ export default function AdminPage() {
   const [allowed, setAllowed] = useState<boolean | null>(null)
   const [users, setUsers] = useState<UserProfile[]>([])
   const [teams, setTeams] = useState<AdminTeam[]>([])
-  const [error, setError] = useState('')
+  const { toast, ToastContainer } = useToast()
+  const [confirmDelete, setConfirmDelete] = useState<{ type: 'user' | 'team'; id: string; label: string } | null>(null)
 
   // New-user form
   const [nu, setNu] = useState({ email: '', password: '', name: '', role: 'user' as GlobalRole })
@@ -53,15 +56,15 @@ export default function AdminPage() {
   }, [router, loadAll])
 
   async function createUser(e: React.FormEvent) {
-    e.preventDefault()
-    setError(''); setCreatingUser(true)
+    e.preventDefault(); setCreatingUser(true)
     try {
       const res = await fetch('/api/admin/users', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nu),
       })
       const data = await res.json()
-      if (!res.ok) { setError(data.error ?? 'Failed to create user'); return }
+      if (!res.ok) { toast(data.error ?? 'Failed to create user', 'error'); return }
+      toast('User created')
       setNu({ email: '', password: '', name: '', role: 'user' })
       await loadAll()
     } finally { setCreatingUser(false) }
@@ -72,15 +75,17 @@ export default function AdminPage() {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ role }),
     })
-    if (!res.ok) { const d = await res.json(); setError(d.error ?? 'Failed'); return }
-    await loadAll()
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed', 'error'); return }
+    toast('Role updated'); await loadAll()
   }
 
   async function deleteUser(userId: string) {
-    if (!confirm('Delete this user? This cannot be undone.')) return
+    setConfirmDelete(null)
     const res = await fetch(`/api/admin/users/${userId}`, { method: 'DELETE' })
-    if (!res.ok) { const d = await res.json(); setError(d.error ?? 'Failed'); return }
-    await loadAll()
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed to delete user', 'error'); return }
+    toast('User deleted'); await loadAll()
   }
 
   async function setUserPassword(userId: string, password: string): Promise<boolean> {
@@ -88,24 +93,31 @@ export default function AdminPage() {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password }),
     })
-    if (!res.ok) { const d = await res.json(); setError(d.error ?? 'Failed to set password'); return false }
-    setError('')
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed to set password', 'error'); return false }
+    toast('Password updated')
     return true
   }
 
   async function createTeam(e: React.FormEvent) {
-    e.preventDefault()
-    setError(''); setCreatingTeam(true)
+    e.preventDefault(); setCreatingTeam(true)
     try {
       const res = await fetch('/api/teams', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: newTeam }),
       })
       const data = await res.json()
-      if (!res.ok) { setError(data.error ?? 'Failed to create team'); return }
-      setNewTeam('')
-      await loadAll()
+      if (!res.ok) { toast(data.error ?? 'Failed to create team', 'error'); return }
+      toast('Team created'); setNewTeam(''); await loadAll()
     } finally { setCreatingTeam(false) }
+  }
+
+  async function deleteTeam(teamId: string) {
+    setConfirmDelete(null)
+    const res = await fetch(`/api/teams/${teamId}`, { method: 'DELETE' })
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed to delete team', 'error'); return }
+    toast('Team deleted'); await loadAll()
   }
 
   async function addMember(teamId: string, email: string, role: TeamRole) {
@@ -113,8 +125,9 @@ export default function AdminPage() {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, role }),
     })
-    if (!res.ok) { const d = await res.json(); setError(d.error ?? 'Failed to add member'); return }
-    await loadAll()
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed to add member', 'error'); return }
+    toast('Member added'); await loadAll()
   }
 
   async function changeMemberRole(teamId: string, userId: string, role: TeamRole) {
@@ -122,22 +135,33 @@ export default function AdminPage() {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ role }),
     })
-    if (!res.ok) { const d = await res.json(); setError(d.error ?? 'Failed'); return }
-    await loadAll()
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed', 'error'); return }
+    toast('Role updated'); await loadAll()
   }
 
   async function removeMember(teamId: string, userId: string) {
     const res = await fetch(`/api/teams/${teamId}/members/${userId}`, { method: 'DELETE' })
-    if (!res.ok) { const d = await res.json(); setError(d.error ?? 'Failed'); return }
-    await loadAll()
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed', 'error'); return }
+    toast('Member removed'); await loadAll()
   }
 
   if (allowed === null) return <PageWrapper><p className="text-gray-500">Loading...</p></PageWrapper>
 
   return (
     <PageWrapper>
+      <ToastContainer />
+      {confirmDelete && (
+        <ConfirmDialog
+          message={`Delete ${confirmDelete.type === 'user' ? 'user' : 'team'} "${confirmDelete.label}"?`}
+          description={confirmDelete.type === 'team' ? 'All meetings, summaries, and audio files will be permanently deleted.' : 'This cannot be undone.'}
+          confirmLabel={`Delete ${confirmDelete.type === 'user' ? 'User' : 'Team'}`}
+          onConfirm={() => confirmDelete.type === 'user' ? deleteUser(confirmDelete.id) : deleteTeam(confirmDelete.id)}
+          onCancel={() => setConfirmDelete(null)}
+        />
+      )}
       <h1 className="text-3xl font-bold mb-8">Admin</h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
 
       {/* ---- Users ---- */}
       <section className="mb-12">
@@ -161,7 +185,7 @@ export default function AdminPage() {
           {users.map(u => (
             <UserAdminRow key={u.id} u={u}
               onChangeRole={changeUserRole}
-              onDelete={deleteUser}
+              onDelete={(id, label) => setConfirmDelete({ type: 'user', id, label })}
               onSetPassword={setUserPassword} />
           ))}
         </div>
@@ -180,7 +204,8 @@ export default function AdminPage() {
             <TeamAdminCard key={t.id} team={t} users={users}
               onAddMember={addMember}
               onChangeRole={changeMemberRole}
-              onRemoveMember={removeMember} />
+              onRemoveMember={removeMember}
+              onDelete={(id, label) => setConfirmDelete({ type: 'team', id, label })} />
           ))}
         </div>
       </section>
@@ -191,7 +216,7 @@ export default function AdminPage() {
 function UserAdminRow({ u, onChangeRole, onDelete, onSetPassword }: {
   u: UserProfile
   onChangeRole: (userId: string, role: GlobalRole) => void
-  onDelete: (userId: string) => void
+  onDelete: (userId: string, label: string) => void
   onSetPassword: (userId: string, password: string) => Promise<boolean>
 }) {
   const [open, setOpen] = useState(false)
@@ -220,7 +245,7 @@ function UserAdminRow({ u, onChangeRole, onDelete, onSetPassword }: {
             <option value="admin">admin</option>
           </select>
           <Button variant="secondary" className="text-sm py-1" onClick={() => setOpen(o => !o)}>Set password</Button>
-          <Button variant="danger" className="text-sm py-1" onClick={() => onDelete(u.id)}>Delete</Button>
+          <Button variant="danger" className="text-sm py-1" onClick={() => onDelete(u.id, u.name)}>Delete</Button>
         </div>
       </div>
       {open && (
@@ -237,12 +262,13 @@ function UserAdminRow({ u, onChangeRole, onDelete, onSetPassword }: {
   )
 }
 
-function TeamAdminCard({ team, users, onAddMember, onChangeRole, onRemoveMember }: {
+function TeamAdminCard({ team, users, onAddMember, onChangeRole, onRemoveMember, onDelete }: {
   team: AdminTeam
   users: UserProfile[]
   onAddMember: (teamId: string, email: string, role: TeamRole) => void
   onChangeRole: (teamId: string, userId: string, role: TeamRole) => void
   onRemoveMember: (teamId: string, userId: string) => void
+  onDelete: (teamId: string, label: string) => void
 }) {
   const [email, setEmail] = useState('')
   const [role, setRole] = useState<TeamRole>('member')
@@ -251,7 +277,10 @@ function TeamAdminCard({ team, users, onAddMember, onChangeRole, onRemoveMember 
 
   return (
     <div className="border rounded-xl p-4">
-      <h3 className="font-semibold mb-3">{team.name}</h3>
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-semibold">{team.name}</h3>
+        <Button variant="danger" className="text-sm py-1" onClick={() => onDelete(team.id, team.name)}>Delete team</Button>
+      </div>
       <div className="divide-y mb-3">
         {team.team_members.map(m => (
           <div key={m.user_id} className="flex items-center justify-between py-2">

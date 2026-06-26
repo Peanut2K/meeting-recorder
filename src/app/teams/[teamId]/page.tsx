@@ -7,6 +7,8 @@ import { MeetingRow } from '@/components/teams/MeetingRow'
 import { BackLink } from '@/components/ui/BackLink'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { useToast } from '@/components/ui/Toast'
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import { Meeting } from '@/types'
 
 export default function TeamPage() {
@@ -18,6 +20,8 @@ export default function TeamPage() {
   const [to, setTo] = useState('')
   const [isHead, setIsHead] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
+  const { toast, ToastContainer } = useToast()
 
   const loadMeetings = useCallback(async () => {
     const params = new URLSearchParams()
@@ -52,16 +56,31 @@ export default function TeamPage() {
   useEffect(() => { loadMeetings() }, [loadMeetings])
 
   async function handleDelete(id: string) {
-    if (!confirm('Delete this meeting? This cannot be undone.')) return
+    setConfirmDelete(null)
+    setMeetings(ms => ms.filter(m => m.id !== id))
     const res = await fetch(`/api/meetings/${id}`, { method: 'DELETE' })
-    if (res.ok) setMeetings(ms => ms.filter(m => m.id !== id))
-    else alert((await res.json().catch(() => ({}))).error ?? 'Could not delete meeting')
+    if (res.ok) {
+      toast('Meeting deleted', 'success')
+    } else {
+      const err = (await res.json().catch(() => ({}))).error ?? 'Could not delete meeting'
+      toast(err, 'error')
+      loadMeetings()
+    }
   }
 
   if (loading) return <PageWrapper><p className="text-gray-500">Loading...</p></PageWrapper>
 
   return (
     <PageWrapper>
+      <ToastContainer />
+      {confirmDelete && (
+        <ConfirmDialog
+          message="Delete this meeting?"
+          description="This action cannot be undone."
+          onConfirm={() => handleDelete(confirmDelete)}
+          onCancel={() => setConfirmDelete(null)}
+        />
+      )}
       <div className="mb-4">
         <BackLink href="/dashboard">Back to teams</BackLink>
       </div>
@@ -91,7 +110,7 @@ export default function TeamPage() {
       <div className="space-y-3">
         {meetings.length === 0
           ? <p className="text-center text-gray-400 py-12">No meetings yet.</p>
-          : meetings.map(m => <MeetingRow key={m.id} meeting={m} onDelete={isHead ? handleDelete : undefined} />)}
+          : meetings.map(m => <MeetingRow key={m.id} meeting={m} onDelete={isHead ? setConfirmDelete : undefined} />)}
       </div>
     </PageWrapper>
   )
