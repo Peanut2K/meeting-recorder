@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/Button'
 export default function TeamSettingsPage() {
   const { teamId } = useParams<{ teamId: string }>()
   const [team, setTeam] = useState<any>(null)
-  const [newEmail, setNewEmail] = useState('')
   const [customFields, setCustomFields] = useState<string[]>([])
   const [newField, setNewField] = useState('')
   const [msg, setMsg] = useState('')
@@ -30,25 +29,6 @@ export default function TeamSettingsPage() {
     fetch(`/api/teams/${teamId}/template`).then(r => r.json()).then(d => setCustomFields(d.fields || []))
   }, [teamId])
 
-  async function addMember() {
-    if (!newEmail.trim()) return
-    const res = await fetch(`/api/teams/${teamId}/members`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: newEmail.trim() }),
-    })
-    const data = await res.json()
-    if (res.ok) { notify('Member added!'); setNewEmail(''); loadTeam() }
-    else notify(data.error ?? 'Failed to add member', 'error')
-  }
-
-  async function removeMember(userId: string) {
-    const res = await fetch(`/api/teams/${teamId}/members/${userId}`, { method: 'DELETE' })
-    const data = await res.json()
-    if (res.ok) { notify('Member removed'); loadTeam() }
-    else notify(data.error ?? 'Failed to remove member', 'error')
-  }
-
   async function saveTemplate() {
     const res = await fetch(`/api/teams/${teamId}/template`, {
       method: 'PUT',
@@ -65,26 +45,7 @@ export default function TeamSettingsPage() {
     <PageWrapper>
       <h1 className="text-2xl font-bold mb-8">Team Settings — {team.name}</h1>
       {msg && <p className={`mb-4 text-sm ${msgType === 'error' ? 'text-red-500' : 'text-green-600'}`}>{msg}</p>}
-
-      <section className="mb-10">
-        <h2 className="text-lg font-semibold mb-4">Members</h2>
-        <div className="space-y-2 mb-4">
-          {team.team_members?.map((m: any) => (
-            <div key={m.user_id} className="flex items-center justify-between border rounded-lg p-3">
-              <div>
-                <p className="font-medium">{m.users?.name}</p>
-                <p className="text-sm text-gray-500">{m.users?.email} · {m.role}</p>
-              </div>
-              <Button variant="danger" className="text-xs py-1" onClick={() => removeMember(m.user_id)}>Remove</Button>
-            </div>
-          ))}
-        </div>
-        <div className="flex gap-2">
-          <Input placeholder="Email address" value={newEmail} onChange={e => setNewEmail(e.target.value)}
-            onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addMember() } }} />
-          <Button onClick={addMember}>Add Member</Button>
-        </div>
-      </section>
+      <p className="text-sm text-gray-500 mb-8">Members are managed by an administrator in the Admin panel.</p>
 
       <section>
         <h2 className="text-lg font-semibold mb-4">Custom Summary Fields</h2>

@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { isGlobalAdmin } from '@/lib/auth/roles'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -9,15 +10,15 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data: membership } = await supabase.from('team_members').select('role')
-    .eq('team_id', id).eq('user_id', user.id).single()
-  if (membership?.role !== 'admin')
+  if (!(await isGlobalAdmin(admin, user.id)))
     return NextResponse.json({ error: 'Admin only' }, { status: 403 })
 
   let body: { email?: string; role?: string }
   try { body = await request.json() } catch { return NextResponse.json({ error: 'Invalid request body' }, { status: 400 }) }
   const { email, role = 'member' } = body
   if (!email) return NextResponse.json({ error: 'Email required' }, { status: 400 })
+  if (role !== 'head' && role !== 'member')
+    return NextResponse.json({ error: 'role must be head or member' }, { status: 400 })
 
   // Use admin client to look up user by email (bypasses RLS on users table)
   const { data: targetUser } = await admin.from('users').select('id').eq('email', email).single()

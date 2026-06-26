@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { MeetingRow } from '@/components/teams/MeetingRow'
+import { BackLink } from '@/components/ui/BackLink'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Meeting } from '@/types'
@@ -14,7 +15,7 @@ export default function TeamPage() {
   const [meetings, setMeetings] = useState<Meeting[]>([])
   const [search, setSearch] = useState('')
   const [date, setDate] = useState('')
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isHead, setIsHead] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const loadMeetings = useCallback(async () => {
@@ -35,7 +36,7 @@ export default function TeamPage() {
     ]).then(([teamData, teamsData]) => {
       setTeam(teamData)
       const t = Array.isArray(teamsData) ? teamsData.find((t: any) => t.teams?.id === teamId) : null
-      setIsAdmin(t?.role === 'admin')
+      setIsHead(t?.role === 'head')
       setLoading(false)
     })
     loadMeetings()
@@ -43,15 +44,25 @@ export default function TeamPage() {
 
   useEffect(() => { loadMeetings() }, [loadMeetings])
 
+  async function handleDelete(id: string) {
+    if (!confirm('Delete this meeting? This cannot be undone.')) return
+    const res = await fetch(`/api/meetings/${id}`, { method: 'DELETE' })
+    if (res.ok) setMeetings(ms => ms.filter(m => m.id !== id))
+    else alert((await res.json().catch(() => ({}))).error ?? 'Could not delete meeting')
+  }
+
   if (loading) return <PageWrapper><p className="text-gray-500">Loading...</p></PageWrapper>
 
   return (
     <PageWrapper>
+      <div className="mb-4">
+        <BackLink href="/dashboard">Back to teams</BackLink>
+      </div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">{team?.name || 'Team'}</h1>
         <div className="flex gap-2">
-          {isAdmin && <Link href={`/teams/${teamId}/settings`}><Button variant="secondary">Settings</Button></Link>}
-          <Link href={`/teams/${teamId}/record`}><Button>+ Record Meeting</Button></Link>
+          {isHead && <Link href={`/teams/${teamId}/settings`}><Button variant="secondary">Settings</Button></Link>}
+          {isHead && <Link href={`/teams/${teamId}/record`}><Button>+ Record Meeting</Button></Link>}
         </div>
       </div>
       <div className="flex gap-3 mb-6">
@@ -63,7 +74,7 @@ export default function TeamPage() {
       <div className="space-y-3">
         {meetings.length === 0
           ? <p className="text-center text-gray-400 py-12">No meetings yet.</p>
-          : meetings.map(m => <MeetingRow key={m.id} meeting={m} />)}
+          : meetings.map(m => <MeetingRow key={m.id} meeting={m} onDelete={isHead ? handleDelete : undefined} />)}
       </div>
     </PageWrapper>
   )

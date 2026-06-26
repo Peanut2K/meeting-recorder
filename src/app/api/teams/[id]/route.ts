@@ -1,12 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
+import { isGlobalAdmin } from '@/lib/auth/roles'
 import { NextResponse } from 'next/server'
-
-async function getCallerRole(supabase: any, teamId: string, userId: string): Promise<string | null> {
-  const { data } = await supabase
-    .from('team_members').select('role')
-    .eq('team_id', teamId).eq('user_id', userId).single()
-  return data?.role ?? null
-}
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -28,9 +23,10 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const supabase = await createClient()
+  const admin = createAdminClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  if (await getCallerRole(supabase, id, user.id) !== 'admin')
+  if (!(await isGlobalAdmin(admin, user.id)))
     return NextResponse.json({ error: 'Admin only' }, { status: 403 })
 
   let body: { name?: string }

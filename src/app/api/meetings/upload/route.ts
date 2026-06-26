@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { transcribeAudio } from '@/lib/ai/transcribe'
 import { summarizeMeeting } from '@/lib/ai/summarize'
+import { canManageTeam } from '@/lib/auth/roles'
 import { NextResponse } from 'next/server'
 
 export const maxDuration = 120
@@ -22,10 +23,9 @@ export async function POST(request: Request) {
   if (!file || !teamId || !title?.trim())
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
 
-  // Verify user is a member of the team
-  const { data: membership } = await supabase.from('team_members').select('role')
-    .eq('team_id', teamId).eq('user_id', user.id).single()
-  if (!membership) return NextResponse.json({ error: 'Not a team member' }, { status: 403 })
+  // Only the team head (or a global admin) may record/create meetings.
+  if (!(await canManageTeam(supabase, admin, teamId, user.id)))
+    return NextResponse.json({ error: 'Only the team head can record meetings' }, { status: 403 })
 
   // Create meeting record with processing status
   const { data: meeting, error: meetingError } = await admin
@@ -43,31 +43,37 @@ export async function POST(request: Request) {
   const { error: storageError } = await admin.storage
     .from('meeting-audio').upload(audioPath, audioBuffer, { contentType: 'audio/webm' })
 
+  // Non-fatal: transcription uses the in-memory buffer, not the stored file. A storage
+  // hiccup (e.g. 504) only costs audio replay — it shouldn't lose the whole meeting.
   if (storageError) {
-    console.error('Storage upload failed:', storageError.message)
-    await admin.from('meetings').update({ status: 'failed', error_message: 'Audio upload failed' }).eq('id', meeting.id)
-    return NextResponse.json({ error: 'Audio upload failed' }, { status: 500 })
+    console.error('Storage upload failed (continuing without saved audio):', storageError.message)
+  } else {
+    const { data: { publicUrl } } = admin.storage.from('meeting-audio').getPublicUrl(audioPath)
+    await admin.from('meetings').update({ audio_url: publicUrl }).eq('id', meeting.id)
   }
-
-  const { data: { publicUrl } } = admin.storage.from('meeting-audio').getPublicUrl(audioPath)
-  await admin.from('meetings').update({ audio_url: publicUrl }).eq('id', meeting.id)
 
   try {
     const transcript = await transcribeAudio(audioBuffer, `${meeting.id}.webm`)
+      .catch((e: unknown) => { throw new Error(`Transcription (Typhoon) failed: ${e instanceof Error ? e.message : e}`) })
     await admin.from('meetings').update({ transcript }).eq('id', meeting.id)
 
     const { data: template } = await admin.from('team_templates').select('fields').eq('team_id', teamId).single()
     const customFields: string[] = Array.isArray(template?.fields) ? template.fields : []
 
     const summary = await summarizeMeeting(transcript, customFields)
-    await admin.from('summaries').insert({ meeting_id: meeting.id, content: summary, edited_by: user.id })
+      .catch((e: unknown) => { throw new Error(`Summarization (Anthropic) failed: ${e instanceof Error ? e.message : e}`) })
+    const { error: summaryError } = await admin.from('summaries').insert({ meeting_id: meeting.id, content: summary, edited_by: user.id })
+    if (summaryError) throw new Error(`Saving summary failed: ${summaryError.message}`)
     await admin.from('meetings').update({ status: 'done' }).eq('id', meeting.id)
 
     return NextResponse.json({ meetingId: meeting.id })
   } catch (err: unknown) {
     const detail = err instanceof Error ? err.message : 'Unknown error'
     console.error('AI processing failed:', detail)
-    await admin.from('meetings').update({ status: 'failed', error_message: 'AI processing failed' }).eq('id', meeting.id)
-    return NextResponse.json({ error: 'Meeting processing failed' }, { status: 500 })
+    // Don't keep failed meetings — drop the row (and any uploaded audio) so the list stays clean.
+    // The error still goes back to the user in the response below.
+    await admin.storage.from('meeting-audio').remove([audioPath]).catch(() => {})
+    await admin.from('meetings').delete().eq('id', meeting.id)
+    return NextResponse.json({ error: `Meeting processing failed: ${detail}` }, { status: 500 })
   }
 }

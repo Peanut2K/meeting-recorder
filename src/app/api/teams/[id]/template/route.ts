@@ -1,4 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
+import { canManageTeam } from '@/lib/auth/roles'
 import { NextResponse } from 'next/server'
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -14,13 +16,13 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const supabase = await createClient()
+  const admin = createAdminClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data: membership } = await supabase.from('team_members').select('role')
-    .eq('team_id', id).eq('user_id', user.id).single()
-  if (membership?.role !== 'admin')
-    return NextResponse.json({ error: 'Admin only' }, { status: 403 })
+  // Only the team head (or a global admin) may edit the prompt/template.
+  if (!(await canManageTeam(supabase, admin, id, user.id)))
+    return NextResponse.json({ error: 'Only the team head can edit the prompt' }, { status: 403 })
 
   let body: { fields?: string[] }
   try { body = await request.json() } catch { return NextResponse.json({ error: 'Invalid request body' }, { status: 400 }) }

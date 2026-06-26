@@ -1,10 +1,19 @@
-export type UserRole = 'admin' | 'member'
+export type GlobalRole = 'admin' | 'user'
+export type TeamRole = 'head' | 'member'
 export type MeetingStatus = 'processing' | 'done' | 'failed'
+
+export interface UserProfile {
+  id: string
+  email: string
+  name: string
+  role: GlobalRole
+  created_at: string
+}
 
 export interface TeamMember {
   user_id: string
   team_id: string
-  role: UserRole
+  role: TeamRole
   users: { id: string; name: string; email: string }
 }
 

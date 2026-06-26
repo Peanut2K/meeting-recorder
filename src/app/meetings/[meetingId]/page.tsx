@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { format } from 'date-fns'
+import { BackLink } from '@/components/ui/BackLink'
 import { PageWrapper } from '@/components/layout/PageWrapper'
 import { SummaryEditor } from '@/components/summary/SummaryEditor'
 import { TranscriptCollapsible } from '@/components/summary/TranscriptCollapsible'
@@ -53,6 +54,9 @@ export default function MeetingPage() {
 
   return (
     <PageWrapper>
+      <div className="mb-4">
+        <BackLink href={`/teams/${meeting.team_id}`}>Back to team</BackLink>
+      </div>
       <div className="flex items-start justify-between mb-6 gap-4 flex-wrap">
         <div>
           <h1 className="text-2xl font-bold">{meeting.title}</h1>

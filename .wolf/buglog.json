@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "bugs": [
+    {
+      "id": "bug-001",
+      "timestamp": "2026-06-26T00:00:00Z",
+      "error_message": "infinite recursion detected in policy for relation \"team_members\"",
+      "file": "supabase/migrations/001_initial_schema.sql",
+      "root_cause": "RLS policies on public.team_members (team_members_select/insert/delete) ran a subquery against public.team_members itself. Evaluating that subquery re-triggers the same policy, causing Postgres to loop forever. teams_member_select, meetings_team_member, and templates_team_member also subquery team_members and would hit the same loop.",
+      "fix": "Created supabase/migrations/002_fix_rls_recursion.sql: added SECURITY DEFINER helper functions is_team_member(uuid) and is_team_admin(uuid) (they bypass RLS for the inner read), then rewrote the recursive policies to call the helpers instead of subquerying team_members directly.",
+      "tags": [
+        "supabase",
+        "rls",
+        "postgres",
+        "recursion",
+        "policy",
+        "team_members"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T00:00:00Z"
+    },
+    {
+      "id": "bug-002",
+      "timestamp": "2026-06-26T06:14:15.513Z",
+      "error_message": "Wrong reference: supabase should be admin",
+      "file": "src/app/api/teams/route.ts",
+      "root_cause": "Used \"supabase\" instead of \"admin\"",
+      "fix": "Changed supabase → admin",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T06:15:56.954Z"
+    },
+    {
+      "id": "bug-003",
+      "timestamp": "2026-06-26T06:15:23.148Z",
+      "error_message": "Wrong return value",
+      "file": "src/app/api/teams/route.ts",
+      "root_cause": "Was returning: NextResponse.json({ error: 'Failed to create team'",
+      "fix": "Now returns: NextResponse.json({ error: memberError.message }, ",
+      "tags": [
+        "auto-detected",
+        "return-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:15:23.148Z"
+    },
+    {
+      "id": "bug-004",
+      "timestamp": "2026-06-26T06:20:00.000Z",
+      "error_message": "new row violates RLS / Failed to create team (500) — team_members insert FK fails because public.users profile row is missing",
+      "file": "src/app/api/auth/register/route.ts",
+      "root_cause": "Register inserted the public.users profile via the user-scoped supabase client. Right after signUp() in a server route the session isn't set on that client, so auth.uid() is null and the users_own RLS policy (auth.uid() = id) blocks the insert. profileError then deleted the auth user. Net result: accounts exist in auth.users with no public.users profile row, so any later team_members insert (FK -> public.users) fails.",
+      "fix": "Insert the profile via the admin (service-role) client instead of supabase, matching how teams/route.ts inserts team_members. Existing broken accounts created before the fix must be re-registered or have their public.users row backfilled.",
+      "tags": [
+        "supabase",
+        "rls",
+        "auth",
+        "register",
+        "service-role",
+        "foreign-key"
+      ],
+      "related_bugs": [
+        "bug-002"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:20:00.000Z"
+    },
+    {
+      "id": "bug-005",
+      "timestamp": "2026-06-26T06:33:07.077Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/types/index.ts",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 9→18 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:33:07.077Z"
+    },
+    {
+      "id": "bug-006",
+      "timestamp": "2026-06-26T06:34:52.571Z",
+      "error_message": "Wrong condition in logic",
+      "file": "src/app/api/meetings/upload/route.ts",
+      "root_cause": "Condition was: if (!membership)",
+      "fix": "Changed to: if (!(await canManageTeam(supabase, admin, teamId, use)",
+      "tags": [
+        "auto-detected",
+        "logic-fix",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:34:52.571Z"
+    },
+    {
+      "id": "bug-007",
+      "timestamp": "2026-06-26T06:35:57.346Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/api/teams/[id]/route.ts",
+      "root_cause": "6 lines replaced/restructured",
+      "fix": "Rewrote 9→4 lines (6 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:35:57.346Z"
+    },
+    {
+      "id": "bug-008",
+      "timestamp": "2026-06-26T06:36:25.281Z",
+      "error_message": "Type error",
+      "file": "src/app/api/teams/route.ts",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:36:25.281Z"
+    },
+    {
+      "id": "bug-009",
+      "timestamp": "2026-06-26T06:37:39.754Z",
+      "error_message": "Missing error handling in function",
+      "file": "src/app/api/teams/[id]/members/[userId]/route.ts",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:37:39.754Z"
+    },
+    {
+      "id": "bug-010",
+      "timestamp": "2026-06-26T06:39:39.626Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/dashboard/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:39:39.626Z"
+    },
+    {
+      "id": "bug-011",
+      "timestamp": "2026-06-26T06:40:13.261Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/teams/[teamId]/page.tsx",
+      "root_cause": "Had 'admin'",
+      "fix": "Changed to 'head'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T06:40:13.261Z"
+    },
+    {
+      "id": "bug-012",
+      "timestamp": "2026-06-26T06:41:07.833Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/teams/[teamId]/settings/page.tsx",
+      "root_cause": "16 lines replaced/restructured",
+      "fix": "Rewrote 45→25 lines (16 removed) | Also: <section className=\"mb-10\">; <h2 className=\"text-lg font-semibold mb-4\">Members",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T06:41:19.326Z"
+    },
+    {
+      "id": "bug-013",
+      "timestamp": "2026-06-26T07:07:51.297Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 9→18 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T07:07:51.297Z"
+    },
+    {
+      "id": "bug-014",
+      "timestamp": "2026-06-26T07:15:12.804Z",
+      "error_message": "CSS fix: disabled, primary, secondary",
+      "file": "src/components/ui/Button.tsx",
+      "root_cause": "disabled: opacity-50 disabled:cursor-not-allowed' → opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2'; primary: 'bg-black text-white hover:bg-gray-800', → 'bg-brand text-white hover:bg-brand-strong',; secondary: 'bg-gray-100 text-black hover:bg-gray-200', → 'bg-gray-100 text-ink hover:bg-gray-200',",
+      "fix": "Changed disabled: opacity-50 disabled:cursor-not-allowed' → opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2'; primary: 'bg-black text-white hover:bg-gray-800', → 'bg-brand text-white hover:bg-brand-strong',; secondary: 'bg-gray-100 text-black hover:bg-gray-200', → 'bg-gray-100 text-ink hover:bg-gray-200',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T07:15:12.804Z"
+    },
+    {
+      "id": "bug-015",
+      "timestamp": "2026-06-26T07:22:13.980Z",
+      "error_message": "CSS fix: hover",
+      "file": "src/components/layout/Navbar.tsx",
+      "root_cause": "hover: text-black\">Profile</Link> → text-ink'",
+      "fix": "Changed hover: text-black\">Profile</Link> → text-ink'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T07:22:13.980Z"
+    },
+    {
+      "id": "bug-016",
+      "timestamp": "2026-06-26T07:22:25.602Z",
+      "error_message": "CSS fix: t",
+      "file": "src/app/dashboard/page.tsx",
+      "root_cause": "t: any) => ( → any, i: number) => (",
+      "fix": "Changed t: any) => ( → any, i: number) => (",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T07:22:25.602Z"
+    },
+    {
+      "id": "bug-017",
+      "timestamp": "2026-06-26T07:38:14.782Z",
+      "error_message": "Wrong return value",
+      "file": "src/app/api/meetings/upload/route.ts",
+      "root_cause": "Was returning: NextResponse.json({ error: 'Audio upload failed' }",
+      "fix": "Now returns: NextResponse.json({ error: `Audio upload failed: $",
+      "tags": [
+        "auto-detected",
+        "return-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T07:38:20.248Z"
+    },
+    {
+      "id": "bug-018",
+      "timestamp": "2026-06-26T14:55:00.000Z",
+      "error_message": "Meeting processing failed: 400 File type audio/webm not supported. Supported formats: wav, flac, mp3, ogg, opus",
+      "file": "src/lib/ai/transcribe.ts",
+      "root_cause": "Browser MediaRecorder outputs audio/webm (Opus codec in a WebM container). Typhoon ASR allowlists by extension/mime and rejects 'webm', even though the inner Opus codec is supported.",
+      "fix": "Relabel the file sent to Typhoon to .ogg / audio/ogg (bytes unchanged) so it passes the format gate; Typhoon's server-side ffmpeg sniffs the real container. Upgrade path if it still fails: remux webm->ogg with ffmpeg (-c copy) server-side.",
+      "tags": [
+        "typhoon",
+        "asr",
+        "webm",
+        "opus",
+        "audio-format",
+        "mediarecorder"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T14:55:00.000Z"
+    },
+    {
+      "id": "bug-019",
+      "timestamp": "2026-06-26T07:48:42.845Z",
+      "error_message": "Missing guard clause",
+      "file": "src/app/teams/[teamId]/record/page.tsx",
+      "root_cause": "No early return/throw for edge case: audio.duration !== Infinity",
+      "fix": "Added guard clause: if (audio.duration !== Infinity)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T07:48:42.845Z"
+    },
+    {
+      "id": "bug-020",
+      "timestamp": "2026-06-26T07:52:55.040Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "src/app/api/meetings/upload/route.ts",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T07:52:55.040Z"
+    },
+    {
+      "id": "bug-021",
+      "timestamp": "2026-06-26T15:10:00.000Z",
+      "error_message": "Transcription (Typhoon) failed: 500 Internal Server Error after relabeling webm to .ogg",
+      "file": "src/lib/ai/transcribe.ts",
+      "root_cause": "Browser MediaRecorder only outputs WebM/Opus. Relabeling to .ogg passed Typhoon's format allowlist but its decoder cannot demux WebM bytes labeled ogg, so it 500s. The container must actually change, not just its name.",
+      "fix": "Added @ffmpeg-installer/ffmpeg (static binary) and a toWav() step that re-encodes the WebM buffer to 16kHz mono WAV via temp files before sending to Typhoon. Verified end-to-end webm/opus -> valid RIFF/WAVE. pnpm ignores @ffmpeg-installer/linux-x64 build script but the binary is already +x.",
+      "tags": [
+        "typhoon",
+        "asr",
+        "ffmpeg",
+        "webm",
+        "transcode"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T15:10:00.000Z"
+    },
+    {
+      "id": "bug-022",
+      "timestamp": "2026-06-26T08:06:21.372Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "src/app/api/meetings/upload/route.ts",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:06:21.372Z"
+    },
+    {
+      "id": "bug-023",
+      "timestamp": "2026-06-26T08:18:27.525Z",
+      "error_message": "Missing guard clause",
+      "file": "src/app/api/meetings/upload/route.ts",
+      "root_cause": "No early return/throw for edge case: summaryError",
+      "fix": "Added guard clause: if (summaryError)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:18:27.525Z"
+    },
+    {
+      "id": "bug-024",
+      "timestamp": "2026-06-26T08:18:55.916Z",
+      "error_message": "CSS fix: hover",
+      "file": "src/components/teams/MeetingRow.tsx",
+      "root_cause": "hover: -translate-y-0.5 hover:border-brand/40 hover:shadow-md\"> → bg-red-50 hover:text-red-600 group-hover:opacity-100\">",
+      "fix": "Changed hover: -translate-y-0.5 hover:border-brand/40 hover:shadow-md\"> → bg-red-50 hover:text-red-600 group-hover:opacity-100\">",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:18:55.916Z"
+    },
+    {
+      "id": "bug-025",
+      "timestamp": "2026-06-26T08:19:01.677Z",
+      "error_message": "Missing error handling in function",
+      "file": "src/app/teams/[teamId]/page.tsx",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:19:01.677Z"
+    },
+    {
+      "id": "bug-026",
+      "timestamp": "2026-06-26T08:22:14.267Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/meetings/[meetingId]/page.tsx",
+      "root_cause": "Had 'next/link'",
+      "fix": "Changed to 'date-fns'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-26T08:22:27.253Z"
+    },
+    {
+      "id": "bug-027",
+      "timestamp": "2026-06-26T08:27:35.302Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/api/admin/users/[userId]/route.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:27:35.302Z"
+    },
+    {
+      "id": "bug-028",
+      "timestamp": "2026-06-26T08:27:43.413Z",
+      "error_message": "CSS fix: userId, method",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "userId: string) { → string, password: string): Promise<boolean> {; method: 'DELETE' → 'PATCH', headers: { 'Content-Type': 'application/json'",
+      "fix": "Changed userId: string) { → string, password: string): Promise<boolean> {; method: 'DELETE' → 'PATCH', headers: { 'Content-Type': 'application/json'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:27:43.413Z"
+    },
+    {
+      "id": "bug-029",
+      "timestamp": "2026-06-26T08:27:49.776Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "11 lines replaced/restructured",
+      "fix": "Rewrote 18→8 lines (11 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:27:49.776Z"
+    },
+    {
+      "id": "bug-030",
+      "timestamp": "2026-06-26T08:28:02.336Z",
+      "error_message": "Missing await",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "Async call without await — returned Promise instead of value",
+      "fix": "Added await to async call",
+      "tags": [
+        "auto-detected",
+        "async-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T08:28:02.336Z"
+    }
+  ]
+}

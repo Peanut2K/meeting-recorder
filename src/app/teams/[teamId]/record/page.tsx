@@ -9,6 +9,15 @@ import { Button } from '@/components/ui/Button'
 
 type Stage = 'record' | 'preview' | 'processing'
 
+// MediaRecorder WebM blobs ship without a duration header, so audio.duration is Infinity
+// and the seek bar runs backwards. Force the browser to compute it: seek far, then reset.
+function primeWebmDuration(audio: HTMLAudioElement) {
+  if (audio.duration !== Infinity) return
+  audio.currentTime = 1e101
+  const reset = () => { audio.removeEventListener('timeupdate', reset); audio.currentTime = 0 }
+  audio.addEventListener('timeupdate', reset)
+}
+
 export default function RecordPage() {
   const { teamId } = useParams<{ teamId: string }>()
   const router = useRouter()
@@ -76,7 +85,7 @@ export default function RecordPage() {
         <div className="flex flex-col gap-6 max-w-md">
           <div className="border rounded-xl p-4 bg-gray-50">
             <p className="text-sm text-gray-500 mb-2">Preview</p>
-            <audio src={audioUrl} controls className="w-full" />
+            <audio src={audioUrl} controls className="w-full" onLoadedMetadata={e => primeWebmDuration(e.currentTarget)} />
           </div>
           <Input label="Meeting Title" value={title} onChange={e => setTitle(e.target.value)} placeholder="e.g. Sprint Planning Week 26" required />
           {error && <p className="text-sm text-red-500">{error}</p>}
