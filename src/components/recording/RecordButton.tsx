@@ -55,13 +55,14 @@ export function RecordButton({ onRecordingComplete }: RecordButtonProps) {
         displayStream.getVideoTracks()[0]?.addEventListener('ended', stopRecording)
       }
 
-      const mediaRecorder = new MediaRecorder(dest.stream)
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4'
+      const mediaRecorder = new MediaRecorder(dest.stream, { mimeType })
       mediaRecorderRef.current = mediaRecorder
       chunksRef.current = []
 
       mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunksRef.current.push(e.data) }
       mediaRecorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: 'audio/webm' })
+        const blob = new Blob(chunksRef.current, { type: mimeType })
         cleanup()
         onRecordingComplete(blob)
       }
@@ -84,6 +85,16 @@ export function RecordButton({ onRecordingComplete }: RecordButtonProps) {
     if (timerRef.current) clearInterval(timerRef.current)
     setRecording(false)
     setPaused(false)
+  }
+
+  function cancelRecording() {
+    if (timerRef.current) clearInterval(timerRef.current)
+    // onstop will fire but we ignore the blob by unregistering the handler first
+    const mr = mediaRecorderRef.current
+    if (mr) { mr.onstop = () => { cleanup() }; mr.stop() }
+    setRecording(false)
+    setPaused(false)
+    setSeconds(0)
   }
 
   function togglePause() {
@@ -118,14 +129,21 @@ const fmt = (s: number) => `${Math.floor(s / 60).toString().padStart(2, '0')}:${
             {paused ? '▶ Resume' : '⏸ Pause'}
           </Button>
           <Button onClick={stopRecording} className="px-6 py-3 text-base">Submit</Button>
+          <Button variant="danger" onClick={cancelRecording} className="px-6 py-3 text-base">Cancel</Button>
         </div>
       ) : (
         <Button onClick={startRecording} className="px-8 py-3 text-base">Start Recording</Button>
       )}
-      {!recording && (
-        <label className="flex items-center gap-2 text-sm text-muted cursor-pointer select-none">
-          <input type="checkbox" checked={includeSystem} onChange={e => setIncludeSystem(e.target.checked)} className="accent-brand" />
-          Also record call / tab audio (Discord, YouTube, Meet…)
+      {!recording && typeof navigator !== 'undefined' && !!navigator.mediaDevices?.getDisplayMedia && (
+        <label className="flex items-center gap-3 cursor-pointer select-none">
+          <span className={`text-sm transition-colors ${includeSystem ? 'text-foreground' : 'text-muted'}`}>
+            Also record call / tab audio
+          </span>
+          <button type="button" role="switch" aria-checked={includeSystem}
+            onClick={() => setIncludeSystem(v => !v)}
+            className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${includeSystem ? 'bg-brand' : 'bg-line'}`}>
+            <span className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform duration-200 ${includeSystem ? 'translate-x-5' : 'translate-x-0'}`} />
+          </button>
         </label>
       )}
     </div>

@@ -1247,6 +1247,54 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T19:59:57.373Z"
+    },
+    {
+      "id": "bug-078",
+      "timestamp": "2026-06-26T20:10:10.973Z",
+      "error_message": "CSS fix: type",
+      "file": "src/components/recording/RecordButton.tsx",
+      "root_cause": "type: 'audio/webm' → mimeType",
+      "fix": "Changed type: 'audio/webm' → mimeType",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T20:10:10.973Z"
+    },
+    {
+      "id": "bug-079",
+      "timestamp": "2026-06-26T20:10:17.221Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/components/recording/RecordButton.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T20:10:17.221Z"
+    },
+    {
+      "id": "bug-080",
+      "timestamp": "2026-06-26T20:11:36.660Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/recording/RecordButton.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 6→12 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-26T20:11:36.660Z"
     }
   ]
 }

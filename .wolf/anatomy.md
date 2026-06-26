@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T20:02:49.676Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T20:13:16.275Z
 > Files: 20 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
@@ -135,7 +135,7 @@
 
 ## src/components/recording/
 
-- `RecordButton.tsx` — RecordButton (~1522 tok)
+- `RecordButton.tsx` — RecordButton (~1826 tok)
 
 ## src/components/summary/
 
