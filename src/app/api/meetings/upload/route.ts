@@ -65,7 +65,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const transcript = await transcribeAudio(audioBuffer, file.name)
+    const transcript = await transcribeAudio(compressedAudio ?? audioBuffer, file.name, !!compressedAudio)
       .catch((e: unknown) => { throw new Error(`Transcription (Whisper) failed: ${e instanceof Error ? e.message : e}`) })
     await admin.from('meetings').update({ transcript }).eq('id', meeting.id)
 

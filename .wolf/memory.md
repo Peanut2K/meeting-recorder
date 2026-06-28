@@ -358,3 +358,19 @@
 | 03:13 | Session end: 40 writes across 5 files (RecordButton.tsx, page.tsx, client.ts, middleware.ts, server.ts) | 9 reads | ~11233 tok |
 | 03:15 | Edited src/app/teams/[teamId]/page.tsx | CSS: sm, sm | ~228 |
 | 03:15 | Session end: 41 writes across 5 files (RecordButton.tsx, page.tsx, client.ts, middleware.ts, server.ts) | 10 reads | ~12975 tok |
+
+## Session: 2026-06-28 23:02
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 23:04 | Edited src/lib/ai/transcribe.ts | added 1 condition(s) | ~331 |
+| 23:04 | Edited src/app/api/meetings/upload/route.ts | added nullish coalescing | ~31 |
+| 23:04 | Edited src/lib/ai/transcribe.ts | modified transcribeAudio() | ~54 |
+| 23:05 | Fix Whisper 413: send MP3 not WAV | transcribe.ts, upload/route.ts | typechecks | ~3k |
+| 23:05 | Session end: 3 writes across 2 files (transcribe.ts, route.ts) | 2 reads | ~2391 tok |
+| 23:09 | Edited src/lib/ai/transcribe.ts | 7→7 lines | ~86 |
+| 23:10 | Edited src/lib/ai/transcribe.ts | modified whisper() | ~516 |
+| 23:10 | Edited src/lib/ai/transcribe.ts | inline fix | ~24 |
+| 23:10 | Edited src/lib/ai/transcribe.ts | 5→4 lines | ~31 |
+| 23:10 | Unlimited-length transcription via MP3 chunking | transcribe.ts | typechecks | ~2k |
+| 23:11 | Session end: 7 writes across 2 files (transcribe.ts, route.ts) | 2 reads | ~3029 tok |

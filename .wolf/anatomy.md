@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T20:15:28.750Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-28T16:10:23.635Z
 > Files: 20 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
@@ -75,7 +75,7 @@
 
 ## src/app/api/meetings/upload/
 
-- `route.ts` — Next.js API route: POST (~1386 tok)
+- `route.ts` — Next.js API route: POST (~1397 tok)
 
 ## src/app/api/teams/
 
@@ -151,7 +151,7 @@
 ## src/lib/ai/
 
 - `summarize.ts` — Exports summarizeMeeting (~371 tok)
-- `transcribe.ts` — Exports compressToMp3, transcribeAudio (~589 tok)
+- `transcribe.ts` — Exports compressToMp3, transcribeAudio (~882 tok)
 
 ## src/lib/auth/
 
