@@ -413,3 +413,7 @@
 | 10:15 | Edited src/lib/pdf/render.ts | readFileSync() → bundle() | ~170 |
 | 10:16 | fix prod PDF export: move render inline (lib/pdf/render.ts), drop spawn+scripts/, add outputFileTracingIncludes for fonts | pdf/route.ts, lib/pdf/render.ts, next.config.ts | smoke test PDF 9902B header %PDF- | ~2k |
 | 10:16 | Session end: 14 writes across 8 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 5 reads | ~5530 tok |
+| 10:22 | Edited src/components/summary/SummaryEditor.tsx | CSS: textarea | ~217 |
+| 10:22 | Edited src/components/summary/SummaryEditor.tsx | 4→4 lines | ~101 |
+| 10:22 | Edited src/components/summary/SummaryEditor.tsx | 5→5 lines | ~174 |
+| 10:22 | Session end: 17 writes across 9 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 6 reads | ~6022 tok |

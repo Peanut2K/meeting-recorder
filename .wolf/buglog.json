@@ -1527,6 +1527,22 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-29T03:14:33.196Z"
+    },
+    {
+      "id": "bug-095",
+      "timestamp": "2026-06-29T03:22:13.072Z",
+      "error_message": "Missing guard clause",
+      "file": "src/components/summary/SummaryEditor.tsx",
+      "root_cause": "No early return/throw for edge case: !el",
+      "fix": "Added guard clause: if (!el)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-29T03:22:13.072Z"
     }
   ]
 }

@@ -1,7 +1,20 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useLayoutEffect } from 'react'
 import { SummaryContent, ActionItem } from '@/types'
 import { Button } from '@/components/ui/Button'
+
+// Auto-growing textarea: height follows content so long sentences wrap and stay
+// fully visible instead of overflowing a single-line input.
+function AutoTextarea({ className = '', value, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  const ref = useRef<HTMLTextAreaElement>(null)
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight}px`
+  }, [value])
+  return <textarea ref={ref} rows={1} value={value} className={`resize-none overflow-hidden ${className}`} {...props} />
+}
 
 interface SummaryEditorProps {
   content: SummaryContent
@@ -56,8 +69,8 @@ export function SummaryEditor({ content: initial, customFields, onSave, readOnly
           <h2 className="text-lg font-semibold capitalize mb-3">{key}</h2>
           <div className="space-y-2">
             {content[key].map((item, i) => (
-              <div key={i} className="flex gap-2">
-                <input value={item} readOnly={readOnly} onChange={e => updateList(key, i, e.target.value)} className={inputCls} />
+              <div key={i} className="flex gap-2 items-start">
+                <AutoTextarea value={item} readOnly={readOnly} onChange={e => updateList(key, i, e.target.value)} className={inputCls} />
                 {!readOnly && <Button variant="secondary" className="text-xs px-2" onClick={() => removeItem(key, i)}>×</Button>}
               </div>
             ))}
@@ -70,9 +83,9 @@ export function SummaryEditor({ content: initial, customFields, onSave, readOnly
         <h2 className="text-lg font-semibold mb-3">Action Items</h2>
         <div className="space-y-3">
           {content.action_items.map((item, i) => (
-            <div key={i} className="grid grid-cols-3 gap-2">
-              <input placeholder="Who" value={item.who} readOnly={readOnly} onChange={e => updateActionItem(i, 'who', e.target.value)} className={inputCls} />
-              <input placeholder="What" value={item.what} readOnly={readOnly} onChange={e => updateActionItem(i, 'what', e.target.value)} className={inputCls} />
+            <div key={i} className="grid grid-cols-[1fr_2fr_1fr] gap-2 items-start">
+              <AutoTextarea placeholder="Who" value={item.who} readOnly={readOnly} onChange={e => updateActionItem(i, 'who', e.target.value)} className={inputCls} />
+              <AutoTextarea placeholder="What" value={item.what} readOnly={readOnly} onChange={e => updateActionItem(i, 'what', e.target.value)} className={inputCls} />
               <input placeholder="Due date" value={item.due || ''} readOnly={readOnly} onChange={e => updateActionItem(i, 'due', e.target.value)} className={inputCls} />
             </div>
           ))}

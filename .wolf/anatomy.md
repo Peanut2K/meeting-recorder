@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-29T03:15:18.476Z
-> Files: 27 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-29T03:22:28.297Z
+> Files: 28 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
 
@@ -142,6 +142,7 @@
 
 ## src/components/summary/
 
+- `SummaryEditor.tsx` — AutoTextarea (~1411 tok)
 
 ## src/components/teams/
 
@@ -162,6 +163,9 @@
 ## src/lib/pdf/
 
 - `render.ts` — Inline PDF renderer. @react-pdf/renderer is in next.config serverExternalPackages, (~960 tok)
+
+## src/lib/pdf/render.ts
+
 
 ## src/lib/supabase/
 
@@ -191,6 +195,3 @@
 
 ## trigger.config.ts
 
-
-## src/lib/pdf/render.ts
-Inline PDF render (createElement + @react-pdf/renderer). Replaces scripts/render-pdf.mjs spawn workaround — Vercel didn't bundle scripts/. ~120 tok
