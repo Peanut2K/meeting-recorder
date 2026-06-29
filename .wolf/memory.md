@@ -405,3 +405,11 @@
 | 08:55 | Session end: 9 writes across 6 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 2 reads | ~4112 tok |
 | 09:21 | Session end: 9 writes across 6 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 2 reads | ~4112 tok |
 | 09:24 | Session end: 9 writes across 6 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 2 reads | ~4112 tok |
+| 10:04 | Session end: 9 writes across 6 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 2 reads | ~4112 tok |
+| 10:14 | Created src/lib/pdf/render.ts | — | ~953 |
+| 10:14 | Edited src/app/api/meetings/[id]/pdf/route.ts | reduced (-15 lines) | ~125 |
+| 10:14 | Edited next.config.ts | 5→10 lines | ~159 |
+| 10:14 | Edited src/lib/pdf/render.ts | inline fix | ~11 |
+| 10:15 | Edited src/lib/pdf/render.ts | readFileSync() → bundle() | ~170 |
+| 10:16 | fix prod PDF export: move render inline (lib/pdf/render.ts), drop spawn+scripts/, add outputFileTracingIncludes for fonts | pdf/route.ts, lib/pdf/render.ts, next.config.ts | smoke test PDF 9902B header %PDF- | ~2k |
+| 10:16 | Session end: 14 writes across 8 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 5 reads | ~5530 tok |

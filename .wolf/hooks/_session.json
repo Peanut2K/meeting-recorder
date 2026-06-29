@@ -11,6 +11,21 @@
       "count": 1,
       "tokens": 0,
       "first_read": "2026-06-29T01:53:46.215Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/scripts/render-pdf.mjs": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-06-29T03:13:28.219Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/pdf/route.ts": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-06-29T03:14:03.470Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/next.config.ts": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-06-29T03:14:38.460Z"
     }
   },
   "files_written": [
@@ -67,6 +82,36 @@
       "action": "edit",
       "tokens": 139,
       "at": "2026-06-29T01:54:16.345Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/pdf/render.ts",
+      "action": "create",
+      "tokens": 953,
+      "at": "2026-06-29T03:14:22.565Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/[id]/pdf/route.ts",
+      "action": "edit",
+      "tokens": 125,
+      "at": "2026-06-29T03:14:33.193Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/next.config.ts",
+      "action": "edit",
+      "tokens": 159,
+      "at": "2026-06-29T03:14:45.263Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/pdf/render.ts",
+      "action": "edit",
+      "tokens": 11,
+      "at": "2026-06-29T03:14:57.510Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/lib/pdf/render.ts",
+      "action": "edit",
+      "tokens": 170,
+      "at": "2026-06-29T03:15:18.495Z"
     }
   ],
   "edit_counts": {
@@ -75,11 +120,14 @@
     "src/app/api/meetings/upload/route.ts": 3,
     "supabase/migrations/004_queued_status.sql": 1,
     "src/types/index.ts": 1,
-    "src/app/meetings/[meetingId]/page.tsx": 2
+    "src/app/meetings/[meetingId]/page.tsx": 2,
+    "src/lib/pdf/render.ts": 3,
+    "src/app/api/meetings/[id]/pdf/route.ts": 1,
+    "next.config.ts": 1
   },
   "anatomy_hits": 1,
-  "anatomy_misses": 1,
+  "anatomy_misses": 4,
   "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 5
+  "stop_count": 7
 }

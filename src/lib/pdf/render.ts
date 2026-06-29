@@ -1,13 +1,15 @@
-// Standalone PDF renderer — run as its own node process so @react-pdf/renderer
-// reconciles with plain node_modules React. Rendering inside Next fails with
-// "Cannot read properties of null (reading 'props')" because Next's vendored
-// React and the external react-pdf get two different React instances.
-//
-// Reads JSON { title, date, teamName, content } on stdin, writes the PDF to stdout.
+// Inline PDF renderer. @react-pdf/renderer is in next.config serverExternalPackages,
+// so it loads as one external module and reconciles with its own React — no child
+// process, no two-React-instance crash. Moved out of scripts/ because Vercel doesn't
+// bundle that dir; here the import is traced and the fonts are read relative to this
+// file (works in the serverless bundle, unlike process.cwd()).
 import { join } from 'node:path'
 import { createElement as h } from 'react'
 import { renderToBuffer, Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer'
+import type { SummaryContent } from '@/types'
 
+// Paths resolve under process.cwd() in both dev and the Vercel bundle (fonts shipped
+// via outputFileTracingIncludes in next.config).
 const fontsDir = join(process.cwd(), 'src/lib/pdf/fonts')
 Font.register({
   family: 'Sarabun',
@@ -29,7 +31,9 @@ const styles = StyleSheet.create({
   label: { fontWeight: 'bold', fontSize: 9, color: '#555' },
 })
 
-function MeetingPdf({ title, date, teamName, content }) {
+type PdfProps = { title: string; date: string; teamName: string; content: SummaryContent }
+
+function MeetingPdf({ title, date, teamName, content }: PdfProps) {
   const topics = content.topics || []
   const decisions = content.decisions || []
   const actionItems = content.action_items || []
@@ -64,12 +68,6 @@ function MeetingPdf({ title, date, teamName, content }) {
   )
 }
 
-async function main() {
-  const chunks = []
-  for await (const c of process.stdin) chunks.push(c)
-  const props = JSON.parse(Buffer.concat(chunks).toString('utf8'))
-  const buffer = await renderToBuffer(h(MeetingPdf, props))
-  process.stdout.write(buffer)
+export function renderPdf(props: PdfProps): Promise<Buffer> {
+  return renderToBuffer(h(MeetingPdf, props))
 }
-
-main().catch(e => { console.error(e?.message ?? e); process.exit(1) })

@@ -1,27 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { spawn } from 'node:child_process'
-import { join } from 'node:path'
 import { format } from 'date-fns'
 import { NextResponse } from 'next/server'
+import { renderPdf } from '@/lib/pdf/render'
 
-// Render the PDF in a separate node process (scripts/render-pdf.mjs). Rendering
-// @react-pdf/renderer inside Next throws "Cannot read properties of null (reading
-// 'props')" because Next's vendored React and the external react-pdf end up as two
-// different React instances; a plain node process sidesteps that entirely.
-function renderPdf(payload: object): Promise<Buffer> {
-  return new Promise((resolve, reject) => {
-    const proc = spawn(process.execPath, [join(process.cwd(), 'scripts/render-pdf.mjs')])
-    const chunks: Buffer[] = []
-    let err = ''
-    proc.stdout.on('data', c => chunks.push(c))
-    proc.stderr.on('data', c => { err += c })
-    proc.on('error', reject)
-    proc.on('close', code => code === 0 ? resolve(Buffer.concat(chunks)) : reject(new Error(err.trim() || `render exited ${code}`)))
-    proc.stdin.write(JSON.stringify(payload))
-    proc.stdin.end()
-  })
-}
+// Render inline via the shared lib — the old child-process approach broke on Vercel
+// (scripts/ wasn't bundled). serverExternalPackages handles the React-instance clash.
+export const runtime = 'nodejs'
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

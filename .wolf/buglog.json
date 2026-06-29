@@ -1511,6 +1511,22 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-29T01:54:16.348Z"
+    },
+    {
+      "id": "bug-094",
+      "timestamp": "2026-06-29T03:14:33.196Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/api/meetings/[id]/pdf/route.ts",
+      "root_cause": "19 lines replaced/restructured",
+      "fix": "Rewrote 24→9 lines (19 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-29T03:14:33.196Z"
     }
   ]
 }

@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-29T01:54:16.330Z
-> Files: 24 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-29T03:15:18.476Z
+> Files: 27 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
 
@@ -9,6 +9,7 @@
 
 ## ./
 
+- `next.config.ts` — Declares nextConfig (~179 tok)
 - `trigger.config.ts` — project ref ต้องมาจาก trigger.dev dashboard (ขึ้นต้น proj_...). ตั้งผ่าน env (~154 tok)
 
 ## .claude/
@@ -70,6 +71,7 @@
 
 ## src/app/api/meetings/[id]/pdf/
 
+- `route.ts` — Render inline via the shared lib — the old child-process approach broke on Vercel (~554 tok)
 
 ## src/app/api/meetings/[id]/summary/
 
@@ -159,6 +161,7 @@
 
 ## src/lib/pdf/
 
+- `render.ts` — Inline PDF renderer. @react-pdf/renderer is in next.config serverExternalPackages, (~960 tok)
 
 ## src/lib/supabase/
 
@@ -172,6 +175,9 @@
 
 - `process-meeting.ts` — Worker-side pipeline. Runs on Trigger.dev (no request timeout), so any-length (~921 tok)
 
+## src/trigger/process-meeting.ts
+
+
 ## src/types/
 
 - `index.ts` — Exports GlobalRole, TeamRole, MeetingStatus, UserProfile + 7 more (~339 tok)
@@ -180,11 +186,11 @@
 
 - `004_queued_status.sql` — Add 'queued' status: meeting rows are created queued by the upload route, (~94 tok)
 
-## src/trigger/process-meeting.ts
-Trigger.dev background task — downloads stored mp3 from Supabase, runs transcribe+summarize off the request path (no timeout). ~400 tok
+## supabase/migrations/004_queued_status.sql
+
 
 ## trigger.config.ts
-Trigger.dev project config (project ref via env, maxDuration 3600, ffmpeg external). ~80 tok
 
-## supabase/migrations/004_queued_status.sql
-Adds queued to meetings.status check constraint. ~40 tok
+
+## src/lib/pdf/render.ts
+Inline PDF render (createElement + @react-pdf/renderer). Replaces scripts/render-pdf.mjs spawn workaround — Vercel didn't bundle scripts/. ~120 tok
