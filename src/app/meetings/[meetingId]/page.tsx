@@ -43,6 +43,19 @@ export default function MeetingPage() {
       .catch(() => setLoading(false))
   }, [meetingId])
 
+  // While the worker is still processing, poll the meeting every 5s so the page
+  // flips to the summary on its own — no manual refresh.
+  useEffect(() => {
+    if (meeting?.status !== 'queued' && meeting?.status !== 'processing') return
+    const id = setInterval(() => {
+      fetch(`/api/meetings/${meetingId}`)
+        .then(r => r.ok ? r.json() : null)
+        .then((data: MeetingWithSummary | null) => { if (data) setMeeting(data) })
+        .catch(() => {})
+    }, 5000)
+    return () => clearInterval(id)
+  }, [meeting?.status, meetingId])
+
   async function handleSave(content: SummaryContent) {
     const res = await fetch(`/api/meetings/${meetingId}/summary`, {
       method: 'PUT',
@@ -89,10 +102,12 @@ export default function MeetingPage() {
         </div>
       )}
 
-      {meeting.status === 'processing' && (
+      {(meeting.status === 'queued' || meeting.status === 'processing') && (
         <div className="text-center py-12 text-gray-500">
-          <p className="animate-pulse text-lg">Processing your meeting...</p>
-          <p className="text-sm mt-2">This may take a few minutes. Refresh to check.</p>
+          <p className="animate-pulse text-lg">
+            {meeting.status === 'queued' ? 'Queued — starting soon...' : 'Processing your meeting...'}
+          </p>
+          <p className="text-sm mt-2">Long recordings can take a while. You can close this page — it&apos;ll keep working, and this view updates on its own.</p>
         </div>
       )}
 

@@ -1,11 +1,14 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { transcribeAudio, compressToMp3 } from '@/lib/ai/transcribe'
-import { summarizeMeeting } from '@/lib/ai/summarize'
+import { compressToMp3 } from '@/lib/ai/transcribe'
 import { canManageTeam } from '@/lib/auth/roles'
+import { tasks } from '@trigger.dev/sdk'
+import type { processMeeting } from '@/trigger/process-meeting'
 import { NextResponse } from 'next/server'
 
-export const maxDuration = 120
+// Route only ingests + hands off. The long pipeline runs on Trigger.dev, so this
+// stays well under Vercel's function timeout regardless of clip length.
+export const maxDuration = 60
 
 export async function POST(request: Request) {
   const supabase = await createClient()
@@ -36,10 +39,10 @@ export async function POST(request: Request) {
   if (!(await canManageTeam(supabase, admin, teamId, user.id)))
     return NextResponse.json({ error: 'Only the team head can record meetings' }, { status: 403 })
 
-  // Create meeting record with processing status
+  // Create meeting record as queued — the Trigger.dev worker flips it to processing/done/failed.
   const { data: meeting, error: meetingError } = await admin
     .from('meetings')
-    .insert({ team_id: teamId, title: title.trim(), recorded_by: user.id, status: 'processing', ...(createdAt && { created_at: createdAt }) })
+    .insert({ team_id: teamId, title: title.trim(), recorded_by: user.id, status: 'queued', ...(createdAt && { created_at: createdAt }) })
     .select().single()
   if (meetingError) {
     console.error('Meeting insert failed:', meetingError.message)
@@ -49,43 +52,34 @@ export async function POST(request: Request) {
   const audioBuffer = Buffer.from(await file.arrayBuffer())
   const audioPath = `${teamId}/${meeting.id}.mp3`
 
+  // Compress here (fast, fits the route budget) then store. The worker downloads this
+  // file and transcribes it as-is (alreadyMp3), so it MUST be mp3 — fail loudly if not.
   const compressedAudio = await compressToMp3(audioBuffer).catch(() => null)
-  const { error: storageError } = await admin.storage
-    .from('meeting-audio').upload(audioPath, compressedAudio ?? audioBuffer, {
-      contentType: compressedAudio ? 'audio/mpeg' : 'audio/webm',
-    })
-
-  // Non-fatal: transcription uses the in-memory buffer, not the stored file. A storage
-  // hiccup (e.g. 504) only costs audio replay — it shouldn't lose the whole meeting.
-  if (storageError) {
-    console.error('Storage upload failed (continuing without saved audio):', storageError.message)
-  } else {
-    const { data: { publicUrl } } = admin.storage.from('meeting-audio').getPublicUrl(audioPath)
-    await admin.from('meetings').update({ audio_url: publicUrl }).eq('id', meeting.id)
-  }
-
-  try {
-    const transcript = await transcribeAudio(compressedAudio ?? audioBuffer, file.name, !!compressedAudio)
-      .catch((e: unknown) => { throw new Error(`Transcription (Whisper) failed: ${e instanceof Error ? e.message : e}`) })
-    await admin.from('meetings').update({ transcript }).eq('id', meeting.id)
-
-    const { data: template } = await admin.from('team_templates').select('fields, prompt').eq('team_id', teamId).single()
-    const customFields: string[] = Array.isArray(template?.fields) ? template.fields : []
-
-    const summary = await summarizeMeeting(transcript, customFields, template?.prompt)
-      .catch((e: unknown) => { throw new Error(`Summarization (Anthropic) failed: ${e instanceof Error ? e.message : e}`) })
-    const { error: summaryError } = await admin.from('summaries').insert({ meeting_id: meeting.id, content: summary, edited_by: user.id })
-    if (summaryError) throw new Error(`Saving summary failed: ${summaryError.message}`)
-    await admin.from('meetings').update({ status: 'done' }).eq('id', meeting.id)
-
-    return NextResponse.json({ meetingId: meeting.id })
-  } catch (err: unknown) {
-    const detail = err instanceof Error ? err.message : 'Unknown error'
-    console.error('AI processing failed:', detail)
-    // Don't keep failed meetings — drop the row (and any uploaded audio) so the list stays clean.
-    // The error still goes back to the user in the response below.
-    await admin.storage.from('meeting-audio').remove([audioPath]).catch(() => {})
+  if (!compressedAudio) {
     await admin.from('meetings').delete().eq('id', meeting.id)
-    return NextResponse.json({ error: `Meeting processing failed: ${detail}` }, { status: 500 })
+    return NextResponse.json({ error: 'Audio compression failed' }, { status: 500 })
   }
+  const { error: storageError } = await admin.storage
+    .from('meeting-audio').upload(audioPath, compressedAudio, { contentType: 'audio/mpeg' })
+  if (storageError) {
+    console.error('Storage upload failed:', storageError.message)
+    await admin.from('meetings').delete().eq('id', meeting.id)
+    return NextResponse.json({ error: 'Failed to store audio' }, { status: 500 })
+  }
+  const { data: { publicUrl } } = admin.storage.from('meeting-audio').getPublicUrl(audioPath)
+  await admin.from('meetings').update({ audio_url: publicUrl }).eq('id', meeting.id)
+
+  // Hand off to the worker and return immediately — user can close the tab.
+  // alreadyMp3 only if compression actually succeeded.
+  try {
+    await tasks.trigger<typeof processMeeting>('process-meeting', {
+      meetingId: meeting.id, teamId, audioPath, fileName: file.name,
+    })
+  } catch (err: unknown) {
+    console.error('Failed to enqueue processing:', err instanceof Error ? err.message : err)
+    await admin.from('meetings').update({ status: 'failed' }).eq('id', meeting.id)
+    return NextResponse.json({ error: 'Failed to start processing' }, { status: 500 })
+  }
+
+  return NextResponse.json({ meetingId: meeting.id })
 }

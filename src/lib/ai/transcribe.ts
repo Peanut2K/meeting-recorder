@@ -6,7 +6,13 @@ import { join } from 'node:path'
 import { randomUUID } from 'node:crypto'
 import ffmpeg from '@ffmpeg-installer/ffmpeg'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+// Lazy: a missing OPENAI_API_KEY should fail inside the route's try/catch (clean JSON
+// error) rather than crash at module load and return an HTML 500 the client can't parse.
+let _openai: OpenAI | null = null
+function getOpenAI(): OpenAI {
+  if (!process.env.OPENAI_API_KEY) throw new Error('OPENAI_API_KEY is not set')
+  return (_openai ??= new OpenAI({ apiKey: process.env.OPENAI_API_KEY }))
+}
 
 async function runFfmpeg(inPath: string, outPath: string, args: string[]): Promise<void> {
   await new Promise<void>((resolve, reject) => {
@@ -35,7 +41,7 @@ export async function compressToMp3(input: Buffer): Promise<Buffer> {
 
 async function whisper(mp3: Buffer, name: string): Promise<string> {
   const file = new File([new Uint8Array(mp3)], name, { type: 'audio/mpeg' })
-  const r = await openai.audio.transcriptions.create({ file, model: 'whisper-1', language: 'th' })
+  const r = await getOpenAI().audio.transcriptions.create({ file, model: 'whisper-1', language: 'th' })
   return r.text
 }
 

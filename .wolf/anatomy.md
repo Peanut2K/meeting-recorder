@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-28T16:10:23.635Z
-> Files: 20 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-29T01:54:16.330Z
+> Files: 24 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
 
@@ -9,6 +9,7 @@
 
 ## ./
 
+- `trigger.config.ts` — project ref ต้องมาจาก trigger.dev dashboard (ขึ้นต้น proj_...). ตั้งผ่าน env (~154 tok)
 
 ## .claude/
 
@@ -75,7 +76,7 @@
 
 ## src/app/api/meetings/upload/
 
-- `route.ts` — Next.js API route: POST (~1397 tok)
+- `route.ts` — Route only ingests + hands off. The long pipeline runs on Trigger.dev, so this (~1203 tok)
 
 ## src/app/api/teams/
 
@@ -106,7 +107,7 @@
 
 ## src/app/meetings/[meetingId]/
 
-- `page.tsx` — MeetingPage (~1422 tok)
+- `page.tsx` — MeetingPage (~1602 tok)
 
 ## src/app/profile/
 
@@ -151,7 +152,7 @@
 ## src/lib/ai/
 
 - `summarize.ts` — Exports summarizeMeeting (~371 tok)
-- `transcribe.ts` — Exports compressToMp3, transcribeAudio (~882 tok)
+- `transcribe.ts` — Lazy: a missing OPENAI_API_KEY should fail inside the route's try/catch (clean JSON (~979 tok)
 
 ## src/lib/auth/
 
@@ -167,8 +168,23 @@
 ## src/lib/utils/
 
 
+## src/trigger/
+
+- `process-meeting.ts` — Worker-side pipeline. Runs on Trigger.dev (no request timeout), so any-length (~921 tok)
+
 ## src/types/
 
+- `index.ts` — Exports GlobalRole, TeamRole, MeetingStatus, UserProfile + 7 more (~339 tok)
 
 ## supabase/migrations/
 
+- `004_queued_status.sql` — Add 'queued' status: meeting rows are created queued by the upload route, (~94 tok)
+
+## src/trigger/process-meeting.ts
+Trigger.dev background task — downloads stored mp3 from Supabase, runs transcribe+summarize off the request path (no timeout). ~400 tok
+
+## trigger.config.ts
+Trigger.dev project config (project ref via env, maxDuration 3600, ffmpeg external). ~80 tok
+
+## supabase/migrations/004_queued_status.sql
+Adds queued to meetings.status check constraint. ~40 tok

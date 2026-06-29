@@ -374,3 +374,34 @@
 | 23:10 | Edited src/lib/ai/transcribe.ts | 5→4 lines | ~31 |
 | 23:10 | Unlimited-length transcription via MP3 chunking | transcribe.ts | typechecks | ~2k |
 | 23:11 | Session end: 7 writes across 2 files (transcribe.ts, route.ts) | 2 reads | ~3029 tok |
+
+## Session: 2026-06-29 08:00
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 08:07 | Edited src/lib/ai/transcribe.ts | added error handling | ~114 |
+| 08:08 | Edited src/lib/ai/transcribe.ts | inline fix | ~30 |
+| 08:08 | Session end: 2 writes across 1 files (transcribe.ts) | 3 reads | ~3873 tok |
+
+## Session: 2026-06-29 08:41
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-29 08:41
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 08:52 | Created trigger.config.ts | — | ~154 |
+| 08:52 | Created src/trigger/process-meeting.ts | — | ~921 |
+| 08:52 | Edited src/app/api/meetings/upload/route.ts | modified timeout() | ~156 |
+| 08:53 | Edited src/app/api/meetings/upload/route.ts | modified if() | ~605 |
+| 08:53 | Edited src/app/api/meetings/upload/route.ts | added 1 condition(s) | ~165 |
+| 08:53 | Created supabase/migrations/004_queued_status.sql | — | ~94 |
+| 08:53 | Edited src/types/index.ts | "processing" → "queued" | ~21 |
+| 08:54 | Edited src/app/meetings/[meetingId]/page.tsx | added 2 condition(s) | ~428 |
+| 08:54 | Edited src/app/meetings/[meetingId]/page.tsx | 6→8 lines | ~139 |
+| 08:54 | move transcription to Trigger.dev background task (clip 1-2hr support, survives tab close) | upload/route.ts, trigger/process-meeting.ts, trigger.config.ts, 004_queued_status.sql, types, meeting page poll | typecheck pass | ~3k |
+| 08:55 | Session end: 9 writes across 6 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 2 reads | ~4112 tok |
+| 09:21 | Session end: 9 writes across 6 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 2 reads | ~4112 tok |
+| 09:24 | Session end: 9 writes across 6 files (trigger.config.ts, process-meeting.ts, route.ts, 004_queued_status.sql, index.ts) | 2 reads | ~4112 tok |

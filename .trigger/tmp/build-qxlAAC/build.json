@@ -1,0 +1,112 @@
+{
+  "build": {
+  },
+  "cliPackageVersion": "4.4.6",
+  "config": {
+    "dirs": [
+      "./src/trigger"
+    ],
+    "project": "proj_qctkocmnflnktxynzcae"
+  },
+  "configPath": "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/Desktop/Projects/meeting-recorder/trigger.config.mjs",
+  "contentHash": "88d25fa90b4b69f444def4743234ba9f",
+  "customConditions": [
+  ],
+  "deploy": {
+    "env": {
+    }
+  },
+  "environment": "dev",
+  "externals": [
+    {
+      "name": "@ffmpeg-installer/ffmpeg",
+      "version": "1.1.0"
+    },
+    {
+      "name": "import-in-the-middle",
+      "version": "1.11.0"
+    }
+  ],
+  "files": [
+    {
+      "entry": "src/trigger/process-meeting.ts",
+      "out": "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/Desktop/Projects/meeting-recorder/src/trigger/process-meeting.mjs"
+    }
+  ],
+  "indexWorkerEntryPoint": "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/.cache/pnpm/dlx/886e157b61cdcb21f1e5048f3649e59a7fcfc579327ce6a4d853a479cb024479/19f112a855e-568f/node_modules/.pnpm/trigger.dev@4.4.6/node_modules/trigger.dev/dist/esm/entryPoints/dev-index-worker.mjs",
+  "otelImportHook": {
+    "include": [
+    ]
+  },
+  "outputHashes": {
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/.cache/pnpm/dlx/886e157b61cdcb21f1e5048f3649e59a7fcfc579327ce6a4d853a479cb024479/19f112a855e-568f/node_modules/.pnpm/trigger.dev@4.4.6/node_modules/trigger.dev/dist/esm/entryPoints/dev-index-worker.mjs": "VbUvbRR08LY",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/.cache/pnpm/dlx/886e157b61cdcb21f1e5048f3649e59a7fcfc579327ce6a4d853a479cb024479/19f112a855e-568f/node_modules/.pnpm/trigger.dev@4.4.6/node_modules/trigger.dev/dist/esm/entryPoints/dev-index-worker.mjs.map": "yWgQNY1iyHg",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/.cache/pnpm/dlx/886e157b61cdcb21f1e5048f3649e59a7fcfc579327ce6a4d853a479cb024479/19f112a855e-568f/node_modules/.pnpm/trigger.dev@4.4.6/node_modules/trigger.dev/dist/esm/entryPoints/dev-run-worker.mjs": "4STJOWwQkb8",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/.cache/pnpm/dlx/886e157b61cdcb21f1e5048f3649e59a7fcfc579327ce6a4d853a479cb024479/19f112a855e-568f/node_modules/.pnpm/trigger.dev@4.4.6/node_modules/trigger.dev/dist/esm/entryPoints/dev-run-worker.mjs.map": "+jexkpO1ByI",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/Desktop/Projects/meeting-recorder/src/trigger/process-meeting.mjs": "pY22QUFQMcg",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/Desktop/Projects/meeting-recorder/src/trigger/process-meeting.mjs.map": "Gn5OXDC7PDA",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/Desktop/Projects/meeting-recorder/trigger.config.mjs": "TKirUYi2sqc",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/Desktop/Projects/meeting-recorder/trigger.config.mjs.map": "HXE9azlog1k",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-CQYOVGBP.mjs": "QSgKp8Y7P3o",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-CQYOVGBP.mjs.map": "gntIJYJDpLk",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-GF5IBPAD.mjs": "jVmFcMpdEJk",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-GF5IBPAD.mjs.map": "yXKJnsq8T/4",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-J4B46N5X.mjs": "sBdfIXFAPoM",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-J4B46N5X.mjs.map": "BsgmmRZBhFI",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-JREKMI3W.mjs": "LUyJUolLzU8",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-JREKMI3W.mjs.map": "pwtlqW5LG6A",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-KHD3EF4T.mjs": "y2tWfCIKArg",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-KHD3EF4T.mjs.map": "dRqISYf7hKI",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-NTRWDTMB.mjs": "uVSLkZ5gOho",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-NTRWDTMB.mjs.map": "neOiamiccgU",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-RSU2FPP5.mjs": "JTdfuwQvhGA",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-RSU2FPP5.mjs.map": "H7AJgUJpukU",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-T3LB5DYB.mjs": "85tmVq4zuf4",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/chunk-T3LB5DYB.mjs.map": "YKDHiUJoxoY",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/crypto.node-SK3MXVDJ.mjs": "nm3bILdgYLM",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/crypto.node-SK3MXVDJ.mjs.map": "dWLNL2Yrv9U",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/crypto.node-VTA4ON3B.mjs": "OcEiX8DMxqI",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/crypto.node-VTA4ON3B.mjs.map": "0b4tlwmkM3g",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/esm-IDWEVJIZ.mjs": "h5Vy5fZgvns",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/esm-IDWEVJIZ.mjs.map": "uuvelps5tsQ",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/esm-YDGL765I.mjs": "6JMjAfDDr0I",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/esm-YDGL765I.mjs.map": "IIuM21OVWSQ",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-bsd-7PKDMLAP.mjs": "C4CiWS8H1CQ",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-bsd-7PKDMLAP.mjs.map": "gCSaiD+z8Yc",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-darwin-XDRJDNKW.mjs": "N0hwVopYYnA",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-darwin-XDRJDNKW.mjs.map": "03clcUYzLgY",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-linux-K5S6V3BO.mjs": "TXX0wACsnIQ",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-linux-K5S6V3BO.mjs.map": "fQcqUBTeW8U",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-unsupported-DLJK6VSU.mjs": "Sibs+ZhyM3k",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-unsupported-DLJK6VSU.mjs.map": "Lfo2l813e5E",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-win-S2S5WMBH.mjs": "JKY/j/74S5A",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/getMachineId-win-S2S5WMBH.mjs.map": "r/54PM2PkfQ",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/node-F7RYGRYJ.mjs": "li1b367vm08",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/node-F7RYGRYJ.mjs.map": "83cJ8UM8jY8",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/s2s-YAZHBJQS.mjs": "XfTFxnD2dVk",
+    "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/s2s-YAZHBJQS.mjs.map": "cRwZVjo7c7o"
+  },
+  "outputPath": "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC",
+  "packageVersion": "4.4.6",
+  "runWorkerEntryPoint": "/home/sapon/Desktop/Projects/meeting-recorder/.trigger/tmp/build-qxlAAC/.cache/pnpm/dlx/886e157b61cdcb21f1e5048f3649e59a7fcfc579327ce6a4d853a479cb024479/19f112a855e-568f/node_modules/.pnpm/trigger.dev@4.4.6/node_modules/trigger.dev/dist/esm/entryPoints/dev-run-worker.mjs",
+  "runtime": "node",
+  "sources": {
+    "package.json": {
+      "contentHash": "b926f8b6882ebb1ec649972543ab74e8",
+      "contents": "eJxtkstugzAQRfd8hcU6mEcJarLqot8RycEDdQvGmnFoqij/XtmAIW129r1nnvYtYizWoof4yOIewCrdJgj1gBIw3jl3BCQ1aAdkPOfZpBpUo7AuzOIFvEQ1KmMpPrJbxBhjsYTRRWm4WubOu0k+X1QngzHdZousQBus6RYxdvf5JRjQEnStYFPkTWj7gYNRdSJUSvLLhZ8ynmfV3KuDmqY30CZKkxVdB5hOgmfzMJUjEURtEyObFF01BPRQyfc8DxBdjDgLgpQIl3rFJsnqz4fkkzxX8Dx75UUALaq2BeQSxtB7yUteLUTd0XWJXBuQwkLSaAp8KO0W59S84gU/LOpgQAvl6YqX+xX303r+wAtePsiJHPr/lhWq+1ZaJj1g67/N6YW7VW/eaXx//lRLbE2UmoFsTfME6z5+DFCqBzllLrI/Tuj3lB+eWUvPG3tT9LGYD/N/1ut7P0F0j34BeWXSFQ=="
+    },
+    "src/trigger/process-meeting.ts": {
+      "contentHash": "4aa4bb353955a887cf178866084fba43",
+      "contents": "eJydVu1u2zYU/e+nOAUGSCpsee2wPx68LMmyIehHgqRpNxSFS0vXNheKVEkqjpYa6EP0CfskA0nJkhPvq78si5f349xzzxUvSqUt7mCZucYGC60KRD9ZzZdL0mlON2OTX0cD3tplmpilY8FJ2s7eVCWbM0Pj9mH0h+ldsppJk2k+p8Mq56q7NxZ8PmZ83Bn0bpmqKJjmf9ILIsvl8uG1rUU0GIzHeKP0NemR4Tmh5CUJLinFRSUNlMSrribEUkHTh4qMheUFqcomQxgFJuuRILm0K+cwE7zsJW+wIk3g0lhiOdQCXMKuCK9JZySwqGRmuZIpLqgyZPyZYQU5X52bLm0IPg9WWlWWUBnKYRUyJgS49PkPxmN3vWC3P1eaOffIVCWtwfH5lU8eSooa8WJRlLRMhpDKep+n4zOsGbeu+DcrbkrS40NpV1qVPMOXT5+dX1cznq40NGVK5w7mTBlrILi1gnyQTFPOLXIyJbfkfQsll1gzIUaZUNl1OhjQrW9bpqSxKLXKyJi2cVNPr/huAPB8gqg5HhXhPBoOgPEYpZK1ZVxMYArn+skt4m/T7389SpDTglXCpjhdgIXomq1RlUKxHGdnL3yLc7WW7kXjb14VpYMzKijnVTF6chshfuLcffn0Gbmq5oJMW9280nIYoMxWTC4JfAFuwTJbMSFqLBgXJh0AmqyuJ7hzPTm0lorSmgmeYuPC6kpOwEwtM8Qlq1023jRUeppPYKzmcvkDLLGi/5+50ThndtW9WnBBL1lB7RtsEkx/hMMRDdI918PG5bBzNdy6wAZTNAn56+MxLknf8IxGWglyXCdpJ1j7IXJ1GKjK+mFisnbc1DBkjCN4LwGWF1xiuiMMsT9HS4OU5E368uS3V7Pzq6Pnp8ezy6vzw6PDy5PZ1cXzR8M9xluDy5OL16fHJ7OLs+cns2cnvz/yxsnA/zDPbp9A6pQhjhosTJSkVZkzS/EdjGW2Mh3rHOGwSVL6EEc8j4YdgI1bq+sG4g7knFk2wVyo+RCktdIT5OLEPXhg+5kYqzRb0m5GI9+SKElbisbbHiVNKL5A3Pr8+BGPXLAEblzXkLSGP4nfBwVt3XhWUj7BN3fN3YO0IGPYknBwgEgqz4Bo8z7ZqchHP6oWC9KYIjyEjEMpLnjKtGZ1OIuTBpxAHKs05d4zuAETmlheI1NFqck4ESuUVCjK7xCHEXW6tmIWa1ZjXneSl6Q7abUiWdotqPd2R9zLvGP3EFZX1JYIpBmz2SqOaYJKXku1lmFwHsL5ahvRKWvc6GTSwzUIPpMZqUW4hQPQFuUJaPM+waYN/t9I2Sv0n6h4n4BObASz9IB0IZKb/1lr4+IZEpTZOFpwErkZuhkrShuFiN7ahw26kaRuNgTFu1TJKmNV8Yv30ArR23eY4tDRI+XG/8Zt2IM0BEtwsE23eYUJ3r7bLSyswnpbzf2dH3dADXcyGaILGKr6mu5fNuHCXo232/Gr+r+3Y8X222Vfw3rUaFsV9jDls3kd7WXG/i7dtbLUILpfm0LUBmTPEC4NaRtv18jMLejeSsmUtH4vNH6HcNvSp7e1O0h7SXeT4AStn80eMbtkNw6clgUd6P17LdROw/7XkG2VP1eS/lbzg0dNttJyd53ev+9NN/DsQkxa9/i1uzByct8xmLqm7KWP1j0CRVfBS2hh1OnsM6Ky0co14pDONICUuC83d9TsZTJ4vF7Vj90nS7Dof6cy3DDJzcopc6gv/Tokg+t/wfJBm9vvwG4D9/eWx6pdUA7kzXCwSQZ/AbvxO/I="
+    },
+    "trigger.config.ts": {
+      "contentHash": "c9845fd2d8da62e928c0ea8fa562e5f6",
+      "contents": "eJxlkc9rE1EQx+/7V3w9JcG4WxE8xEuljUVBlNCblPCy+zZ5dvdteLuJKSHQlmLSq6SU1B/QgnjqIcXq7H8z9C+RfTEx6mWYN8PM9/s+o+JuYjIMEchQabmV6FC1MUJokhilzcyodlsaN5B9Lw32S47jeeia5K30MxgZgumM81Oma6Yx0yXTDdPExiOsDSMQaaeVCBOgzHTM9MNOzZbjM7u06bpuxbU7aW7rY6ZPnC8WziB1v9Dn/JDpC9NP27nm/KRQzifoCBP4SSBxdzgF05QpR6P+dPtl3bOi8z+iheH15Ny2bpiuXEcOLJNAhqIXZX+RKQ8dLP9fKxJfpqkrdd/dbTzf2ak3mq8br17Ut3abjfqze1UHCJRJa3hTcr3U+N5vJKW9ohWLwXbPiEwluoZHjzc2qijoJvogEyqq4WHHwBddF36kumC6sga/MR0VcUmF6ZbzU9y9/7AC8902L+3zK9PxE6wY2RvdWlKIVKwyMH22ZCZM4/WTOSjchGHclW3cx+Yie6B0mokokuaf058VsjS1Qh+txTnTBd4lZl8atHo6iCTKWmSqL9FSWpgDGJkmUV9idQeYns5ULCsO0OqpKKhhCDnIpNEiKij+58JbFEp7GFWdUcX5BYMzW8I="
+    },
+    "tsconfig.json": {
+      "contentHash": "ee17fd1c97c735e9f3564e3f5251f125",
+      "contents": "eJxtUU1Lw0AQvedXLHMMbaJehJ4E6cFiEfRYimyyQ7t2v9id1EjJf5fdJNVET8O8N2/2vdlLxhjUVjup0L84ktYEWLFLxhhjQNwfkGDFYP12d3N7D4seV7KCFduBsBoWLJZCEnpeKYw9BoMtwX6Y5krZz01cS77BAQwn6Z5l9XjE+jRjyMuappixay1nGIatFY3CJ0PorZuSOlHR+WBmgr9isKqJYeNE1Rih0I8jPpJn3ARrtuOWX5tlsIoTip6bpfoIbdzokde0jM0oMrVHjYa4mgqcag4ynXyXADacvk/NdYqQAgxwl+p4Wsfp+PNfjMFDmaefKcrg6zKHfTaKuiiJRlQj8Ppe2r1Ecy5EQWG0m+dl/re9pimiqKQvh6GcjfaUwPP/dGo1hZgmZQBsr4bAWIHverjrPuuyb0p5toA="
+    }
+  },
+  "target": "dev"
+}

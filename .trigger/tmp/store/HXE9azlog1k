@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../trigger.config.ts"],
+  "sourcesContent": ["import { defineConfig } from '@trigger.dev/sdk'\n\n// project ref ต้องมาจาก trigger.dev dashboard (ขึ้นต้น proj_...). ตั้งผ่าน env\n// เพื่อไม่ hardcode — ดู README/ขั้นตอนตอนท้าย.\nexport default defineConfig({\n  project: process.env.TRIGGER_PROJECT_REF!,\n  dirs: ['./src/trigger'],\n  maxDuration: 3600, // ponytail: 1hr cap. clip ยาวกว่านี้ → เพิ่มเลข; ไม่มี hard limit ฝั่ง trigger.dev\n  // ffmpeg + @ffmpeg-installer ต้องติดไปกับ worker bundle (native binary resolve ตอน runtime)\n  build: {},\n})\nexport const resolveEnvVars = undefined;"],
+  "mappings": ";;;;;;;;;AAAA;AAIA,IAAO,yBAAQ,aAAa;AAAA,EAC1B,SAAS,QAAQ,IAAI;AAAA,EACrB,MAAM,CAAC,eAAe;AAAA,EACtB,aAAa;AAAA;AAAA;AAAA,EAEb,OAAO,CAAC;AACV,CAAC;AACM,IAAM,iBAAiB;",
+  "names": []
+}

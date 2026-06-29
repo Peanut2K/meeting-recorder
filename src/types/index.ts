@@ -1,6 +1,6 @@
 export type GlobalRole = 'admin' | 'user'
 export type TeamRole = 'head' | 'member'
-export type MeetingStatus = 'processing' | 'done' | 'failed'
+export type MeetingStatus = 'queued' | 'processing' | 'done' | 'failed'
 
 export interface UserProfile {
   id: string

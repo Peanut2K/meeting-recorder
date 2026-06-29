@@ -1,69 +1,85 @@
 {
-  "session_id": "session-2026-06-28-2302",
-  "started": "2026-06-28T16:02:20.516Z",
+  "session_id": "session-2026-06-29-0841",
+  "started": "2026-06-29T01:41:38.739Z",
   "files_read": {
-    "c:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts": {
-      "count": 2,
-      "tokens": 570,
-      "first_read": "2026-06-28T16:04:02.396Z"
-    },
-    "c:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/upload/route.ts": {
+    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx": {
       "count": 1,
-      "tokens": 1386,
-      "first_read": "2026-06-28T16:04:20.872Z"
+      "tokens": 1422,
+      "first_read": "2026-06-29T01:49:02.868Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/src/types/index.ts": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-06-29T01:53:46.215Z"
     }
   },
   "files_written": [
     {
-      "file": "c:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts",
-      "action": "edit",
-      "tokens": 331,
-      "at": "2026-06-28T16:04:16.816Z"
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/trigger.config.ts",
+      "action": "create",
+      "tokens": 154,
+      "at": "2026-06-29T01:52:29.234Z"
     },
     {
-      "file": "c:/Users/USER/Desktop/meeting-recorder/src/app/api/meetings/upload/route.ts",
-      "action": "edit",
-      "tokens": 31,
-      "at": "2026-06-28T16:04:25.283Z"
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/trigger/process-meeting.ts",
+      "action": "create",
+      "tokens": 921,
+      "at": "2026-06-29T01:52:47.771Z"
     },
     {
-      "file": "c:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts",
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
       "action": "edit",
-      "tokens": 54,
-      "at": "2026-06-28T16:04:30.862Z"
+      "tokens": 156,
+      "at": "2026-06-29T01:52:57.806Z"
     },
     {
-      "file": "c:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts",
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
       "action": "edit",
-      "tokens": 86,
-      "at": "2026-06-28T16:09:55.211Z"
+      "tokens": 605,
+      "at": "2026-06-29T01:53:21.516Z"
     },
     {
-      "file": "c:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts",
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/meetings/upload/route.ts",
       "action": "edit",
-      "tokens": 516,
-      "at": "2026-06-28T16:10:12.273Z"
+      "tokens": 165,
+      "at": "2026-06-29T01:53:31.415Z"
     },
     {
-      "file": "c:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts",
-      "action": "edit",
-      "tokens": 24,
-      "at": "2026-06-28T16:10:17.236Z"
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/supabase/migrations/004_queued_status.sql",
+      "action": "create",
+      "tokens": 101,
+      "at": "2026-06-29T01:53:40.255Z"
     },
     {
-      "file": "c:/Users/USER/Desktop/meeting-recorder/src/lib/ai/transcribe.ts",
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/types/index.ts",
       "action": "edit",
-      "tokens": 31,
-      "at": "2026-06-28T16:10:23.646Z"
+      "tokens": 21,
+      "at": "2026-06-29T01:53:53.044Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
+      "action": "edit",
+      "tokens": 428,
+      "at": "2026-06-29T01:54:08.220Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/meetings/[meetingId]/page.tsx",
+      "action": "edit",
+      "tokens": 139,
+      "at": "2026-06-29T01:54:16.345Z"
     }
   ],
   "edit_counts": {
-    "src/lib/ai/transcribe.ts": 6,
-    "src/app/api/meetings/upload/route.ts": 1
+    "trigger.config.ts": 1,
+    "src/trigger/process-meeting.ts": 1,
+    "src/app/api/meetings/upload/route.ts": 3,
+    "supabase/migrations/004_queued_status.sql": 1,
+    "src/types/index.ts": 1,
+    "src/app/meetings/[meetingId]/page.tsx": 2
   },
-  "anatomy_hits": 2,
-  "anatomy_misses": 0,
-  "repeated_reads_warned": 1,
+  "anatomy_hits": 1,
+  "anatomy_misses": 1,
+  "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 2
+  "stop_count": 5
 }
