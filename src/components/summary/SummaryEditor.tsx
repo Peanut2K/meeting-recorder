@@ -4,15 +4,25 @@ import { SummaryContent, ActionItem } from '@/types'
 import { Button } from '@/components/ui/Button'
 
 // Auto-growing textarea: height follows content so long sentences wrap and stay
-// fully visible instead of overflowing a single-line input.
+// fully visible instead of overflowing a single-line input. Re-measures on value
+// change AND on width change (ResizeObserver) — grid columns settle after mount, so
+// a value-only measure under-counts wrapped lines and clips them.
 function AutoTextarea({ className = '', value, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   const ref = useRef<HTMLTextAreaElement>(null)
-  useLayoutEffect(() => {
+  const fit = () => {
     const el = ref.current
     if (!el) return
     el.style.height = 'auto'
     el.style.height = `${el.scrollHeight}px`
-  }, [value])
+  }
+  useLayoutEffect(fit, [value])
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const ro = new ResizeObserver(fit)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
   return <textarea ref={ref} rows={1} value={value} className={`resize-none overflow-hidden ${className}`} {...props} />
 }
 

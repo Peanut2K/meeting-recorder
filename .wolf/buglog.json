@@ -1607,6 +1607,38 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-30T02:30:10.134Z"
+    },
+    {
+      "id": "bug-100",
+      "timestamp": "2026-06-30T02:33:41.512Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/summary/SummaryEditor.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 12→22 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T02:33:41.512Z"
+    },
+    {
+      "id": "bug-101",
+      "timestamp": "2026-06-30T02:38:45.407Z",
+      "error_message": "Missing guard clause",
+      "file": "src/app/teams/[teamId]/settings/page.tsx",
+      "root_cause": "No early return/throw for edge case: res.ok",
+      "fix": "Added guard clause: if (res.ok)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T02:38:45.407Z"
     }
   ]
 }

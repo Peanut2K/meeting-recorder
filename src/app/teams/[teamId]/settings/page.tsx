@@ -17,7 +17,11 @@ export default function TeamSettingsPage() {
   const [prompt, setPrompt] = useState('')
   const [newField, setNewField] = useState('')
   const [confirmDeleteTeam, setConfirmDeleteTeam] = useState(false)
+  // Snapshot of last-saved values — compared against current state to detect unsaved edits.
+  const [saved, setSaved] = useState<{ fields: string[]; prompt: string }>({ fields: [], prompt: '' })
   const { toast, ToastContainer } = useToast()
+
+  const dirty = JSON.stringify({ fields: customFields, prompt }) !== JSON.stringify(saved)
 
   async function loadTeam() {
     const res = await fetch(`/api/teams/${teamId}`)
@@ -29,8 +33,17 @@ export default function TeamSettingsPage() {
     fetch(`/api/teams/${teamId}/template`).then(r => r.json()).then(d => {
       setCustomFields(d.fields || [])
       setPrompt(d.prompt || '')
+      setSaved({ fields: d.fields || [], prompt: d.prompt || '' })
     })
   }, [teamId])
+
+  // Warn before leaving (reload/close tab) with unsaved changes.
+  useEffect(() => {
+    if (!dirty) return
+    const warn = (e: BeforeUnloadEvent) => { e.preventDefault() }
+    window.addEventListener('beforeunload', warn)
+    return () => window.removeEventListener('beforeunload', warn)
+  }, [dirty])
 
   async function saveTemplate() {
     const res = await fetch(`/api/teams/${teamId}/template`, {
@@ -38,8 +51,10 @@ export default function TeamSettingsPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fields: customFields, prompt }),
     })
-    if (res.ok) toast('Settings saved!')
-    else toast('Failed to save', 'error')
+    if (res.ok) {
+      setSaved({ fields: customFields, prompt })
+      toast('Settings saved!')
+    } else toast('Failed to save', 'error')
   }
 
   async function handleDeleteTeam() {
@@ -102,7 +117,10 @@ export default function TeamSettingsPage() {
         </div>
       </section>
 
-      <Button onClick={saveTemplate}>Save Settings</Button>
+      <div className="flex items-center gap-3">
+        <Button onClick={saveTemplate} disabled={!dirty}>Save Settings</Button>
+        {dirty && <span className="text-sm text-amber-600">You have unsaved changes</span>}
+      </div>
 
       <section className="mt-16 border border-red-200 rounded-xl p-6">
         <h2 className="text-lg font-semibold text-red-600 mb-1">Danger Zone</h2>

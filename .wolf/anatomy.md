@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T02:30:10.108Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T02:38:51.371Z
 > Files: 28 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
@@ -128,7 +128,7 @@
 
 ## src/app/teams/[teamId]/settings/
 
-- `page.tsx` — TeamSettingsPage (~1589 tok)
+- `page.tsx` — TeamSettingsPage (~1808 tok)
 
 ## src/app/teams/new/
 
@@ -142,7 +142,7 @@
 
 ## src/components/summary/
 
-- `SummaryEditor.tsx` — AutoTextarea (~1984 tok)
+- `SummaryEditor.tsx` — AutoTextarea (~2088 tok)
 
 ## src/components/teams/
 
