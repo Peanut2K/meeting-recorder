@@ -16,6 +16,16 @@
       "count": 1,
       "tokens": 594,
       "first_read": "2026-06-30T02:36:51.208Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/teams/[id]/route.ts": {
+      "count": 2,
+      "tokens": 849,
+      "first_read": "2026-06-30T02:43:01.661Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx": {
+      "count": 4,
+      "tokens": 4293,
+      "first_read": "2026-06-30T02:43:17.050Z"
     }
   },
   "files_written": [
@@ -96,15 +106,47 @@
       "action": "edit",
       "tokens": 67,
       "at": "2026-06-30T02:38:51.390Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx",
+      "action": "edit",
+      "tokens": 133,
+      "at": "2026-06-30T02:43:36.613Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx",
+      "action": "edit",
+      "tokens": 90,
+      "at": "2026-06-30T02:43:43.038Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx",
+      "action": "edit",
+      "tokens": 227,
+      "at": "2026-06-30T02:43:57.005Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/admin/page.tsx",
+      "action": "edit",
+      "tokens": 383,
+      "at": "2026-06-30T02:44:12.314Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/api/teams/[id]/route.ts",
+      "action": "edit",
+      "tokens": 113,
+      "at": "2026-06-30T02:47:41.934Z"
     }
   ],
   "edit_counts": {
     "src/components/summary/SummaryEditor.tsx": 11,
-    "src/app/teams/[teamId]/settings/page.tsx": 2
+    "src/app/teams/[teamId]/settings/page.tsx": 2,
+    "src/app/admin/page.tsx": 4,
+    "src/app/api/teams/[id]/route.ts": 1
   },
-  "anatomy_hits": 3,
+  "anatomy_hits": 5,
   "anatomy_misses": 0,
-  "repeated_reads_warned": 7,
+  "repeated_reads_warned": 11,
   "cerebrum_warnings": 0,
-  "stop_count": 6
+  "stop_count": 8
 }

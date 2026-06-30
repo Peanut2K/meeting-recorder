@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T02:38:51.371Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T02:47:41.920Z
 > Files: 28 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
@@ -42,7 +42,7 @@
 
 ## src/app/admin/
 
-- `page.tsx` — AdminPage — renders form (~4267 tok)
+- `page.tsx` — AdminPage — renders form (~4705 tok)
 
 ## src/app/api/admin/teams/
 
@@ -85,7 +85,7 @@
 
 ## src/app/api/teams/[id]/
 
-- `route.ts` — Next.js API route: GET, DELETE, PUT (~849 tok)
+- `route.ts` — Next.js API route: GET, DELETE, PUT (~878 tok)
 
 ## src/app/api/teams/[id]/meetings/
 

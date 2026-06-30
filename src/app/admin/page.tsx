@@ -120,6 +120,16 @@ export default function AdminPage() {
     toast('Team deleted'); await loadAll()
   }
 
+  async function renameTeam(teamId: string, name: string) {
+    const res = await fetch(`/api/teams/${teamId}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name }),
+    })
+    const d = await res.json()
+    if (!res.ok) { toast(d.error ?? 'Failed to rename team', 'error'); return }
+    toast('Team renamed'); await loadAll()
+  }
+
   async function addMember(teamId: string, email: string, role: TeamRole) {
     const res = await fetch(`/api/teams/${teamId}/members`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -217,6 +227,7 @@ export default function AdminPage() {
               onAddMember={addMember}
               onChangeRole={changeMemberRole}
               onRemoveMember={removeMember}
+              onRename={renameTeam}
               onDelete={(id, label) => setConfirmDelete({ type: 'team', id, label })} />
           ))}
         </div>
@@ -274,24 +285,48 @@ function UserAdminRow({ u, onChangeRole, onDelete, onSetPassword }: {
   )
 }
 
-function TeamAdminCard({ team, users, onAddMember, onChangeRole, onRemoveMember, onDelete }: {
+function TeamAdminCard({ team, users, onAddMember, onChangeRole, onRemoveMember, onRename, onDelete }: {
   team: AdminTeam
   users: UserProfile[]
   onAddMember: (teamId: string, email: string, role: TeamRole) => void
   onChangeRole: (teamId: string, userId: string, role: TeamRole) => void
   onRemoveMember: (teamId: string, userId: string) => void
+  onRename: (teamId: string, name: string) => void
   onDelete: (teamId: string, label: string) => void
 }) {
+  const [editingName, setEditingName] = useState(false)
+  const [nameDraft, setNameDraft] = useState(team.name)
   const [email, setEmail] = useState('')
+
+  function commitName() {
+    const next = nameDraft.trim()
+    setEditingName(false)
+    if (next && next !== team.name) onRename(team.id, next)
+    else setNameDraft(team.name)
+  }
   const [role, setRole] = useState<TeamRole>('member')
   const memberIds = new Set(team.team_members.map(m => m.user_id))
   const available = users.filter(u => !memberIds.has(u.id))
 
   return (
     <div className="border rounded-xl p-4">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="font-semibold">{team.name}</h3>
-        <Button variant="danger" className="text-sm py-1" onClick={() => onDelete(team.id, team.name)}>Delete team</Button>
+      <div className="flex items-center justify-between mb-3 gap-2">
+        {editingName ? (
+          <input autoFocus value={nameDraft}
+            onChange={e => setNameDraft(e.target.value)}
+            onBlur={commitName}
+            onKeyDown={e => { if (e.key === 'Enter') commitName(); if (e.key === 'Escape') { setEditingName(false); setNameDraft(team.name) } }}
+            className="font-semibold border border-line rounded-lg px-2 py-1 focus:border-brand outline-none flex-1 min-w-0" />
+        ) : (
+          <div className="flex items-center gap-1.5 min-w-0">
+            <h3 className="font-semibold truncate">{team.name}</h3>
+            <button onClick={() => { setNameDraft(team.name); setEditingName(true) }} aria-label="Rename team"
+              className="shrink-0 flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:bg-bg hover:text-brand transition-colors">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+            </button>
+          </div>
+        )}
+        <Button variant="danger" className="text-sm py-1 shrink-0" onClick={() => onDelete(team.id, team.name)}>Delete team</Button>
       </div>
       <div className="divide-y mb-3">
         {team.team_members.map(m => (

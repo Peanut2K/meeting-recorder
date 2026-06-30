@@ -1639,6 +1639,59 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-30T02:38:45.407Z"
+    },
+    {
+      "id": "bug-102",
+      "timestamp": "2026-06-30T02:43:36.618Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T02:43:36.618Z"
+    },
+    {
+      "id": "bug-103",
+      "timestamp": "2026-06-30T02:44:12.319Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/admin/page.tsx",
+      "root_cause": "3 lines replaced/restructured",
+      "fix": "Rewrote 4→18 lines (3 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T02:44:12.319Z"
+    },
+    {
+      "id": "bug-104",
+      "timestamp": "2026-06-30T02:47:56Z",
+      "error_message": "PUT /api/teams/[id] returns 500 when renaming a team",
+      "file": "src/app/api/teams/[id]/route.ts",
+      "root_cause": "PUT used the user-scoped supabase client for the UPDATE. The teams table has RLS policies for select/insert/delete only — no UPDATE policy — so the update matched 0 rows and .single() threw, surfacing as 500.",
+      "fix": "Switched the update to the admin (service-role) client, which bypasses RLS. The route already guards with isGlobalAdmin, so authorization is unchanged.",
+      "tags": [
+        "supabase",
+        "rls",
+        "teams",
+        "admin-client",
+        "500",
+        "rename"
+      ],
+      "related_bugs": [
+        "bug-001"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T02:47:56Z"
     }
   ]
 }

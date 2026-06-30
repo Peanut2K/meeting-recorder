@@ -54,7 +54,9 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   try { body = await request.json() } catch { return NextResponse.json({ error: 'Invalid request body' }, { status: 400 }) }
   if (!body.name?.trim()) return NextResponse.json({ error: 'Name required' }, { status: 400 })
 
-  const { data, error } = await supabase.from('teams').update({ name: body.name.trim() }).eq('id', id).select().single()
+  // Use admin client: teams has no UPDATE RLS policy, so a user-client update is
+  // blocked (0 rows -> .single() errors). Already gated by isGlobalAdmin above.
+  const { data, error } = await admin.from('teams').update({ name: body.name.trim() }).eq('id', id).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json(data)
 }
