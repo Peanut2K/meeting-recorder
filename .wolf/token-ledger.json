@@ -2,14 +2,14 @@
   "version": 1,
   "created_at": "2026-06-26T02:35:24.646Z",
   "lifetime": {
-    "total_tokens_estimated": 1019874,
-    "total_reads": 1200,
-    "total_writes": 2348,
-    "total_sessions": 11,
-    "anatomy_hits": 816,
+    "total_tokens_estimated": 1031185,
+    "total_reads": 1204,
+    "total_writes": 2377,
+    "total_sessions": 13,
+    "anatomy_hits": 820,
     "anatomy_misses": 384,
-    "repeated_reads_blocked": 164,
-    "estimated_savings_vs_bare_cli": 431268
+    "repeated_reads_blocked": 181,
+    "estimated_savings_vs_bare_cli": 460924
   },
   "sessions": [
     {
@@ -20476,6 +20476,243 @@
         "reads_count": 6,
         "writes_count": 17,
         "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-06-30-0918",
+      "started": "2026-06-30T02:18:03.612Z",
+      "ended": "2026-06-30T02:20:57.369Z",
+      "reads": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 1557,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 353,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 42,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 79,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1557,
+        "output_tokens_estimated": 474,
+        "reads_count": 1,
+        "writes_count": 3,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-06-30-0918",
+      "started": "2026-06-30T02:18:03.612Z",
+      "ended": "2026-06-30T02:23:17.958Z",
+      "reads": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 1559,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 353,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 42,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 79,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 113,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 191,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 216,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 109,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1559,
+        "output_tokens_estimated": 1103,
+        "reads_count": 1,
+        "writes_count": 7,
+        "repeated_reads_blocked": 4,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-06-30-0918",
+      "started": "2026-06-30T02:18:03.612Z",
+      "ended": "2026-06-30T02:24:24.328Z",
+      "reads": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 1746,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 353,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 42,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 79,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 113,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 191,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 216,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 109,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 158,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 92,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1746,
+        "output_tokens_estimated": 1353,
+        "reads_count": 1,
+        "writes_count": 9,
+        "repeated_reads_blocked": 5,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-06-30-0918",
+      "started": "2026-06-30T02:18:03.612Z",
+      "ended": "2026-06-30T02:30:48.270Z",
+      "reads": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 1796,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 353,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 42,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 79,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 113,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 191,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 216,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 109,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 158,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 92,
+          "action": "edit"
+        },
+        {
+          "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/summary/SummaryEditor.tsx",
+          "tokens_estimated": 370,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1796,
+        "output_tokens_estimated": 1723,
+        "reads_count": 1,
+        "writes_count": 10,
+        "repeated_reads_blocked": 6,
         "anatomy_lookups": 1
       }
     }

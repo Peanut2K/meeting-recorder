@@ -1543,6 +1543,70 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-29T03:22:13.072Z"
+    },
+    {
+      "id": "bug-096",
+      "timestamp": "2026-06-30T02:19:17.330Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/summary/SummaryEditor.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 9→20 lines (2 removed) | Also: <div className=\"space-y-2\">; <div key={i} className=\"flex gap-2 items-start\">",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-30T02:22:24.448Z"
+    },
+    {
+      "id": "bug-097",
+      "timestamp": "2026-06-30T02:19:33.306Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/summary/SummaryEditor.tsx",
+      "root_cause": "Had 'flex-1 border border-line rounded-lg px-3 py-2 te",
+      "fix": "Changed to 'w-full border border-line rounded-lg px-3 py-2 te",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-30T02:20:38.432Z"
+    },
+    {
+      "id": "bug-098",
+      "timestamp": "2026-06-30T02:22:14.996Z",
+      "error_message": "CSS fix: index, action_items",
+      "file": "src/components/summary/SummaryEditor.tsx",
+      "root_cause": "index: number, field: keyof ActionItem, value: string) { → number) {; action_items: items → content.action_items.filter((_, i) => i !== index)",
+      "fix": "Changed index: number, field: keyof ActionItem, value: string) { → number) {; action_items: items → content.action_items.filter((_, i) => i !== index)",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-30T02:22:59.567Z"
+    },
+    {
+      "id": "bug-099",
+      "timestamp": "2026-06-30T02:30:10.134Z",
+      "error_message": "CSS fix: hover",
+      "file": "src/components/summary/SummaryEditor.tsx",
+      "root_cause": "hover: text-red-500 text-lg leading-none px-1.5 rounded\">×</button> → bg-red-50 hover:text-red-500 focus:opacity-100 group-hover:opacity-100\">",
+      "fix": "Changed hover: text-red-500 text-lg leading-none px-1.5 rounded\">×</button> → bg-red-50 hover:text-red-500 focus:opacity-100 group-hover:opacity-100\">",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T02:30:10.134Z"
     }
   ]
 }

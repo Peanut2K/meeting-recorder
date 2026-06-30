@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-29T03:22:28.297Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T02:30:10.108Z
 > Files: 28 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
@@ -142,7 +142,7 @@
 
 ## src/components/summary/
 
-- `SummaryEditor.tsx` — AutoTextarea (~1411 tok)
+- `SummaryEditor.tsx` — AutoTextarea (~1984 tok)
 
 ## src/components/teams/
 
