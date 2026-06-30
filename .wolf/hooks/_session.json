@@ -26,6 +26,16 @@
       "count": 4,
       "tokens": 4293,
       "first_read": "2026-06-30T02:43:17.050Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/src/middleware.ts": {
+      "count": 1,
+      "tokens": 339,
+      "first_read": "2026-06-30T02:52:41.600Z"
+    },
+    "/home/sapon/Desktop/Projects/meeting-recorder/src/app/layout.tsx": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-06-30T02:53:51.914Z"
     }
   },
   "files_written": [
@@ -136,17 +146,37 @@
       "action": "edit",
       "tokens": 113,
       "at": "2026-06-30T02:47:41.934Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/components/layout/AuthGuard.tsx",
+      "action": "create",
+      "tokens": 186,
+      "at": "2026-06-30T02:53:47.280Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/layout.tsx",
+      "action": "edit",
+      "tokens": 32,
+      "at": "2026-06-30T02:53:58.265Z"
+    },
+    {
+      "file": "/home/sapon/Desktop/Projects/meeting-recorder/src/app/layout.tsx",
+      "action": "edit",
+      "tokens": 24,
+      "at": "2026-06-30T02:54:03.516Z"
     }
   ],
   "edit_counts": {
     "src/components/summary/SummaryEditor.tsx": 11,
     "src/app/teams/[teamId]/settings/page.tsx": 2,
     "src/app/admin/page.tsx": 4,
-    "src/app/api/teams/[id]/route.ts": 1
+    "src/app/api/teams/[id]/route.ts": 1,
+    "src/components/layout/AuthGuard.tsx": 1,
+    "src/app/layout.tsx": 2
   },
-  "anatomy_hits": 5,
-  "anatomy_misses": 0,
+  "anatomy_hits": 6,
+  "anatomy_misses": 1,
   "repeated_reads_warned": 11,
   "cerebrum_warnings": 0,
-  "stop_count": 8
+  "stop_count": 9
 }

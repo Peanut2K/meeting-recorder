@@ -454,3 +454,7 @@
 | 09:44 | Session end: 17 writes across 2 files (SummaryEditor.tsx, page.tsx) | 5 reads | ~12676 tok |
 | 09:47 | Edited src/app/api/teams/[id]/route.ts | 3→5 lines | ~113 |
 | 09:48 | Session end: 18 writes across 3 files (SummaryEditor.tsx, page.tsx, route.ts) | 5 reads | ~12789 tok |
+| 09:53 | Created src/components/layout/AuthGuard.tsx | — | ~186 |
+| 09:53 | Edited src/app/layout.tsx | added 1 import(s) | ~32 |
+| 09:54 | Edited src/app/layout.tsx | 2→3 lines | ~24 |
+| 09:54 | Session end: 21 writes across 5 files (SummaryEditor.tsx, page.tsx, route.ts, AuthGuard.tsx, layout.tsx) | 7 reads | ~13370 tok |

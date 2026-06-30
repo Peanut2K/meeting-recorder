@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T02:47:41.920Z
-> Files: 28 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T02:54:03.499Z
+> Files: 30 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/plans/
 
@@ -39,6 +39,7 @@
 
 ## src/app/
 
+- `layout.tsx` — inter (~174 tok)
 
 ## src/app/admin/
 
@@ -135,6 +136,7 @@
 
 ## src/components/layout/
 
+- `AuthGuard.tsx` — AuthGuard (~186 tok)
 
 ## src/components/recording/
 
